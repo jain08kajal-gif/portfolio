@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kajal Jain — Portfolio Coming Soon</title>
+<meta name="description" content="A new UX portfolio by Kajal Jain is on the way." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A0A;
+    --surface: #111111;
+    --ink: #FFFFFF;
+    --ink-soft: #B8B8B8;
+    --ink-mute: #6B6B6B;
+    --rule: #222222;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01", "ss02", "cv11";
+    overflow-x: hidden;
+  }
+
+  .shell {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 56px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .mark {
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: -0.01em;
+  }
+  .meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    display: inline-flex;
+    align-items: center;
+  }
+  .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--ink);
+    border-radius: 50%;
+    margin-right: 10px;
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.35; }
+  }
+
+  /* ---------- MAIN ---------- */
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 80px;
+    align-items: center;
+    padding: 60px 0;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 32px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--ink-mute);
+  }
+
+  h1 {
+    font-weight: 800;
+    font-size: clamp(42px, 6vw, 88px);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    margin-bottom: 28px;
+  }
+  h1 .thin {
+    font-weight: 300;
+    color: var(--ink-soft);
+  }
+
+  .lede {
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin-bottom: 44px;
+    font-weight: 400;
+  }
+  .lede strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ---------- CTA / CONTACT ---------- */
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 56px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    border: 1px solid var(--rule);
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: all .18s ease;
+  }
+  .btn:hover {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .btn.primary {
+    background: var(--ink);
+    color: var(--bg);
+    border-color: var(--ink);
+    font-weight: 600;
+  }
+  .btn.primary:hover {
+    background: transparent;
+    color: var(--ink);
+  }
+  .btn svg { width: 14px; height: 14px; }
+
+  /* ---------- DETAILS ROW ---------- */
+  .details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--rule);
+  }
+  .detail .label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 10px;
+  }
+  .detail .value {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+
+  /* ---------- PORTRAIT ---------- */
+  .portrait-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .portrait-frame {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 1 / 1;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .portrait {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .corner {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 1px solid var(--ink);
+  }
+  .corner.tl { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+  .corner.tr { top: -1px; right: -1px; border-left: 0; border-bottom: 0; }
+  .corner.bl { bottom: -1px; left: -1px; border-right: 0; border-top: 0; }
+  .corner.br { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+
+  .portrait-label {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+  footer a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    margin-left: 24px;
+    transition: color .18s;
+  }
+  footer a:hover { color: var(--ink); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px) {
+    .shell { padding: 24px 20px; }
+    main {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      padding: 40px 0;
+    }
+    .portrait-wrap { order: -1; }
+    .portrait-frame { max-width: 320px; }
+    .details { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+    footer { flex-direction: column; gap: 14px; text-align: center; }
+    footer a { margin: 0 8px; }
+  }
+</style>
+</head>
+<body>
+  <div class="shell">
+
+    <nav>
+      <div class="mark">KAJAL JAIN</div>
+      <div class="meta"><span class="dot"></span>Portfolio / In progress</div>
+    </nav>
+
+    <main>
+      <section class="intro">
+        <div class="eyebrow">Coming soon — 2026</div>
+
+        <h1>A new portfolio.<br/><span class="thin">Built with intent.</span></h1>
+
+        <p class="lede">
+          I'm Kajal — a <strong>UX designer</strong> working on
+          product experiences that are clear, functional, and
+          quietly considered. The new site launches soon.
+        </p>
+
+        <div class="contact">
+          <a class="btn primary" href="mailto:jain08kajal@gmail.com">
+            Get in touch
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+          <a class="btn" href="https://www.linkedin.com/in/kajal-jain8" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://www.behance.net/KajalDesigns" target="_blank" rel="noopener">Behance</a>
+          <a class="btn" href="KajalJain_Resume26.pdf" target="_blank" rel="noopener">Résumé</a>
+        </div>
+
+        <div class="details">
+          <div class="detail">
+            <div class="label">Discipline</div>
+            <div class="value">UX &amp; Product Design</div>
+          </div>
+          <div class="detail">
+            <div class="label">Based in</div>
+            <div class="value">India</div>
+          </div>
+          <div class="detail">
+            <div class="label">Status</div>
+            <div class="value">Open to work</div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="portrait-wrap">
+        <div class="portrait-frame">
+          <span class="corner tl"></span>
+          <span class="corner tr"></span>
+          <span class="corner bl"></span>
+          <span class="corner br"></span>
+          <div class="portrait-label">01 / Hello</div>
+          <img class="portrait" src="kajal-portrait.webp" alt="Portrait of Kajal Jain" />
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div>&copy; 2026 Kajal Jain</div>
+      <div>
+        <a href="mailto:jain08kajal@gmail.com">Email</a>
+        <a href="https://www.linkedin.com/in/kajal-jain8" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.behance.net/KajalDesigns" target="_blank" rel="noopener">Behance</a>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
