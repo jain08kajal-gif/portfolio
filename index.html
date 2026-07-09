@@ -84,6 +84,7 @@ nav {
   display: block;
 }
 .hero-headline {
+  position: relative;
   font-size: clamp(26px, 3.4vw, 34px);
   font-weight: 700;
   line-height: 1.32;
@@ -91,6 +92,21 @@ nav {
   max-width: 760px;
   margin-bottom: 20px;
 }
+.headline-base { position: relative; }
+.headline-glow {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(90deg, #49DA9A, #34BBE6, #4355DB, #D23BE7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-mask-image: radial-gradient(circle 130px at var(--mx, 50%) var(--my, 50%), #000 0%, transparent 70%);
+  mask-image: radial-gradient(circle 130px at var(--mx, 50%) var(--my, 50%), #000 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
+}
+.hero-headline:hover .headline-glow { opacity: 1; }
 .hero-sub {
   font-size: 15px;
   font-weight: 400;
@@ -260,28 +276,58 @@ nav {
   gap: 16px;
 }
 .manual-card {
+  position: relative;
   background: #F0EEEB;
   border-radius: 20px;
   padding: 28px 30px;
+  overflow: hidden;
   transition: transform .25s ease, box-shadow .25s ease;
 }
 .manual-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 16px 32px rgba(20,20,20,0.08);
 }
+.manual-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 20%, #49DA9A, transparent 45%),
+    radial-gradient(circle at 85% 15%, #34BBE6, transparent 45%),
+    radial-gradient(circle at 20% 90%, #4355DB, transparent 45%),
+    radial-gradient(circle at 90% 85%, #D23BE7, transparent 45%);
+  -webkit-mask-image: radial-gradient(circle, #000 1.6px, transparent 1.6px);
+  -webkit-mask-size: 16px 16px;
+  mask-image: radial-gradient(circle, #000 1.6px, transparent 1.6px);
+  mask-size: 16px 16px;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity .45s ease, transform .6s ease;
+  pointer-events: none;
+}
+.manual-card:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
 .manual-num {
+  position: relative;
+  z-index: 1;
   font-size: 12px;
   font-weight: 700;
   color: #4F4132;
   letter-spacing: 0.04em;
 }
 .manual-card h3 {
+  position: relative;
+  z-index: 1;
   font-size: 16px;
   font-weight: 700;
   margin: 10px 0 14px;
   letter-spacing: -0.01em;
 }
 .manual-card ul {
+  position: relative;
+  z-index: 1;
   list-style: none;
   font-size: 13.5px;
   line-height: 1.8;
@@ -372,7 +418,10 @@ footer {
   <div class="hero-portrait-frame">
     <img class="hero-portrait" src="hero-portrait.webp" alt="Illustrated portrait of Kajal Jain" />
   </div>
-  <h1 class="hero-headline">Senior Product Designer building scalable products through systems thinking, behavioural design and cross functional execution</h1>
+  <h1 class="hero-headline">
+    <span class="headline-base">Senior Product Designer building scalable products through systems thinking, behavioural design and cross functional execution</span>
+    <span class="headline-glow" aria-hidden="true">Senior Product Designer building scalable products through systems thinking, behavioural design and cross functional execution</span>
+  </h1>
   <p class="hero-sub">With 7+ years of experience, including 4+ years solving complex UX challenges across supply chain SaaS, streaming tools, and HR platforms</p>
   <a class="hero-cta" href="#work">View work
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -501,6 +550,20 @@ footer {
     <li><a href="https://www.behance.net/KajalDesigns" target="_blank" rel="noopener">Behance</a></li>
   </ul>
 </footer>
+
+<script>
+(function () {
+  var headline = document.querySelector('.hero-headline');
+  if (!headline) return;
+  headline.addEventListener('mousemove', function (e) {
+    var rect = headline.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
+    headline.style.setProperty('--mx', x + 'px');
+    headline.style.setProperty('--my', y + 'px');
+  });
+})();
+</script>
 
 </body>
 </html>
