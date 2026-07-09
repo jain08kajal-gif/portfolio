@@ -34,14 +34,14 @@ nav {
   gap: 10px;
 }
 .logo-mark {
-  width: 17px;
-  height: 30px;
-  border-radius: 8.5px;
+  width: 28px;
+  height: 48px;
+  border-radius: 14px;
   background: linear-gradient(180deg, #49DA9A 0%, #34BBE6 30%, #4355DB 60%, #D23BE7 100%);
   flex-shrink: 0;
 }
 .logo-text {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.01em;
@@ -69,10 +69,19 @@ nav {
   align-items: center;
   text-align: center;
 }
-.hero-portrait {
-  width: 220px;
-  height: auto;
+.hero-portrait-frame {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  overflow: hidden;
   margin-bottom: 32px;
+  flex-shrink: 0;
+}
+.hero-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .hero-headline {
   font-size: clamp(26px, 3.4vw, 34px);
@@ -105,7 +114,7 @@ nav {
   transition: background .2s ease;
   margin-bottom: 56px;
 }
-.hero-cta:hover { background: #362B20; }
+.hero-cta:hover { background: #362B20; transform: translateY(-1px); }
 .hero-cta svg { width: 14px; height: 14px; }
 
 /* ─── LOGO STRIP ─────────────────────────────── */
@@ -114,25 +123,41 @@ nav {
   color: #3F3F3F;
   margin-bottom: 24px;
 }
-.logo-row {
+.logo-strip {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto 72px;
+  overflow: hidden;
+  padding: 0 24px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 12%, #000 88%, transparent 100%);
+}
+.logo-track {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 44px;
-  padding: 0 24px 72px;
+  gap: 64px;
+  width: max-content;
+  animation: logo-scroll 22s linear infinite;
+  will-change: transform;
 }
-.logo-row img {
-  height: 22px;
+.logo-track:hover { animation-play-state: paused; }
+@keyframes logo-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.logo-track img {
+  height: 34px;
   width: auto;
   display: block;
-  opacity: 0.92;
+  flex-shrink: 0;
+  opacity: 0.88;
+  transition: opacity .25s ease, transform .25s ease;
+  user-select: none;
+  -webkit-user-drag: none;
 }
-.loco-text {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  color: #141414;
+.logo-track img:hover {
+  opacity: 1;
+  transform: scale(1.08);
 }
 
 /* ─── SECTION SHELL ──────────────────────────── */
@@ -167,6 +192,11 @@ nav {
   border-radius: 24px;
   padding: 40px;
   margin-bottom: 24px;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.case-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px rgba(20,20,20,0.10);
 }
 .case-card img.case-thumb {
   width: 46%;
@@ -174,6 +204,10 @@ nav {
   border-radius: 12px;
   display: block;
   box-shadow: 0 20px 44px rgba(20,20,20,0.10);
+  transition: transform .4s ease;
+}
+.case-card:hover img.case-thumb {
+  transform: scale(1.02);
 }
 .case-copy { flex: 1; }
 .case-eyebrow {
@@ -211,7 +245,7 @@ nav {
   text-decoration: none;
   transition: background .2s ease;
 }
-.case-cta:hover { background: #362B20; }
+.case-cta:hover { background: #362B20; transform: translateY(-1px); }
 .case-cta svg { width: 13px; height: 13px; }
 
 /* ─── OPERATING MANUAL ───────────────────────── */
@@ -229,6 +263,11 @@ nav {
   background: #F0EEEB;
   border-radius: 20px;
   padding: 28px 30px;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.manual-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 32px rgba(20,20,20,0.08);
 }
 .manual-num {
   font-size: 12px;
@@ -307,7 +346,8 @@ footer {
 @media (max-width: 480px) {
   .nav-links { gap: 14px; }
   .nav-links a { font-size: 13px; }
-  .logo-row { gap: 28px; }
+  .logo-track { gap: 40px; }
+  .logo-track img { height: 26px; }
 }
 
 </style>
@@ -329,7 +369,9 @@ footer {
 
 <!-- HERO -->
 <section class="hero">
-  <img class="hero-portrait" src="hero-portrait.webp" alt="Illustrated portrait of Kajal Jain" />
+  <div class="hero-portrait-frame">
+    <img class="hero-portrait" src="hero-portrait.webp" alt="Illustrated portrait of Kajal Jain" />
+  </div>
   <h1 class="hero-headline">Senior Product Designer building scalable products through systems thinking, behavioural design and cross functional execution</h1>
   <p class="hero-sub">With 7+ years of experience, including 4+ years solving complex UX challenges across supply chain SaaS, streaming tools, and HR platforms</p>
   <a class="hero-cta" href="#work">View work
@@ -337,12 +379,19 @@ footer {
   </a>
 
   <p class="worked-for">Previously worked for</p>
-  <div class="logo-row">
-    <span class="loco-text">LOCO</span>
-    <img src="logo-fynd.webp" alt="Fynd" />
-    <img src="logo-conga.webp" alt="Conga" />
-    <img src="logo-fractalink.webp" alt="Fractal Ink" />
-    <img src="logo-repindia.webp" alt="RepIndia" />
+  <div class="logo-strip">
+    <div class="logo-track">
+      <img src="logo-loco.svg" alt="Loco" />
+      <img src="logo-fynd.webp" alt="Fynd" />
+      <img src="logo-conga.webp" alt="Conga" />
+      <img src="logo-fractalink.webp" alt="Fractal Ink" />
+      <img src="logo-repindia.webp" alt="RepIndia" />
+      <img src="logo-loco.svg" alt="Loco" aria-hidden="true" />
+      <img src="logo-fynd.webp" alt="Fynd" aria-hidden="true" />
+      <img src="logo-conga.webp" alt="Conga" aria-hidden="true" />
+      <img src="logo-fractalink.webp" alt="Fractal Ink" aria-hidden="true" />
+      <img src="logo-repindia.webp" alt="RepIndia" aria-hidden="true" />
+    </div>
   </div>
 </section>
 
@@ -351,7 +400,6 @@ footer {
   <h2 class="section-title">Case Studies</h2>
 
   <div class="case-card">
-    <img class="case-thumb" src="WMS.png" alt="Warehouse Management System dashboard" />
     <div class="case-copy">
       <p class="case-eyebrow">Fynd</p>
       <h3 class="case-title">Simplify multi-warehouse inventory management</h3>
@@ -360,10 +408,10 @@ footer {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
+    <img class="case-thumb" src="WMS.png" alt="Warehouse Management System dashboard" />
   </div>
 
   <div class="case-card">
-    <img class="case-thumb" src="TMS.png" alt="Trip Management System dashboard" />
     <div class="case-copy">
       <p class="case-eyebrow">Fynd</p>
       <h3 class="case-title">Coordinate last-mile delivery in real time</h3>
@@ -372,10 +420,10 @@ footer {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
+    <img class="case-thumb" src="TMS.png" alt="Trip Management System dashboard" />
   </div>
 
   <div class="case-card">
-    <img class="case-thumb" src="Loco.png" alt="Loco vertical mobile streaming app" />
     <div class="case-copy">
       <p class="case-eyebrow">Loco</p>
       <h3 class="case-title">Vertical mobile streaming</h3>
@@ -384,6 +432,7 @@ footer {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
+    <img class="case-thumb" src="Loco.png" alt="Loco vertical mobile streaming app" />
   </div>
 </section>
 
