@@ -619,6 +619,38 @@ footer {
 </head>
 <body>
 
+<div id="site-lock" style="position:fixed; inset:0; z-index:9999; background:#FFFEFC; display:flex; align-items:center; justify-content:center; padding:24px; font-family:'DM Sans', system-ui, sans-serif;">
+  <form id="site-lock-form" style="max-width:320px; width:100%; text-align:center;">
+    <p style="font-size:13px; color:#3F3F3F; margin-bottom:16px;">This site is temporarily private.</p>
+    <input id="site-lock-input" type="password" placeholder="Enter password" autocomplete="off" style="width:100%; box-sizing:border-box; padding:12px 18px; border:1px solid #D8D4CC; border-radius:100px; font-family:'DM Sans', sans-serif; font-size:14px; margin-bottom:12px; outline:none; text-align:center;" />
+    <button type="submit" style="width:100%; padding:12px 18px; border:none; border-radius:100px; background:#4F4132; color:#fff; font-family:'DM Sans', sans-serif; font-size:14px; font-weight:500; cursor:pointer;">Enter</button>
+    <p id="site-lock-error" style="font-size:12px; color:#A32D2D; margin-top:10px; display:none;">Incorrect password, try again.</p>
+  </form>
+</div>
+<script>
+(function () {
+  var PASSWORD = 'kajal2026';
+  var lock = document.getElementById('site-lock');
+  if (!lock) return;
+  if (sessionStorage.getItem('site-unlocked') === 'true') {
+    lock.style.display = 'none';
+  }
+  var form = document.getElementById('site-lock-form');
+  var input = document.getElementById('site-lock-input');
+  var error = document.getElementById('site-lock-error');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (input.value === PASSWORD) {
+      sessionStorage.setItem('site-unlocked', 'true');
+      lock.style.display = 'none';
+    } else {
+      error.style.display = 'block';
+      input.value = '';
+    }
+  });
+})();
+</script>
+
 <nav>
   <div class="logo">
     <span class="logo-mark"></span>
