@@ -301,7 +301,7 @@ nav {
 .case-card img.case-thumb.case-thumb--flat {
   border-radius: 0;
   box-shadow: none;
-  filter: drop-shadow(0 22px 34px rgba(20,20,20,0.26)) drop-shadow(0 10px 16px rgba(20,20,20,0.18));
+  filter: drop-shadow(0 22px 34px rgba(20,20,20,0.14)) drop-shadow(0 10px 16px rgba(20,20,20,0.10));
 }
 .case-card:hover img.case-thumb {
   transform: scale(1.02);
@@ -344,6 +344,94 @@ nav {
 }
 .case-cta:hover { background: #362B20; transform: translateY(-1px); }
 .case-cta svg { width: 13px; height: 13px; }
+
+/* ─── ABOUT ──────────────────────────────────── */
+.about {
+  padding: 40px 60px 40px;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.about-carousel {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(20,20,20,0.12);
+}
+.about-carousel-track {
+  display: flex;
+  transition: transform .4s ease;
+}
+.about-carousel-track img {
+  width: 100%;
+  flex-shrink: 0;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+}
+.about-carousel-progress {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 4px;
+  z-index: 2;
+}
+.about-carousel-progress-seg {
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.4);
+  overflow: hidden;
+}
+.about-carousel-progress-seg::after {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: #FFFEFC;
+  border-radius: 2px;
+  transition: width .25s ease;
+}
+.about-carousel-progress-seg.is-done::after,
+.about-carousel-progress-seg.is-active::after {
+  width: 100%;
+}
+.about-carousel-tap {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  cursor: pointer;
+  z-index: 1;
+}
+.about-carousel-tap--prev { left: 0; }
+.about-carousel-tap--next { right: 0; }
+.about-title {
+  font-size: clamp(28px, 3.4vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.about-copy p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: #3F3F3F;
+  margin-bottom: 18px;
+}
+.about-statement {
+  font-size: 19px;
+  font-weight: 700;
+  color: #141414;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
 
 /* ─── OPERATING MANUAL ───────────────────────── */
 .manual {
@@ -398,14 +486,32 @@ nav {
 
 /* ─── FOOTER ─────────────────────────────────── */
 footer {
-  padding: 56px 60px 64px;
+  padding: 56px 60px 40px;
   max-width: 1160px;
   margin: 0 auto;
+  border-top: 1px solid #EAE7E1;
+  margin-top: 24px;
+}
+.footer-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid #EAE7E1;
-  margin-top: 24px;
+}
+.footer-credit {
+  text-align: center;
+  font-size: 12px;
+  color: #3F3F3F;
+  margin-top: 32px;
+}
+.footer-credit a {
+  color: #3F3F3F;
+  text-decoration: underline;
+}
+.footer-credit svg {
+  width: 12px;
+  height: 12px;
+  vertical-align: -1px;
+  margin-right: 2px;
 }
 .footer-name {
   font-size: 15px;
@@ -433,12 +539,14 @@ footer {
 @media (max-width: 900px) {
   nav { padding: 24px 28px; }
   .hero { padding: 32px 20px 0; }
-  .work, .manual, footer { padding-left: 28px; padding-right: 28px; }
+  .work, .about, .manual, footer { padding-left: 28px; padding-right: 28px; }
   .case-card { flex-direction: column; align-items: stretch; padding: 28px; gap: 24px; }
   .case-card img.case-thumb { width: 100%; max-width: none; }
   .case-title { font-size: 22px; }
+  .about-grid { grid-template-columns: 1fr; gap: 32px; }
+  .about-carousel { max-width: 280px; margin: 0 auto; }
   .manual-grid { grid-template-columns: 1fr; }
-  footer { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .footer-row { flex-direction: column; align-items: flex-start; gap: 20px; }
 }
 @media (max-width: 480px) {
   .nav-links { gap: 14px; }
@@ -458,6 +566,7 @@ footer {
   </div>
   <ul class="nav-links">
     <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
     <li><a href="KajalJain_Resume26.pdf" target="_blank" rel="noopener">Resume</a></li>
     <li><a href="https://www.linkedin.com/in/kajal-jain8" target="_blank" rel="noopener">Linkedin</a></li>
     <li><a href="https://www.behance.net/KajalDesigns" target="_blank" rel="noopener">Behance</a></li>
@@ -551,7 +660,33 @@ footer {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
-    <img class="case-thumb" src="Loco.png" alt="Loco vertical mobile streaming app" />
+    <img class="case-thumb case-thumb--flat" src="irl-viewer-app.webp" alt="IRL vertical mobile streaming app" />
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div class="about-photos">
+      <div class="about-carousel" id="about-carousel">
+        <div class="about-carousel-progress" id="about-carousel-progress"></div>
+        <div class="about-carousel-track" id="about-carousel-track">
+          <img src="about-bench.webp" alt="Kajal Jain sitting outdoors on a bench" />
+          <img src="about-picnic-dog.webp" alt="Kajal Jain reading a book at a park picnic, with a dog resting nearby" />
+          <img src="about-cookies-flatlay.webp" alt="Homemade cookies packaged with handwritten tags, by Kajal" />
+          <img src="about-cookies-standing.webp" alt="Kajal Jain standing beside a table of packaged homemade cookies" />
+          <img src="about-laptop.webp" alt="Kajal Jain working on a laptop at a shared table" />
+        </div>
+        <div class="about-carousel-tap about-carousel-tap--prev" aria-label="Previous photo"></div>
+        <div class="about-carousel-tap about-carousel-tap--next" aria-label="Next photo"></div>
+      </div>
+    </div>
+    <div class="about-copy">
+      <h2 class="about-title">About me</h2>
+      <p>A generalist at heart, I got into product design because it lets me pursue my interests in creative work, business, and psychology all at once. I started in fashion design, then moved into graphic design to deepen my understanding of form, layout, and how design communicates information visually.</p>
+      <p class="about-statement">I make complexity feel simple.</p>
+      <p>Driven by a desire to tackle real-world user challenges, I transitioned into UI design and eventually found my way to digital product design — where I discovered a passion that makes me love this work every day.</p>
+    </div>
   </div>
 </section>
 
@@ -610,15 +745,18 @@ footer {
 
 <!-- FOOTER -->
 <footer>
-  <div>
-    <p class="footer-name">Kajal Jain</p>
-    <p class="footer-email">jain08kajal@gmail.com</p>
+  <div class="footer-row">
+    <div>
+      <p class="footer-name">Kajal Jain</p>
+      <p class="footer-email">jain08kajal@gmail.com</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="KajalJain_Resume26.pdf" target="_blank" rel="noopener">Resume</a></li>
+      <li><a href="https://www.linkedin.com/in/kajal-jain8" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://www.behance.net/KajalDesigns" target="_blank" rel="noopener">Behance</a></li>
+    </ul>
   </div>
-  <ul class="footer-links">
-    <li><a href="KajalJain_Resume26.pdf" target="_blank" rel="noopener">Resume</a></li>
-    <li><a href="https://www.linkedin.com/in/kajal-jain8" target="_blank" rel="noopener">LinkedIn</a></li>
-    <li><a href="https://www.behance.net/KajalDesigns" target="_blank" rel="noopener">Behance</a></li>
-  </ul>
+  <p class="footer-credit">Built with <a href="https://claude.ai" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C12 8 13.5 10.5 22 12C13.5 13.5 12 16 12 22C12 16 10.5 13.5 2 12C10.5 10.5 12 8 12 2Z"/></svg>Claude</a></p>
 </footer>
 
 <script>
@@ -647,6 +785,58 @@ footer {
     });
   }, { threshold: 0.4 });
   observer.observe(wrap);
+})();
+
+(function () {
+  var carousel = document.getElementById('about-carousel');
+  var track = document.getElementById('about-carousel-track');
+  var progress = document.getElementById('about-carousel-progress');
+  if (!carousel || !track || !progress) return;
+
+  var slides = track.querySelectorAll('img');
+  var count = slides.length;
+  var current = 0;
+  var AUTO_MS = 4500;
+  var timer = null;
+
+  if (count <= 1) return;
+
+  for (var i = 0; i < count; i++) {
+    var seg = document.createElement('div');
+    seg.className = 'about-carousel-progress-seg';
+    progress.appendChild(seg);
+  }
+  var segs = progress.querySelectorAll('.about-carousel-progress-seg');
+
+  function render() {
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    segs.forEach(function (s, i) {
+      s.classList.toggle('is-active', i === current);
+      s.classList.toggle('is-done', i < current);
+    });
+  }
+
+  function goTo(i) {
+    current = (i + count) % count;
+    render();
+    restart();
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  function restart() {
+    if (timer) clearInterval(timer);
+    timer = setInterval(next, AUTO_MS);
+  }
+
+  var prevTap = carousel.querySelector('.about-carousel-tap--prev');
+  var nextTap = carousel.querySelector('.about-carousel-tap--next');
+  if (prevTap) prevTap.addEventListener('click', prev);
+  if (nextTap) nextTap.addEventListener('click', next);
+
+  render();
+  restart();
 })();
 </script>
 
