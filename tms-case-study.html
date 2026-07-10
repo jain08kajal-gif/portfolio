@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Redesigning Trip Creation Flow for TMS — Kajal Jain</title>
+<meta name="description" content="Case study: redesigning the trip creation flow for Fynd's Transportation Management System." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+
+/* ─── RESET ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: #FFFEFC;
+  color: #141414;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ────────────────────────────────────── */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 60px;
+}
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.logo-mark {
+  width: 28px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #49DA9A 0%, #34BBE6 30%, #4355DB 60%, #D23BE7 100%);
+  flex-shrink: 0;
+}
+.logo-text {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #141414;
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 15px;
+  font-weight: 400;
+  color: #3F3F3F;
+  text-decoration: none;
+  transition: color .2s;
+}
+.nav-links a:hover { color: #141414; }
+
+/* ─── ARTICLE HEADER ─────────────────────────── */
+.article-header {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 16px 24px 40px;
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #3F3F3F;
+  text-decoration: none;
+  margin-bottom: 28px;
+  transition: color .2s;
+}
+.back-link:hover { color: #141414; }
+.back-link svg { width: 13px; height: 13px; }
+.article-eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #3F3F3F;
+  margin-bottom: 12px;
+}
+.article-title {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 28px;
+}
+.article-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  background: #F0EEEB;
+  border-radius: 16px;
+  padding: 20px 24px;
+}
+.meta-item-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #3F3F3F;
+  margin-bottom: 4px;
+}
+.meta-item-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #141414;
+}
+
+/* ─── NOTICE ─────────────────────────────────── */
+.notice {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px 8px;
+}
+.notice-box {
+  background: #F8DEDE;
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #4A1F1F;
+}
+
+/* ─── FLOW STEPS ─────────────────────────────── */
+.article-body {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px 40px;
+}
+.article-body > .lede {
+  max-width: 680px;
+  margin: 0 auto 40px;
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: #3F3F3F;
+  text-align: center;
+}
+.flow-step {
+  margin-bottom: 48px;
+}
+.flow-step-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #4F4132;
+  margin-bottom: 10px;
+}
+.flow-step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4F4132;
+  color: #fff;
+  font-size: 11px;
+}
+.flow-step p.flow-caption {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #3F3F3F;
+  margin-bottom: 14px;
+  max-width: 680px;
+}
+.flow-step img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 24px 44px rgba(20,20,20,0.12);
+}
+
+/* ─── FOOTER ─────────────────────────────────── */
+footer {
+  padding: 56px 60px 64px;
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #EAE7E1;
+  margin-top: 24px;
+}
+.footer-name { font-size: 15px; font-weight: 700; }
+.footer-email { font-size: 13px; color: #3F3F3F; margin-top: 4px; }
+.footer-links { display: flex; gap: 28px; list-style: none; }
+.footer-links a {
+  font-size: 14px;
+  color: #3F3F3F;
+  text-decoration: none;
+  transition: color .2s;
+}
+.footer-links a:hover { color: #141414; }
+
+/* ─── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 700px) {
+  nav { padding: 24px 28px; }
+  .article-meta { grid-template-columns: 1fr; }
+  footer { flex-direction: column; align-items: flex-start; gap: 20px; }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">
+    <span class="logo-mark"></span>
+    <span class="logo-text">Kajal<br>Jain</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="KajalJain_Resume26.pdf" target="_blank" rel="noopener">Resume</a></li>
+    <li><a href="https://www.linkedin.com/in/kajal-jain8" target="_blank" rel="noopener">Linkedin</a></li>
+    <li><a href="https://www.behance.net/KajalDesigns" target="_blank" rel="noopener">Behance</a></li>
+  </ul>
+</nav>
+
+<header class="article-header">
+  <a class="back-link" href="index.html#work">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to work
+  </a>
+  <p class="article-eyebrow">Fynd — Transportation Management System</p>
+  <h1 class="article-title">Redesigning the trip creation flow for TMS</h1>
+  <div class="article-meta">
+    <div>
+      <p class="meta-item-label">Company</p>
+      <p class="meta-item-value">Fynd</p>
+    </div>
+    <div>
+      <p class="meta-item-label">Product</p>
+      <p class="meta-item-value">Transportation Management System</p>
+    </div>
+    <div>
+      <p class="meta-item-label">Role</p>
+      <p class="meta-item-value">Product Designer</p>
+    </div>
+  </div>
+</header>
+
+<div class="notice">
+  <div class="notice-box">
+    This page currently covers the flow walkthrough only. The fuller write-up — context, constraints, and outcome — is still being drafted and will be added here.
+  </div>
+</div>
+
+<main class="article-body">
+
+  <p class="lede">A four-step flow for dispatchers to build a delivery trip: select shipments, review optimized routes, adjust individual driver assignments, and confirm.</p>
+
+  <div class="flow-step">
+    <p class="flow-step-label"><span class="flow-step-num">1</span> Select shipments — list view</p>
+    <p class="flow-caption">Dispatchers browse shipments in a sortable table — AWB number, shipment ID, pickup and drop postal codes, and order status — and multi-select the ones to include in a trip.</p>
+    <img src="tms-flow-1-select-list.webp" alt="Select shipments list view in the trip creation flow" />
+  </div>
+
+  <div class="flow-step">
+    <p class="flow-step-label"><span class="flow-step-num">2</span> Select shipments — map view</p>
+    <p class="flow-caption">As an alternative to the list, shipments can be selected geographically — drawing a region directly on the map to pull in everything within it.</p>
+    <img src="tms-flow-2-select-map.webp" alt="Select shipments map view in the trip creation flow" />
+  </div>
+
+  <div class="flow-step">
+    <p class="flow-step-label"><span class="flow-step-num">3</span> Review trips</p>
+    <p class="flow-caption">Selected shipments are grouped into optimized routes per driver, plotted on the map alongside distance, shipment count, and package count for each trip.</p>
+    <img src="tms-flow-3-review-routes.webp" alt="Review trips screen showing optimized routes per driver" />
+  </div>
+
+  <div class="flow-step">
+    <p class="flow-step-label"><span class="flow-step-num">4</span> Review trips — driver detail</p>
+    <p class="flow-caption">Drilling into a single driver's trip surfaces the ordered task list, so a dispatcher can reassign or reorder stops before confirming.</p>
+    <img src="tms-flow-4-review-driver.webp" alt="Driver detail panel for reassigning and reordering trip tasks" />
+  </div>
+
+</main>
+
+<footer>
+  <div>
+    <p class="footer-name">Kajal Jain</p>
+    <p class="footer-email">jain08kajal@gmail.com</p>
+  </div>
+  <ul class="footer-links">
+    <li><a href="KajalJain_Resume26.pdf" target="_blank" rel="noopener">Resume</a></li>
+    <li><a href="https://www.linkedin.com/in/kajal-jain8" target="_blank" rel="noopener">LinkedIn</a></li>
+    <li><a href="https://www.behance.net/KajalDesigns" target="_blank" rel="noopener">Behance</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
