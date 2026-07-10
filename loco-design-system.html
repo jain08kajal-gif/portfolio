@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Scaling a Design System Across a 6-Person Team — Kajal Jain</title>
+<title>Scaling a Design System Across a 6-Person Team, Kajal Jain</title>
 <meta name="description" content="Case study: scaling Loco's viewer app design system across three surfaces with a 6-person design team in one month." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,24 +132,6 @@ nav {
   color: #141414;
 }
 
-/* ─── ARTICLE HERO IMAGE ─────────────────────── */
-.article-hero {
-  max-width: 1040px;
-  margin: 0 auto;
-  padding: 0 24px 8px;
-}
-.article-hero img {
-  width: 100%;
-  display: block;
-}
-.article-hero-note {
-  font-size: 12px;
-  color: #3F3F3F;
-  text-align: center;
-  margin-top: 10px;
-  font-style: italic;
-}
-
 /* ─── ARTICLE BODY ───────────────────────────── */
 .article-body {
   max-width: 720px;
@@ -164,6 +146,67 @@ nav {
   font-weight: 700;
   letter-spacing: -0.01em;
   margin-bottom: 16px;
+}
+.article-body h3 {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  margin: 24px 0 12px;
+}
+.compare-card h3 {
+  text-align: center;
+  margin: 0 0 20px;
+}
+.compare-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.compare-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #3F3F3F;
+  margin-top: 10px;
+  text-align: center;
+}
+.compare-caption {
+  font-size: 13px;
+  color: #3F3F3F;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.compare-card {
+  border-radius: 20px;
+  padding: 40px 30px;
+  width: 100vw;
+  max-width: 1140px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+}
+.compare-card--web { background: #E7E0D3; }
+.compare-card--mobile { background: #F0EEEB; }
+.compare-card--web .compare-row {
+  align-items: center;
+  justify-content: center;
+  gap: 2%;
+}
+.compare-card--web .compare-item { flex: 0 1 44%; }
+.compare-card--web img {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+}
+.compare-card--mobile .compare-row {
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4%;
+}
+.compare-card--mobile .compare-item { flex: 0 1 22%; min-width: 130px; max-width: 260px; }
+.compare-card--mobile img {
+  width: 100%;
+  display: block;
 }
 .article-body p {
   font-size: 15.5px;
@@ -241,6 +284,8 @@ footer {
   nav { padding: 24px 28px; position: relative; }
   .article-meta { grid-template-columns: 1fr 1fr; }
   .footer-row { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .compare-card { padding: 24px 16px; }
+  .compare-card--mobile .compare-item { flex-basis: 28%; min-width: 90px; }
   .nav-toggle { display: flex; }
   .nav-links {
     position: absolute;
@@ -332,7 +377,7 @@ footer {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
     Back to work
   </a>
-  <p class="article-eyebrow">Loco Viewer App — Web, Mobile Web, App</p>
+  <p class="article-eyebrow">Loco Viewer App: Web, Mobile Web, App</p>
   <h1 class="article-title">Scaling a design system across a 6-person team in one month</h1>
   <div class="article-meta">
     <div>
@@ -354,38 +399,70 @@ footer {
   </div>
 </header>
 
-<div class="article-hero">
-  <img src="loco-viewer-app.webp" alt="Loco viewer app — web dashboard and mobile viewer screens" />
-</div>
 
 <main class="article-body">
 
   <section>
     <h2>Context</h2>
-    <p>Loco needed a full visual overhaul of its viewer experience across three surfaces — app, web, and mweb — in one month. The scope was explicitly visual and structural, not a UX redesign: existing flows and interaction patterns stayed as they were, re-skinned using competitor visual language (Twitch) as a reference point, since neither design nor engineering had the bandwidth for original UX exploration in that timeframe. A team of 5-6 designers worked on this in parallel.</p>
+    <p>Loco needed a full visual overhaul of its viewer experience across three surfaces (app, web, and mweb) in one month. The scope was explicitly visual and structural, not a UX redesign: existing flows and interaction patterns stayed as they were, re-skinned using competitor visual language (Twitch) as a reference point, since neither design nor engineering had the bandwidth for original UX exploration in that timeframe. A team of 5-6 designers worked on this in parallel.</p>
   </section>
 
   <section>
     <h2>Constraint</h2>
     <ul>
-      <li>One month, three surfaces — an aggressive timeline for a full visual system, not just a feature.</li>
+      <li>One month, three surfaces: an aggressive timeline for a full visual system, not just a feature.</li>
       <li>No new UX decisions in scope; devs couldn't ship structurally new features that fast, so the redesign had to work within existing flows.</li>
-      <li>Branding wasn't finalized — colors, gradients, and iconography were still coming from an external agency, expected weeks into the project.</li>
-      <li>5-6 designers working simultaneously meant consistency wasn't guaranteed by default — nothing enforced shared component usage across the team.</li>
+      <li>Branding wasn't finalized: colors, gradients, and iconography were still coming from an external agency, expected weeks into the project.</li>
+      <li>5-6 designers working simultaneously meant consistency wasn't guaranteed by default. Nothing enforced shared component usage across the team.</li>
     </ul>
   </section>
 
   <section>
     <h2>Decision</h2>
-    <p>I owned design and system consistency for a set of core flows — Homepage, Livestream, Fullscreen Livestream, and Leaderboard — translating reference screens into Loco's visual language while building them from shared, reusable components rather than one-off screens.</p>
-    <p>A team-level decision I applied and maintained across my flows: rather than hardcoding colors and styles into components, we introduced semantic tokens — driven by a dev need for simpler dark/light mode switching. On high-traffic surfaces like Homepage and Livestream, that meant every component had to reference tokens consistently, not just look right in one theme.</p>
-    <p>Keeping six designers aligned against the same reference source took constant coordination — without it, interpretation naturally drifted.</p>
+    <p>I owned design and system consistency for a set of core flows (Homepage, Livestream, Fullscreen Livestream, and Leaderboard), translating reference screens into Loco's visual language while building them from shared, reusable components rather than one-off screens.</p>
+    <p>A team-level decision I applied and maintained across my flows: rather than hardcoding colors and styles into components, we introduced semantic tokens, driven by a dev need for simpler dark/light mode switching. On high-traffic surfaces like Homepage and Livestream, that meant every component had to reference tokens consistently, not just look right in one theme.</p>
+    <p>Keeping six designers aligned against the same reference source took constant coordination. Without it, interpretation naturally drifted.</p>
+  </section>
+
+  <section>
+    <div class="compare-card compare-card--web">
+      <h3>Desktop</h3>
+      <div class="compare-row">
+        <div class="compare-item">
+          <img src="loco-desktop-old.webp" alt="Loco desktop homepage, old design" />
+          <p class="compare-label">Old UI</p>
+        </div>
+        <div class="compare-item">
+          <img src="loco-desktop-new-after.webp" alt="Loco desktop homepage, redesigned, with final style guide applied" />
+          <p class="compare-label">New UI, after final style guide</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="compare-card compare-card--mobile">
+      <h3>App</h3>
+      <p class="compare-caption">Documentation of change log for each key screen was maintained for future reference.</p>
+      <div class="compare-row">
+        <div class="compare-item">
+          <img src="loco-app-old.webp" alt="Loco app livestream screen, old design" />
+          <p class="compare-label">Old UI</p>
+        </div>
+        <div class="compare-item">
+          <img src="loco-app-new-before.webp" alt="Loco app livestream screen, redesigned, before final style guide" />
+          <p class="compare-label">New UI, before final style guide</p>
+        </div>
+        <div class="compare-item">
+          <img src="loco-app-new-after.webp" alt="Loco app livestream screen, redesigned, with final style guide applied" />
+          <p class="compare-label">New UI, after final style guide</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section>
     <h2>Trade-off</h2>
     <ul>
-      <li>Speed and dev-need-driven architecture took priority over original UX exploration — the goal was a cohesive, systemized visual layer, not new interaction design.</li>
+      <li>Speed and dev-need-driven architecture took priority over original UX exploration. The goal was a cohesive, systemized visual layer, not new interaction design.</li>
       <li>Distributed execution across 6 designers meant some inconsistency was unavoidable: not everyone used components as intended, and reconciling that came later rather than being prevented upfront.</li>
     </ul>
   </section>
@@ -393,15 +470,15 @@ footer {
   <section>
     <h2>Outcome</h2>
     <ul>
-      <li>When branding was finalized roughly three weeks in, the semantic token structure — originally built to solve theme-switching — meant the whole system's colors, gradients, and iconography were updated in a single night, rather than requiring screen-by-screen rework across all three surfaces. This wasn't the original intent of the token system, but a direct payoff of building it correctly.</li>
-      <li>The design system built in this sprint is still used today to create new flows on the platform — a stronger, longer-lasting outcome than a one-time launch.</li>
+      <li>When branding was finalized roughly three weeks in, the semantic token structure (originally built to solve theme-switching) meant the whole system's colors, gradients, and iconography were updated in a single night, rather than requiring screen-by-screen rework across all three surfaces. This wasn't the original intent of the token system, but a direct payoff of building it correctly.</li>
+      <li>The design system built in this sprint is still used today to create new flows on the platform. That's a stronger, longer-lasting outcome than a one-time launch.</li>
       <li>Post-branding, a sanity pass and reconciliation of inconsistent component usage was still required, which fed into tighter guidelines for adoption going forward.</li>
     </ul>
   </section>
 
   <section>
     <h2>Reflection</h2>
-    <p>Even with a solid token architecture, inconsistency persisted where designers bypassed shared components — a reminder that a system is only as strong as its adoption discipline. Given the time constraint, we couldn't fully solve for governance in the moment; next time, I'd push for lighter-weight enforcement (e.g., a shared component checklist before merging designs) built into the parallel workflow from day one, rather than reconciling inconsistency after the fact.</p>
+    <p>Even with a solid token architecture, inconsistency persisted where designers bypassed shared components. That's a reminder that a system is only as strong as its adoption discipline. Given the time constraint, we couldn't fully solve for governance in the moment; next time, I'd push for lighter-weight enforcement (e.g., a shared component checklist before merging designs) built into the parallel workflow from day one, rather than reconciling inconsistency after the fact.</p>
   </section>
 
 </main>
