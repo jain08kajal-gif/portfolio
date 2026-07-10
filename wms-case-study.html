@@ -386,13 +386,12 @@ footer {
 
   <section>
     <h2>Background</h2>
-    <p>Fynd platform is an e-commerce solution designed to help businesses streamline their operations through a unified platform. With Reliance Jio as a key client, Fynd saw an opportunity to expand its offerings by developing a comprehensive supply chain suite. This strategic move aimed to leverage existing resources and establish a competitive edge in India, leading to the development of a Warehouse Management System (WMS) as part of the suite.</p>
-    <p>Driven by a strong business strategy, Fynd developed the WMS alongside the Transportation Management System (TMS) to gain full control over tasks, enhance process visibility, and improve efficiency throughout the entire journey — from creating a purchase order to delivering the product to the customer.</p>
+    <p>Fynd was building out a supply chain suite for Reliance Jio, a key client. A Warehouse Management System (WMS), paired with a Transportation Management System (TMS), would give full visibility and control from purchase order to delivery.</p>
   </section>
 
   <section>
     <h2>My role</h2>
-    <p>As a Product Designer, I was the DRI (Directly Responsible Individual) for this project. My responsibilities included collaborating closely with stakeholders to outline user flows based on business requirements, leading the end-to-end design process, and receiving feedback from the Design Manager every week. I also worked with the development team to address and iterate on designs in case of any technical constraints.</p>
+    <p>I was the DRI for this project — owning the end-to-end design process, translating business requirements into user flows, and syncing weekly with the Design Manager and dev team on technical constraints.</p>
   </section>
 
   <section>
@@ -407,23 +406,19 @@ footer {
   <section>
     <h2>Challenges</h2>
     <div class="chip-grid">
-      <div class="chip">No prior knowledge of how warehouses work</div>
-      <div class="chip">PM and EMs expecting instant Figma designs</div>
-      <div class="chip">No common progress documentation for reference</div>
-      <div class="chip">Absence of scrum meetings in the initial phase</div>
-      <div class="chip">Navigating the space in uncertainty</div>
-      <div class="chip">Blurred timelines for delivery</div>
-      <div class="chip">Strategy to be decided once the design team came up with some screens</div>
-      <div class="chip">Wide variety of use cases when it comes to warehouses</div>
+      <div class="chip">No prior knowledge of how warehouses actually operate</div>
+      <div class="chip">No shared documentation or scrum cadence in the early phase</div>
+      <div class="chip">Timelines and strategy stayed undefined until we had screens to react to</div>
+      <div class="chip">Warehouses vary widely in layout and process — no single standard to design for</div>
     </div>
   </section>
 
   <section>
     <h2>Research</h2>
-    <h3>First step was to visit a warehouse</h3>
-    <p>We visited the warehouse of one of the topmost brands in India and saw the structure and process of how they operate to deliver packages to their customers on promised timelines.</p>
-    <h3>Secondary research of competitors</h3>
-    <p>To get an understanding of what competitors are already doing in the Indian market, we looked at various WMS platforms and the features they provide. The platforms we looked at were based on what existing clients of Jio were using:</p>
+    <h3>Warehouse visit</h3>
+    <p>We visited one of India's largest warehouses to see firsthand how packages move from intake to delivery.</p>
+    <h3>Competitor benchmarking</h3>
+    <p>We benchmarked WMS platforms already in use by Jio's other vendors:</p>
     <ul>
       <li>Vineretail</li>
       <li>Unicommerce</li>
@@ -442,11 +437,9 @@ footer {
         <p class="persona-role">Supervisor</p>
         <p class="persona-goals-label">Goals</p>
         <ul>
-          <li>Ensure efficient and smooth warehouse operations</li>
-          <li>Optimize inventory management and minimize stockouts</li>
-          <li>Increase productivity and reduce operational costs</li>
-          <li>Maintain a safe working environment for warehouse staff</li>
-          <li>Meet customer demands and ensure timely order fulfillment</li>
+          <li>Optimize inventory and minimize stockouts</li>
+          <li>Increase productivity, reduce operational costs</li>
+          <li>Ensure timely order fulfillment</li>
         </ul>
       </div>
       <div class="persona-card">
@@ -454,11 +447,9 @@ footer {
         <p class="persona-role">Admin</p>
         <p class="persona-goals-label">Goals</p>
         <ul>
-          <li>Oversee implementation and maintenance of the WMS across multiple warehouses</li>
-          <li>Ensure system stability, scalability, and high availability</li>
-          <li>Provide technical guidance and support to the IT team and other users</li>
-          <li>Collaborate with stakeholders to define system configurations and workflows</li>
-          <li>Optimize system performance, including response times and data accuracy</li>
+          <li>Ensure system stability across warehouses</li>
+          <li>Define configurations with stakeholders</li>
+          <li>Optimize performance and data accuracy</li>
         </ul>
       </div>
       <div class="persona-card">
@@ -466,11 +457,9 @@ footer {
         <p class="persona-role">Worker</p>
         <p class="persona-goals-label">Goals</p>
         <ul>
-          <li>Efficiently complete assigned tasks and meet daily targets</li>
-          <li>Ensure accurate and timely handling of goods and inventory</li>
-          <li>Collaborate with team members to maintain smooth operations</li>
-          <li>Follow safety protocols and maintain a secure work environment</li>
-          <li>Contribute to a positive work culture and team morale</li>
+          <li>Complete tasks accurately and on time</li>
+          <li>Handle inventory safely and efficiently</li>
+          <li>Work smoothly within the team</li>
         </ul>
       </div>
     </div>
@@ -487,21 +476,17 @@ footer {
 
   <section>
     <h2>Final UI</h2>
-    <p>The structure for the web app stays consistent, with a minimal number of unique pages for consistency. The focus is on content, achieved by placing white cards on a light background.</p>
-    <h3>Inbound listing</h3>
-    <p>All consignments received by the warehouse are visible with their status. Tertiary details of a consignment can be reviewed for context, and products are tracked at an item level right up until they're added to the warehouse inventory.</p>
-    <h3>Inbound detail &amp; create inbound</h3>
-    <p>The left nav of the form stays static on scroll, so users can jump to any section of the form easily.</p>
+    <p>A minimal set of page templates, reused throughout — content surfaced through white cards on a light background rather than one-off layouts.</p>
+    <h3>Inbound listing &amp; detail</h3>
+    <p>Consignments are visible with status at a glance, tracked at the item level until stock is added to inventory. The form's left nav stays static on scroll, so workers can jump to any section instantly.</p>
     <h3>Task screens for on-ground workers</h3>
-    <p>The warehouse staff's job is to scan an item code at each task level, to track the status of the item through the warehouse system.</p>
+    <p>Workers scan an item code at each task step to track its status through the system.</p>
     <ul>
-      <li>Stationary tasks like quality checks are performed on desktop, with a handheld barcode scanner connected to the screen for checking status and item details.</li>
-      <li>A mobile handheld device is used for tasks where the worker needs to move from one place to another with the items.</li>
+      <li>Stationary tasks (e.g. quality checks) use a desktop screen with a connected handheld scanner.</li>
+      <li>Mobile handheld devices cover tasks that require moving between locations.</li>
     </ul>
-    <h3>Task completion screen</h3>
-    <p>As all the items to be packed are scanned, a barcode is generated automatically and the screen shows system status as the API hits the OMS to get shipping label details. Once that's generated, a worker can mark the order as packed for the next step. As a worker scans a code, the screen automatically shifts to the next scan, with clear feedback confirming each successful scan.</p>
-    <h3>Handheld mobile screens</h3>
-    <p>Handheld screens use a straightforward design so workers can scan and complete assigned tasks easily — showing how many tasks are left, clear system feedback, and a scanning box in a prominent location on the screen. Workers can complete a task using a scanning device or by touchscreen interaction.</p>
+    <h3>Task completion</h3>
+    <p>Once all items are scanned, a barcode generates automatically via the OMS API and the worker marks the order packed. Each scan gives immediate feedback and auto-advances to the next item — usable via scanner or touch.</p>
   </section>
 
   <section>
