@@ -61,6 +61,20 @@ nav {
   transition: color .2s;
 }
 .nav-links a:hover { color: #141414; }
+.nav-toggle {
+  display: none;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #141414;
+  flex-shrink: 0;
+}
+.nav-toggle svg { width: 22px; height: 22px; }
 
 /* ─── ARTICLE HEADER ─────────────────────────── */
 .article-header {
@@ -228,9 +242,41 @@ footer {
 
 /* ─── RESPONSIVE ─────────────────────────────── */
 @media (max-width: 700px) {
-  nav { padding: 24px 28px; }
+  nav { padding: 24px 28px; position: relative; }
   .article-meta { grid-template-columns: 1fr; }
   .footer-row { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .nav-toggle { display: flex; }
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: #FFFEFC;
+    box-shadow: 0 16px 32px rgba(20,20,20,0.10);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height .3s ease, opacity .25s ease;
+    z-index: 40;
+  }
+  .nav-links.is-open {
+    max-height: 320px;
+    opacity: 1;
+    visibility: visible;
+    padding: 8px 28px 20px;
+  }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block;
+    padding: 13px 0;
+    font-size: 15px;
+    border-bottom: 1px solid #EAE7E1;
+  }
+  .nav-links li:last-child a { border-bottom: none; }
 }
 
 </style>
@@ -242,7 +288,10 @@ footer {
     <span class="logo-mark"></span>
     <span class="logo-text">Kajal<br>Jain</span>
   </a>
-  <ul class="nav-links">
+  <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+  <ul class="nav-links" id="nav-links">
     <li><a href="index.html#work">Work</a></li>
     <li><a href="KajalJain_Resume26.pdf" target="_blank" rel="noopener">Resume</a></li>
     <li><a href="https://www.linkedin.com/in/kajal-jain8" target="_blank" rel="noopener">Linkedin</a></li>
@@ -323,6 +372,24 @@ footer {
   </div>
   <p class="footer-credit">Built with <a href="https://claude.ai" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C12 8 13.5 10.5 22 12C13.5 13.5 12 16 12 22C12 16 10.5 13.5 2 12C10.5 10.5 12 8 12 2Z"/></svg>Claude</a></p>
 </footer>
+
+<script>
+(function () {
+  var toggle = document.getElementById('nav-toggle');
+  var menu = document.getElementById('nav-links');
+  if (!toggle || !menu) return;
+  toggle.addEventListener('click', function () {
+    var isOpen = menu.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  menu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      menu.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
