@@ -286,6 +286,9 @@ nav {
   margin-bottom: 24px;
   transition: transform .3s ease, box-shadow .3s ease;
 }
+.case-card--pink { background: #F8DEDE; }
+.case-card--lavender { background: #DEDAF2; }
+.case-card--mint { background: #DCEEE1; }
 .case-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 24px 48px rgba(20,20,20,0.10);
@@ -295,12 +298,13 @@ nav {
   max-width: 580px;
   border-radius: 12px;
   display: block;
-  box-shadow: 0 20px 44px rgba(20,20,20,0.10);
-  transition: transform .4s ease;
+  box-shadow: 0 30px 50px -12px rgba(20,20,20,0.32), 0 14px 24px -14px rgba(20,20,20,0.24);
+  transition: transform .4s ease, filter .4s ease;
 }
 .case-card img.case-thumb.case-thumb--flat {
   border-radius: 0;
   box-shadow: none;
+  filter: drop-shadow(0 22px 34px rgba(20,20,20,0.26)) drop-shadow(0 10px 16px rgba(20,20,20,0.18));
 }
 .case-card:hover img.case-thumb {
   transform: scale(1.02);
@@ -517,7 +521,7 @@ footer {
     <img class="case-thumb case-thumb--flat" src="loco-viewer-app.webp" alt="Loco viewer app design system" />
   </div>
 
-  <div class="case-card">
+  <div class="case-card case-card--pink">
     <div class="case-copy">
       <p class="case-eyebrow">Fynd</p>
       <h3 class="case-title">Simplify multi-warehouse inventory management</h3>
@@ -529,7 +533,7 @@ footer {
     <img class="case-thumb case-thumb--flat" src="WMS.webp" alt="Warehouse Management System dashboard" />
   </div>
 
-  <div class="case-card">
+  <div class="case-card case-card--lavender">
     <div class="case-copy">
       <p class="case-eyebrow">Fynd</p>
       <h3 class="case-title">Coordinate last-mile delivery in real time</h3>
@@ -541,7 +545,7 @@ footer {
     <img class="case-thumb case-thumb--flat" src="TMS.webp" alt="Trip Management System dashboard" />
   </div>
 
-  <div class="case-card">
+  <div class="case-card case-card--mint">
     <div class="case-copy">
       <p class="case-eyebrow">Loco</p>
       <h3 class="case-title">Vertical mobile streaming</h3>
