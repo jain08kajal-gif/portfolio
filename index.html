@@ -161,7 +161,24 @@ nav {
 .hero-portrait-wrap:hover .hero-pill--3 { transform: translateY(-5px) rotate(6deg) scale(1.08); }
 .hero-portrait-wrap:hover .hero-pill--2 { transform: translateY(-5px) rotate(-3deg) scale(1.04); }
 @media (max-width: 700px) {
-  .hero-pill { display: none; }
+  .hero-pill {
+    display: inline-flex;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .hero-portrait-wrap.in-view .hero-pill--1,
+  .hero-portrait-wrap.in-view .hero-pill--2,
+  .hero-portrait-wrap.in-view .hero-pill--3 {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .hero-portrait-wrap:hover .hero-pill--1,
+  .hero-portrait-wrap:hover .hero-pill--2,
+  .hero-portrait-wrap:hover .hero-pill--3 {
+    transform: none;
+  }
 }
 .hero-headline {
   position: relative;
