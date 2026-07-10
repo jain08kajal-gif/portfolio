@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scaling a Design System Across a 6-Person Team — Kajal Jain</title>
+<meta name="description" content="Case study: scaling Loco's viewer app design system across three surfaces with a 6-person design team in one month." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+
+/* ─── RESET ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: #FFFEFC;
+  color: #141414;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ────────────────────────────────────── */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 60px;
+}
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.logo-mark {
+  width: 28px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #49DA9A 0%, #34BBE6 30%, #4355DB 60%, #D23BE7 100%);
+  flex-shrink: 0;
+}
+.logo-text {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: #141414;
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 15px;
+  font-weight: 400;
+  color: #3F3F3F;
+  text-decoration: none;
+  transition: color .2s;
+}
+.nav-links a:hover { color: #141414; }
+
+/* ─── ARTICLE HEADER ─────────────────────────── */
+.article-header {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 16px 24px 40px;
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #3F3F3F;
+  text-decoration: none;
+  margin-bottom: 28px;
+  transition: color .2s;
+}
+.back-link:hover { color: #141414; }
+.back-link svg { width: 13px; height: 13px; }
+.article-eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #3F3F3F;
+  margin-bottom: 12px;
+}
+.article-title {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 28px;
+}
+.article-meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  background: #F0EEEB;
+  border-radius: 16px;
+  padding: 20px 24px;
+}
+.meta-item-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #3F3F3F;
+  margin-bottom: 4px;
+}
+.meta-item-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #141414;
+}
+
+/* ─── ARTICLE HERO IMAGE ─────────────────────── */
+.article-hero {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 24px 8px;
+}
+.article-hero img {
+  width: 100%;
+  display: block;
+  border-radius: 20px;
+  box-shadow: 0 24px 48px rgba(20,20,20,0.10);
+}
+.article-hero-note {
+  font-size: 12px;
+  color: #3F3F3F;
+  text-align: center;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* ─── ARTICLE BODY ───────────────────────────── */
+.article-body {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 56px 24px 40px;
+}
+.article-body section {
+  margin-bottom: 44px;
+}
+.article-body h2 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+}
+.article-body p {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: #3F3F3F;
+  margin-bottom: 14px;
+}
+.article-body p:last-child { margin-bottom: 0; }
+.article-body ul {
+  list-style: none;
+  margin-top: 4px;
+}
+.article-body li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: #3F3F3F;
+  margin-bottom: 10px;
+}
+.article-body li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #4F4132;
+}
+.article-body li:last-child { margin-bottom: 0; }
+
+/* ─── FOOTER ─────────────────────────────────── */
+footer {
+  padding: 56px 60px 64px;
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #EAE7E1;
+  margin-top: 24px;
+}
+.footer-name { font-size: 15px; font-weight: 700; }
+.footer-email { font-size: 13px; color: #3F3F3F; margin-top: 4px; }
+.footer-links { display: flex; gap: 28px; list-style: none; }
+.footer-links a {
+  font-size: 14px;
+  color: #3F3F3F;
+  text-decoration: none;
+  transition: color .2s;
+}
+.footer-links a:hover { color: #141414; }
+
+/* ─── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 700px) {
+  nav { padding: 24px 28px; }
+  .article-meta { grid-template-columns: 1fr 1fr; }
+  footer { flex-direction: column; align-items: flex-start; gap: 20px; }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">
+    <span class="logo-mark"></span>
+    <span class="logo-text">Kajal<br>Jain</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="KajalJain_Resume26.pdf" target="_blank" rel="noopener">Resume</a></li>
+    <li><a href="https://www.linkedin.com/in/kajal-jain8" target="_blank" rel="noopener">Linkedin</a></li>
+    <li><a href="https://www.behance.net/KajalDesigns" target="_blank" rel="noopener">Behance</a></li>
+  </ul>
+</nav>
+
+<header class="article-header">
+  <a class="back-link" href="index.html#work">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Back to work
+  </a>
+  <p class="article-eyebrow">Loco Viewer App — Web, Mobile Web, App</p>
+  <h1 class="article-title">Scaling a design system across a 6-person team in one month</h1>
+  <div class="article-meta">
+    <div>
+      <p class="meta-item-label">Company</p>
+      <p class="meta-item-value">Loco</p>
+    </div>
+    <div>
+      <p class="meta-item-label">Surfaces</p>
+      <p class="meta-item-value">App, Web, Mobile web</p>
+    </div>
+    <div>
+      <p class="meta-item-label">Timeline</p>
+      <p class="meta-item-value">1 month</p>
+    </div>
+    <div>
+      <p class="meta-item-label">Team</p>
+      <p class="meta-item-value">5–6 designers</p>
+    </div>
+  </div>
+</header>
+
+<div class="article-hero">
+  <img src="Loco.png" alt="Loco viewer app screens — placeholder, final case study screenshots to follow" />
+  <p class="article-hero-note">Placeholder image — final case study screenshots to come</p>
+</div>
+
+<main class="article-body">
+
+  <section>
+    <h2>Context</h2>
+    <p>Loco needed a full visual overhaul of its viewer experience across three surfaces — app, web, and mweb — in one month. The scope was explicitly visual and structural, not a UX redesign: existing flows and interaction patterns stayed as they were, re-skinned using competitor visual language (Twitch) as a reference point, since neither design nor engineering had the bandwidth for original UX exploration in that timeframe. A team of 5-6 designers worked on this in parallel.</p>
+  </section>
+
+  <section>
+    <h2>Constraint</h2>
+    <ul>
+      <li>One month, three surfaces — an aggressive timeline for a full visual system, not just a feature.</li>
+      <li>No new UX decisions in scope; devs couldn't ship structurally new features that fast, so the redesign had to work within existing flows.</li>
+      <li>Branding wasn't finalized — colors, gradients, and iconography were still coming from an external agency, expected weeks into the project.</li>
+      <li>5-6 designers working simultaneously meant consistency wasn't guaranteed by default — nothing enforced shared component usage across the team.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Decision</h2>
+    <p>I owned design and system consistency for a set of core flows — Homepage, Livestream, Fullscreen Livestream, and Leaderboard — translating reference screens into Loco's visual language while building them from shared, reusable components rather than one-off screens.</p>
+    <p>A key structural decision made at the team level, which I applied and maintained across my flows: rather than hardcoding colors and styles into components, we introduced semantic tokens. This was driven by a dev requirement — engineering needed a simpler way to switch the entire app between dark and light mode without rebuilding screens per theme. Applying this correctly across high-traffic surfaces like Homepage and Livestream meant every component I touched needed to reference tokens consistently, not just look right in one theme.</p>
+    <p>Constant coordination — ongoing calls with the design team — was necessary to keep parallel work aligned, since six people building off the same reference source naturally diverged in interpretation.</p>
+  </section>
+
+  <section>
+    <h2>Trade-off</h2>
+    <ul>
+      <li>Speed and dev-need-driven architecture took priority over original UX exploration — the goal was a cohesive, systemized visual layer, not new interaction design.</li>
+      <li>Distributed execution across 6 designers meant some inconsistency was unavoidable: not everyone used components as intended, and reconciling that came later rather than being prevented upfront.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Outcome</h2>
+    <ul>
+      <li>When branding was finalized roughly three weeks in, the semantic token structure — originally built to solve theme-switching — meant the whole system's colors, gradients, and iconography were updated in a single night, rather than requiring screen-by-screen rework across all three surfaces. This wasn't the original intent of the token system, but a direct payoff of building it correctly.</li>
+      <li>The design system built in this sprint is still used today to create new flows on the platform — a stronger, longer-lasting outcome than a one-time launch.</li>
+      <li>Post-branding, a sanity pass and reconciliation of inconsistent component usage was still required, which fed into tighter guidelines for adoption going forward.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Reflection</h2>
+    <p>Even with a solid token architecture, inconsistency persisted where designers bypassed shared components — a reminder that a system is only as strong as its adoption discipline. Given the time constraint, we couldn't fully solve for governance in the moment; next time, I'd push for lighter-weight enforcement (e.g., a shared component checklist before merging designs) built into the parallel workflow from day one, rather than reconciling inconsistency after the fact.</p>
+  </section>
+
+</main>
+
+<footer>
+  <div>
+    <p class="footer-name">Kajal Jain</p>
+    <p class="footer-email">jain08kajal@gmail.com</p>
+  </div>
+  <ul class="footer-links">
+    <li><a href="KajalJain_Resume26.pdf" target="_blank" rel="noopener">Resume</a></li>
+    <li><a href="https://www.linkedin.com/in/kajal-jain8" target="_blank" rel="noopener">LinkedIn</a></li>
+    <li><a href="https://www.behance.net/KajalDesigns" target="_blank" rel="noopener">Behance</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
