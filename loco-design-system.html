@@ -95,13 +95,21 @@ nav {
 }
 .back-link:hover { color: #141414; }
 .back-link svg { width: 13px; height: 13px; }
+.article-eyebrow-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-bottom: 12px;
+}
 .article-eyebrow {
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #3F3F3F;
-  margin-bottom: 12px;
+  margin-bottom: 0;
 }
 .article-title {
   font-size: clamp(28px, 4vw, 40px);
@@ -133,17 +141,19 @@ nav {
 }
 .article-header a.inline-link {
   display: inline-block;
-  margin-top: 20px;
-  font-size: 13.5px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 700;
   color: #4F4132;
+  text-decoration: none;
+  white-space: nowrap;
 }
+.article-header a.inline-link:hover { text-decoration: underline; }
 
 /* ─── ARTICLE BODY ───────────────────────────── */
 .article-body {
   max-width: 720px;
   margin: 0 auto;
-  padding: 56px 24px 40px;
+  padding: 8px 24px 40px;
 }
 .article-body section {
   margin-bottom: 44px;
@@ -386,7 +396,10 @@ footer {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
     Back to work
   </a>
-  <p class="article-eyebrow">Loco Viewer App: Web, Mobile Web, App</p>
+  <div class="article-eyebrow-row">
+    <p class="article-eyebrow">Loco Viewer App: Web, Mobile Web, App</p>
+    <a class="inline-link" href="https://loco.com/" target="_blank" rel="noopener">Visit Loco →</a>
+  </div>
   <h1 class="article-title">Scaling a design system across a 6-person team in one month</h1>
   <div class="article-meta">
     <div>
@@ -406,7 +419,6 @@ footer {
       <p class="meta-item-value">5–6 designers</p>
     </div>
   </div>
-  <a class="inline-link" href="https://loco.com/" target="_blank" rel="noopener">Visit Loco →</a>
 </header>
 
 
