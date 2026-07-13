@@ -426,24 +426,29 @@ footer {
 
   <section>
     <h2>Context</h2>
-    <p>Loco needed a full visual overhaul of its viewer experience across three surfaces (app, web, and mweb) in one month. The scope was explicitly visual and structural, not a UX redesign: existing flows and interaction patterns stayed as they were, re-skinned using competitor visual language (Twitch) as a reference point, since neither design nor engineering had the bandwidth for original UX exploration in that timeframe. A team of 5-6 designers worked on this in parallel.</p>
+    <p>Loco was redesigning its viewer experience across the app, web, and mobile web. The goal was to refresh the visual language within one month while keeping the existing user experience intact.</p>
+    <p>The timeline was ambitious, so the team made a conscious decision to focus on visual consistency rather than rethink interactions. Existing flows already worked well enough and engineering capacity was limited, making a complete UX redesign unrealistic for the release.</p>
+    <p>At the same time, the product branding was still evolving. Final colours, gradients, and iconography were being created by an external agency and would arrive several weeks after the project had already begun.</p>
+    <p>Six designers worked on different parts of the product in parallel. While this allowed us to move quickly, it also introduced a new challenge. Keeping the experience consistent across every screen would depend on how well we collaborated, not simply on having a design system.</p>
   </section>
 
   <section>
     <h2>Constraint</h2>
+    <p>This project came with several constraints that shaped every design decision.</p>
     <ul>
-      <li>One month, three surfaces: an aggressive timeline for a full visual system, not just a feature.</li>
-      <li>No new UX decisions in scope; devs couldn't ship structurally new features that fast, so the redesign had to work within existing flows.</li>
-      <li>Branding wasn't finalized: colors, gradients, and iconography were still coming from an external agency, expected weeks into the project.</li>
-      <li>5-6 designers working simultaneously meant consistency wasn't guaranteed by default. Nothing enforced shared component usage across the team.</li>
+      <li>The redesign had to cover three platforms within one month.</li>
+      <li>Existing user flows needed to remain unchanged so engineering could deliver within the release timeline.</li>
+      <li>The final visual identity was unavailable during the first half of the project, which meant the system had to be flexible enough to absorb branding changes later.</li>
+      <li>Multiple designers were working simultaneously, so consistency could not rely on manual reviews alone. We needed a shared way of building interfaces that everyone could follow.</li>
     </ul>
   </section>
 
   <section>
-    <h2>Decision</h2>
-    <p>I owned design and system consistency for a set of core flows (Homepage, Livestream, Fullscreen Livestream, and Leaderboard), translating reference screens into Loco's visual language while building them from shared, reusable components rather than one-off screens.</p>
-    <p>A team-level decision I applied and maintained across my flows: rather than hardcoding colors and styles into components, we introduced semantic tokens, driven by a dev need for simpler dark/light mode switching. On high-traffic surfaces like Homepage and Livestream, that meant every component had to reference tokens consistently, not just look right in one theme.</p>
-    <p>Keeping six designers aligned against the same reference source took constant coordination. Without it, interpretation naturally drifted.</p>
+    <h2>My role</h2>
+    <p>I was responsible for designing several high visibility experiences, including the Homepage, Livestream, Fullscreen Livestream, and Leaderboard.</p>
+    <p>Rather than recreating reference screens one by one, I focused on building reusable components that could be shared across the team. My goal was to make each screen easy to maintain while keeping the experience consistent across different platforms.</p>
+    <p>One of the most valuable decisions we made was introducing semantic design tokens instead of applying colours directly inside components. The original motivation came from engineering, who wanted a simpler way to support light and dark themes. As I built my flows, every component referenced these tokens instead of fixed colours. At the time it felt like a technical improvement, but it later became one of the biggest advantages of the project.</p>
+    <p>Since several designers were working in parallel, regular conversations became just as important as the components themselves. We frequently aligned on visual decisions to reduce differences before they spread across the product.</p>
   </section>
 
   <section>
@@ -482,25 +487,36 @@ footer {
   </section>
 
   <section>
-    <h2>Trade-off</h2>
-    <ul>
-      <li>Speed and dev-need-driven architecture took priority over original UX exploration. The goal was a cohesive, systemized visual layer, not new interaction design.</li>
-      <li>Distributed execution across 6 designers meant some inconsistency was unavoidable: not everyone used components as intended, and reconciling that came later rather than being prevented upfront.</li>
-    </ul>
+    <h2>Design decisions</h2>
+    <p>Every project is shaped by constraints, and this one was no different.</p>
+    <p>We deliberately prioritised consistency and scalability over introducing new user experiences. Refreshing the visual language across three platforms within one month delivered far more value than redesigning individual interactions.</p>
+    <p>Working in parallel also meant that some inconsistencies were inevitable. Our priority was to establish a strong shared foundation first, knowing that smaller refinements could be addressed once the release was complete.</p>
+  </section>
+
+  <section>
+    <h2>Working with engineering</h2>
+    <p>One aspect of this project that I genuinely enjoyed was working closely with engineers throughout the release.</p>
+    <p>Because of the compressed timeline, it was not practical to design every possible screen before development began. Instead, we focused on building a robust design system with clear styling guidelines that could act as the single source of truth. This gave engineers enough flexibility to build most screens without waiting for detailed mock ups.</p>
+    <p>As development progressed, there were naturally moments where existing components did not fully answer a specific scenario. Rather than creating every edge case in advance, my teammate and I stayed closely involved during implementation. We monitored Slack conversations throughout the day and remained available in the war room to resolve questions as they came up.</p>
+    <p>Some requests needed a new screen, while others only required clarification on how an existing component should behave. Responding quickly meant engineers could continue building without unnecessary delays, which was especially important as release deadlines approached.</p>
+    <p>I also gained a deeper appreciation for the pressure engineers experience during delivery. Their questions were rarely about the design itself. They were usually about reducing uncertainty so they could move forward with confidence. Having a well structured design system made those conversations much easier because both teams could rely on the same source of truth.</p>
   </section>
 
   <section>
     <h2>Outcome</h2>
-    <ul>
-      <li>When branding was finalized roughly three weeks in, the semantic token structure (originally built to solve theme-switching) meant the whole system's colors, gradients, and iconography were updated in a single night, rather than requiring screen-by-screen rework across all three surfaces. This wasn't the original intent of the token system, but a direct payoff of building it correctly.</li>
-      <li>The design system built in this sprint is still used today to create new flows on the platform. That's a stronger, longer-lasting outcome than a one-time launch.</li>
-      <li>Post-branding, a sanity pass and reconciliation of inconsistent component usage was still required, which fed into tighter guidelines for adoption going forward.</li>
-    </ul>
+    <p>When the final brand assets arrived about three weeks into the project, the benefits of the design system became immediately visible.</p>
+    <p>Because every component was built using semantic tokens, updating colours, gradients and iconography happened across the entire product in a single evening instead of requiring manual changes screen by screen.</p>
+    <p>Although the token structure was originally introduced to simplify theme support, it also made the branding transition almost effortless.</p>
+    <p>The design system continues to support new feature development today, making it one of the most valuable outcomes of the project. Beyond the launch itself, it established a shared foundation that designers could continue building on as the product evolved.</p>
+    <p>After the release, we completed a review to identify places where components had been used inconsistently. Those learnings helped strengthen the guidelines and improved adoption for future work.</p>
   </section>
 
   <section>
-    <h2>Reflection</h2>
-    <p>Even with a solid token architecture, inconsistency persisted where designers bypassed shared components. That's a reminder that a system is only as strong as its adoption discipline. Given the time constraint, we couldn't fully solve for governance in the moment; next time, I'd push for lighter-weight enforcement (e.g., a shared component checklist before merging designs) built into the parallel workflow from day one, rather than reconciling inconsistency after the fact.</p>
+    <h2>What I learned</h2>
+    <p>I realised that creating reusable components is only part of the job. The bigger challenge is helping people use them consistently.</p>
+    <p>Even with a well structured system, designers naturally make different decisions when working under pressure. A design system succeeds only when the team adopts it with the same level of consistency that it was designed with.</p>
+    <p>Looking back, I would introduce lightweight checkpoints throughout the project instead of reviewing everything after the work was complete. Something as simple as a shared component review before designs were considered ready would have reduced inconsistencies without slowing the team down.</p>
+    <p>The project reinforced an idea that continues to shape how I work today. Design systems are not just collections of components. They are shared decision making tools that help teams move faster while creating a more consistent product.</p>
   </section>
 
 </main>
