@@ -111,11 +111,14 @@ nav {
   color: #3F3F3F;
   margin-bottom: 0;
 }
+/* L0: page title: size and weight only, never colour */
 .article-title {
-  font-size: clamp(28px, 4vw, 40px);
+  font-size: clamp(30px, 4.2vw, 42px);
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
+  letter-spacing: -0.025em;
+  line-height: 1.18;
+  color: #141414;
+  text-wrap: balance;
   margin-bottom: 28px;
 }
 .article-meta {
@@ -149,30 +152,66 @@ nav {
 }
 .article-header a.inline-link:hover { text-decoration: underline; }
 
-/* ─── ARTICLE BODY ───────────────────────────── */
+/* ═══════════════════════════════════════════════
+   CASE STUDY HIERARCHY SYSTEM
+   Reusable across all case study pages.
+
+   INK SCALE (never mix roles)
+     #141414  Ink        headings + emphasis
+     #3F3F3F  Ink muted  body copy, labels
+     #4F4132  Structure  rules, tags, bullets, borders
+     #FF3700  Action     links ONLY, never decoration
+
+   TYPE SCALE
+     L0  Title      clamp(30,4.2vw,42) / 700 / ink
+     L1  Takeaway   16 / 500 / ink        on #F0EEEB card
+     L2  Section    22 / 700 / ink        + hairline rule
+     L3  Lede       17.5 / 500 / ink      one per section
+     L4  Callout    17 / 700 / ink        on white card
+     L5  Emphasis   inherit / 600 / ink   weight+colour only
+     L6  Body       15.5 / 400 / ink muted
+     L7  Label      11 / 700 / 0.08em / uppercase
+
+   RULE: each level changes ONE thing relative to body.
+   Never size + colour + weight together.
+   ═══════════════════════════════════════════════ */
+
 .article-body {
   max-width: 780px;
   margin: 0 auto;
   padding: 8px 24px 40px;
 }
 .article-body section {
-  margin-bottom: 44px;
+  margin-bottom: 40px;
+}
+/* L2: section heading, with hairline rule for rhythm */
+.article-body section + section:not(.section--bleed) {
+  border-top: 1px solid #EAE7E1;
+  padding-top: 40px;
 }
 .article-body h2 {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
-  letter-spacing: -0.01em;
-  margin-bottom: 16px;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  color: #141414;
+  margin-bottom: 14px;
 }
 .article-body h3 {
   font-size: 14px;
   font-weight: 700;
-  letter-spacing: -0.005em;
-  margin: 24px 0 12px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #4F4132;
+  margin: 28px 0 10px;
 }
 .compare-card h3 {
   text-align: center;
   margin: 0 0 20px;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #4F4132;
 }
 .compare-row {
   display: flex;
@@ -234,27 +273,30 @@ nav {
   margin-bottom: 14px;
 }
 .article-body p:last-child { margin-bottom: 0; }
+/* L1: key takeaway: the one thing to read */
 .key-takeaway {
   background: #F0EEEB;
   border-left: 3px solid #4F4132;
   border-radius: 4px 12px 12px 4px;
-  padding: 20px 24px;
+  padding: 22px 26px;
   margin: 8px 0 40px;
 }
 .key-takeaway-label {
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #4F4132;
   margin-bottom: 8px;
 }
 .key-takeaway p {
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: 500;
   line-height: 1.65;
   color: #141414;
   margin-bottom: 0;
 }
+.key-takeaway mark { font-weight: 700; }
 .article-body ul {
   list-style: none;
   margin-top: 4px;
@@ -290,7 +332,7 @@ nav {
 }
 .article-body a.inline-link:hover { color: #141414; }
 
-/* ─── SCANNING LAYER: LEDE, HIGHLIGHT, CALLOUT ── */
+/* L3: section lede: the skim line, one per section */
 .article-body .lede {
   font-size: 17.5px;
   line-height: 1.6;
@@ -298,51 +340,50 @@ nav {
   color: #141414;
   margin-bottom: 18px;
 }
+
+/* L5: in-body emphasis: weight + ink only.
+   No size change, so line rhythm stays even. */
 mark {
   background: none;
   color: #141414;
   font-weight: 600;
-  font-size: 1.05em;
-  letter-spacing: -0.005em;
 }
 .article-title mark {
-  color: #FF3700;
-  font-weight: 700;
-  font-size: 1em;
+  color: inherit;
+  font-weight: inherit;
 }
-.key-takeaway mark {
-  font-weight: 700;
-  font-size: 1.02em;
-}
+
+/* L4: callout: the narrative moments worth stopping for */
 .article-body .callout {
   background: #FFFFFF;
-  border: 1px solid #EAE7E1;
-  border-left: 3px solid #FF3700;
+  border: 1px solid #E4E0D8;
+  border-left: 3px solid #4F4132;
   border-radius: 4px 14px 14px 4px;
-  padding: 22px 26px;
-  margin: 26px 0;
-  box-shadow: 0 2px 12px rgba(20,20,20,0.04);
+  padding: 24px 28px;
+  margin: 28px 0;
 }
 .article-body .callout-tag {
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #FF3700;
-  margin-bottom: 6px;
+  color: #4F4132;
+  margin-bottom: 8px;
 }
 .article-body .callout h3 {
   font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.01em;
+  text-transform: none;
+  color: #141414;
   margin: 0 0 10px;
   text-align: left;
 }
 .article-body .callout p {
-  font-size: 15px;
+  font-size: 15.5px;
   line-height: 1.7;
   color: #3F3F3F;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 .article-body .callout p:last-child { margin-bottom: 0; }
 
@@ -523,7 +564,7 @@ footer {
     <p class="article-eyebrow">Loco Viewer App: Web, Mobile Web, App</p>
     <a class="inline-link" href="https://loco.com/" target="_blank" rel="noopener">Visit Loco →</a>
   </div>
-  <h1 class="article-title">Keeping <mark>6 designers</mark> consistent across <mark>3 platforms</mark> in 4 weeks</h1>
+  <h1 class="article-title">Keeping 6 designers consistent across 3 platforms in 4 weeks</h1>
   <div class="article-meta">
     <div>
       <p class="meta-item-label">Company</p>
@@ -592,7 +633,7 @@ footer {
     <p>Since several designers were working in parallel, regular conversations became just as important as the components themselves. We frequently aligned on visual decisions to reduce differences before they spread across the product.</p>
   </section>
 
-  <section>
+  <section class="section--bleed">
     <div class="compare-card compare-card--web">
       <h3>Desktop</h3>
       <div class="compare-row">
