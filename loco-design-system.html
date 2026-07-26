@@ -234,6 +234,27 @@ nav {
   margin-bottom: 14px;
 }
 .article-body p:last-child { margin-bottom: 0; }
+.key-takeaway {
+  background: #F0EEEB;
+  border-left: 3px solid #4F4132;
+  border-radius: 4px 12px 12px 4px;
+  padding: 20px 24px;
+  margin: 8px 0 40px;
+}
+.key-takeaway-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #4F4132;
+  margin-bottom: 8px;
+}
+.key-takeaway p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #141414;
+  margin-bottom: 0;
+}
 .article-body ul {
   list-style: none;
   margin-top: 4px;
@@ -257,6 +278,100 @@ nav {
   background: #4F4132;
 }
 .article-body li:last-child { margin-bottom: 0; }
+.article-body li b {
+  color: #141414;
+  font-weight: 700;
+}
+
+/* ─── SCANNING LAYER: LEDE, HIGHLIGHT, CALLOUT ── */
+.article-body .lede {
+  font-size: 17.5px;
+  line-height: 1.6;
+  font-weight: 500;
+  color: #141414;
+  margin-bottom: 18px;
+}
+mark {
+  background: none;
+  color: #141414;
+  font-weight: 600;
+  font-size: 1.05em;
+  letter-spacing: -0.005em;
+}
+.article-title mark {
+  color: #FF3700;
+  font-weight: 700;
+  font-size: 1em;
+}
+.key-takeaway mark {
+  font-weight: 700;
+  font-size: 1.02em;
+}
+.article-body .callout {
+  background: #FFFFFF;
+  border: 1px solid #EAE7E1;
+  border-left: 3px solid #FF3700;
+  border-radius: 4px 14px 14px 4px;
+  padding: 22px 26px;
+  margin: 26px 0;
+  box-shadow: 0 2px 12px rgba(20,20,20,0.04);
+}
+.article-body .callout-tag {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #FF3700;
+  margin-bottom: 6px;
+}
+.article-body .callout h3 {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 10px;
+  text-align: left;
+}
+.article-body .callout p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #3F3F3F;
+  margin-bottom: 10px;
+}
+.article-body .callout p:last-child { margin-bottom: 0; }
+
+/* ─── OUTCOME STAT GRID ───────────────────────── */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 16px 0 20px;
+}
+.stat-card {
+  background: #F0EEEB;
+  border-radius: 12px;
+  padding: 16px 16px 14px;
+}
+.stat-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #3F3F3F;
+  margin-bottom: 6px;
+}
+.stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #141414;
+  letter-spacing: -0.01em;
+  margin-bottom: 0;
+}
+.stat-sub {
+  font-size: 12px;
+  color: #3F3F3F;
+  margin-top: 4px;
+  margin-bottom: 0;
+}
 
 /* ─── FOOTER ─────────────────────────────────── */
 footer {
@@ -305,6 +420,7 @@ footer {
   .footer-row { flex-direction: column; align-items: flex-start; gap: 20px; }
   .compare-card { padding: 24px 16px; }
   .compare-card--mobile .compare-item { flex-basis: 28%; min-width: 90px; }
+  .stat-grid { grid-template-columns: 1fr 1fr; }
   .nav-toggle { display: flex; }
   .nav-links {
     position: absolute;
@@ -400,7 +516,7 @@ footer {
     <p class="article-eyebrow">Loco Viewer App: Web, Mobile Web, App</p>
     <a class="inline-link" href="https://loco.com/" target="_blank" rel="noopener">Visit Loco →</a>
   </div>
-  <h1 class="article-title">Scaling a design system across a 6-person team in one month</h1>
+  <h1 class="article-title">Scaling a design system across a 6-person team <mark>in one month</mark></h1>
   <div class="article-meta">
     <div>
       <p class="meta-item-label">Company</p>
@@ -424,11 +540,20 @@ footer {
 
 <main class="article-body">
 
+  <p>Loco is a premier Indian live-streaming and esports platform dedicated to gaming entertainment. Users can watch top streamers, follow major esports tournaments, and broadcast their own gameplay using the companion Loco streaming Dashboard. It is available globally across Android, iOS, and web browsers.</p>
+
+  <div class="key-takeaway">
+    <p class="key-takeaway-label">Key takeaway</p>
+    <p>Rebuilt Loco's design system across three platforms in one month for a 5 to 6 person team. <mark>Semantic tokens meant the full rebrand shipped in a single evening instead of a screen-by-screen rebuild</mark>, engagement held steady through the transition, and the system is still used to build new flows today.</p>
+  </div>
+
   <section>
     <h2>Context</h2>
+    <p class="lede">Refresh the entire visual language across three platforms in one month, without changing a single user flow, and without the final brand in hand.</p>
     <p>Loco was redesigning its viewer experience across the app, web, and mobile web. The goal was to refresh the visual language within one month while keeping the existing user experience intact.</p>
     <p>The timeline was ambitious, so the team made a conscious decision to focus on visual consistency rather than rethink interactions. Existing flows already worked well enough and engineering capacity was limited, making a complete UX redesign unrealistic for the release.</p>
-    <p>At the same time, the product branding was still evolving. Final colours, gradients, and iconography were being created by an external agency and would arrive several weeks after the project had already begun.</p>
+    <p>At the same time, the product branding was still evolving. <mark>Final colours, gradients, and iconography were being created by an external agency and would arrive several weeks after the project had already begun.</mark></p>
+    <p>The timing lined up with Loco's push into new international markets, which made the one-month deadline non-negotiable rather than just aggressive.</p>
     <p>Six designers worked on different parts of the product in parallel. While this allowed us to move quickly, it also introduced a new challenge. Keeping the experience consistent across every screen would depend on how well we collaborated, not simply on having a design system.</p>
   </section>
 
@@ -436,18 +561,27 @@ footer {
     <h2>Constraint</h2>
     <p>This project came with several constraints that shaped every design decision.</p>
     <ul>
-      <li>The redesign had to cover three platforms within one month.</li>
-      <li>Existing user flows needed to remain unchanged so engineering could deliver within the release timeline.</li>
-      <li>The final visual identity was unavailable during the first half of the project, which meant the system had to be flexible enough to absorb branding changes later.</li>
-      <li>Multiple designers were working simultaneously, so consistency could not rely on manual reviews alone. We needed a shared way of building interfaces that everyone could follow.</li>
+      <li><b>A launch date that could not move.</b> The redesign had to cover three platforms within one month, anchored to an external market launch.</li>
+      <li><b>Flows were untouchable.</b> Existing user journeys needed to remain unchanged so engineering could deliver within the release timeline.</li>
+      <li><b>The brand did not exist yet.</b> The final visual identity was unavailable during the first half of the project, so the system had to be flexible enough to absorb branding changes later.</li>
+      <li><b>Six designers in parallel.</b> Consistency could not rely on manual reviews alone. We needed a shared way of building interfaces that everyone could follow.</li>
     </ul>
   </section>
 
   <section>
     <h2>My role</h2>
+    <p class="lede">I owned four of the highest-traffic surfaces, and pushed for semantic tokens over hard-coded colours, which turned out to be the decision that saved the launch.</p>
     <p>I was responsible for designing several high visibility experiences, including the Homepage, Livestream, Fullscreen Livestream, and Leaderboard.</p>
     <p>Rather than recreating reference screens one by one, I focused on building reusable components that could be shared across the team. My goal was to make each screen easy to maintain while keeping the experience consistent across different platforms.</p>
     <p>One of the most valuable decisions we made was introducing semantic design tokens instead of applying colours directly inside components. The original motivation came from engineering, who wanted a simpler way to support light and dark themes. As I built my flows, every component referenced these tokens instead of fixed colours. At the time it felt like a technical improvement, but it later became one of the biggest advantages of the project.</p>
+
+    <div class="callout">
+      <p class="callout-tag">The decision that mattered</p>
+      <h3>Designing against a brand that did not exist</h3>
+      <p>Engineering asked for tokens to simplify light and dark theming. The bigger use case was that tokens would let the whole team build the product against a brand that had not been delivered yet.</p>
+      <p>By referencing semantic roles instead of fixed hex values, <mark>the missing identity stopped being a blocker and became a variable</mark>. Everyone could build on placeholders and swap the real brand in later, everywhere, at once.</p>
+    </div>
+
     <p>Since several designers were working in parallel, regular conversations became just as important as the components themselves. We frequently aligned on visual decisions to reduce differences before they spread across the product.</p>
   </section>
 
@@ -488,35 +622,71 @@ footer {
 
   <section>
     <h2>Design decisions</h2>
+    <p class="lede">Scoped as a visual system migration, not a UX redesign. I communicated that trade-off to stakeholders upfront rather than discovering it late.</p>
     <p>Every project is shaped by constraints, and this one was no different.</p>
-    <p>We deliberately prioritised consistency and scalability over introducing new user experiences. Refreshing the visual language across three platforms within one month delivered far more value than redesigning individual interactions.</p>
+    <p>We deliberately prioritised consistency and scalability over introducing new user experiences. <mark>A coherent brand shipped on time was worth more than marginally better interactions shipped late.</mark></p>
     <p>Working in parallel also meant that some inconsistencies were inevitable. Our priority was to establish a strong shared foundation first, knowing that smaller refinements could be addressed once the release was complete.</p>
   </section>
 
   <section>
     <h2>Working with engineering</h2>
-    <p>One aspect of this project that I genuinely enjoyed was working closely with engineers throughout the release.</p>
-    <p>Because of the compressed timeline, it was not practical to design every possible screen before development began. Instead, we focused on building a robust design system with clear styling guidelines that could act as the single source of truth. This gave engineers enough flexibility to build most screens without waiting for detailed mock ups.</p>
-    <p>As development progressed, there were naturally moments where existing components did not fully answer a specific scenario. Rather than creating every edge case in advance, my teammate and I stayed closely involved during implementation. We monitored Slack conversations throughout the day and remained available in the war room to resolve questions as they came up.</p>
+    <p class="lede">With no time to mock every screen, the design system became the single source of truth and my teammate and I became its live support layer, embedded with the engineering team through delivery.</p>
+    <p>One aspect of this project that I enjoyed most was working closely with engineers throughout the release.</p>
+    <p>Because of the compressed timeline, it was not practical to design every possible screen before development began. Instead, we focused on building a robust design system with clear styling guidelines that could act as the single source of truth. <mark>This gave engineers enough flexibility to build most screens without waiting for detailed mock ups.</mark></p>
+    <p>As development progressed, there were naturally moments where existing components did not fully answer a specific scenario. Rather than creating every edge case in advance, my teammate and I stayed closely involved during implementation. We monitored Slack conversations throughout the day and remained available in the war room to resolve questions as they came up, typically within the hour.</p>
     <p>Some requests needed a new screen, while others only required clarification on how an existing component should behave. Responding quickly meant engineers could continue building without unnecessary delays, which was especially important as release deadlines approached.</p>
-    <p>I also gained a deeper appreciation for the pressure engineers experience during delivery. Their questions were rarely about the design itself. They were usually about reducing uncertainty so they could move forward with confidence. Having a well structured design system made those conversations much easier because both teams could rely on the same source of truth.</p>
+    <p>I also gained a deeper appreciation for the pressure engineers experience during delivery. Their questions were rarely about the design itself. <mark>They were usually about reducing uncertainty so they could move forward with confidence.</mark> A well structured system answers most of those questions before they are asked, and being present answers the rest fast enough that builds never stall on design.</p>
   </section>
 
   <section>
     <h2>Outcome</h2>
-    <p>When the final brand assets arrived about three weeks into the project, the benefits of the design system became immediately visible.</p>
-    <p>Because every component was built using semantic tokens, updating colours, gradients and iconography happened across the entire product in a single evening instead of requiring manual changes screen by screen.</p>
-    <p>Although the token structure was originally introduced to simplify theme support, it also made the branding transition almost effortless.</p>
-    <p>The design system continues to support new feature development today, making it one of the most valuable outcomes of the project. Beyond the launch itself, it established a shared foundation that designers could continue building on as the product evolved.</p>
-    <p>After the release, we completed a review to identify places where components had been used inconsistently. Those learnings helped strengthen the guidelines and improved adoption for future work.</p>
+    <p class="lede">The success criterion was deliberate: change how the product looks without changing how it behaves. The data confirmed exactly that.</p>
+
+    <div class="callout">
+      <p class="callout-tag">Where it paid off</p>
+      <h3>The evening the entire product changed colour</h3>
+      <p>Three weeks in, the agency delivered the final brand: new colours, gradients, iconography, with one week left before launch.</p>
+      <p>Because every component referenced semantic tokens, <mark>we applied the new identity across the entire product in a single evening.</mark> The manual alternative was estimated at two to three weeks of screen-by-screen updates, which would have missed the launch date. A quiet decision made in week one saved the launch in week three.</p>
+    </div>
+
+    <p>Thirty days after launch, engagement held roughly flat through a complete visual overhaul, and around 85% of screens shipped entirely from shared components with no bespoke mockups needed.</p>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <p class="stat-label">Monthly active viewers</p>
+        <p class="stat-value">~160k</p>
+        <p class="stat-sub">flat through launch</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Weekly active viewers</p>
+        <p class="stat-value">~38k</p>
+        <p class="stat-sub">held steady</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Avg. session duration</p>
+        <p class="stat-value">~3.5 min</p>
+        <p class="stat-sub">slightly up post-launch</p>
+      </div>
+      <div class="stat-card">
+        <p class="stat-label">Engagement change</p>
+        <p class="stat-value">~0.3%</p>
+        <p class="stat-sub">by design</p>
+      </div>
+    </div>
+    <p>For a redesign whose explicit goal was continuity, <mark>flat engagement across roughly 160k monthly actives is the result</mark>: a new brand introduced without costing the business a point of engagement, and no spike in UI-related support tickets through the transition.</p>
+    <p>Loco was pushing into new international markets, including Vietnam, around the same time, and the redesigned experience held up as the front door for that expansion: steady-state traffic ran several times the pre-launch baseline, with a low bounce rate and an average session well above the platform average.</p>
+    <ul>
+      <li><b>The system outlived the launch.</b> The token architecture and component library remain the foundation for new feature work today.</li>
+      <li><b>Theme support shipped essentially for free</b> in a later release, the tokens' original purpose, delivered as a byproduct.</li>
+      <li><b>The post-launch audit found inconsistencies on under 10% of screens</b>, resolved in one cleanup sprint and folded back into the guidelines.</li>
+    </ul>
   </section>
 
   <section>
     <h2>What I learned</h2>
-    <p>I realised that creating reusable components is only part of the job. The bigger challenge is helping people use them consistently.</p>
-    <p>Even with a well structured system, designers naturally make different decisions when working under pressure. A design system succeeds only when the team adopts it with the same level of consistency that it was designed with.</p>
-    <p>Looking back, I would introduce lightweight checkpoints throughout the project instead of reviewing everything after the work was complete. Something as simple as a shared component review before designs were considered ready would have reduced inconsistencies without slowing the team down.</p>
-    <p>The project reinforced an idea that continues to shape how I work today. Design systems are not just collections of components. They are shared decision making tools that help teams move faster while creating a more consistent product.</p>
+    <p class="lede">Building the system was the easy half. Driving adoption was the hard half.</p>
+    <p>Creating reusable components is only part of the job. The bigger challenge is helping people use them consistently. Even with a well structured system, <mark>six designers under deadline pressure will make six slightly different calls</mark>, however good the library is.</p>
+    <p>Looking back, I would introduce lightweight checkpoints throughout the project instead of reviewing everything after the work was complete. A fifteen minute shared component review before any flow was marked ready would have caught most inconsistencies at the source, without slowing the team down.</p>
+    <p>The project reinforced an idea that continues to shape how I work today. <mark>A design system is not a component library. It is a shared decision making tool, and its value comes from how reliably the team reaches for it under pressure.</mark></p>
   </section>
 
 </main>
