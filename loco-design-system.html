@@ -161,6 +161,7 @@ nav {
      #3F3F3F  Ink muted  body copy, labels
      #4F4132  Structure  rules, tags, bullets, borders
      #FF3700  Action     links ONLY, never decoration
+     #2F6BB3  Signal     key takeaway ONLY, one per page
 
    TYPE SCALE
      L0  Title      clamp(30,4.2vw,42) / 700 / ink
@@ -273,10 +274,12 @@ nav {
   margin-bottom: 14px;
 }
 .article-body p:last-child { margin-bottom: 0; }
-/* L1: key takeaway: the one thing to read */
+/* L1: key takeaway: the one thing to read.
+   Cool tint, drawn from the logo gradient, so it separates
+   from the warm neutrals used by every other card. */
 .key-takeaway {
-  background: #F0EEEB;
-  border-left: 3px solid #4F4132;
+  background: #EBF2F8;
+  border-left: 3px solid #2F6BB3;
   border-radius: 4px 12px 12px 4px;
   padding: 22px 26px;
   margin: 8px 0 40px;
@@ -286,7 +289,7 @@ nav {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #4F4132;
+  color: #2F6BB3;
   margin-bottom: 8px;
 }
 .key-takeaway p {
