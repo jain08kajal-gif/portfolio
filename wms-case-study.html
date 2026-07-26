@@ -36,7 +36,7 @@
    ═══════════════════════════════════════════════ */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 120px; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 body {
   font-family: 'DM Sans', system-ui, sans-serif;
   background: #FFFEFC;
@@ -60,10 +60,16 @@ nav {
   padding: 30px 60px;
 }
 .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+/* Logomark: die-cut sticker portrait on an ink disc.
+   Dark disc gives the tan figure enough value contrast to
+   stay readable down to nav size. */
 .logo-mark {
-  width: 28px; height: 48px; border-radius: 14px;
-  background: linear-gradient(180deg, #49DA9A 0%, #34BBE6 30%, #4355DB 60%, #D23BE7 100%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
   flex-shrink: 0;
+  display: block;
+  object-fit: cover;
 }
 .logo-text { font-size: 15px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; color: #141414; }
 .nav-links { display: flex; gap: 36px; list-style: none; }
@@ -75,14 +81,23 @@ nav {
 }
 .nav-toggle svg { width: 22px; height: 22px; }
 
-/* Sticky nav: condenses once the page scrolls */
+/* Sticky nav: strips down to a slim bar once the page scrolls */
 nav.is-stuck {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: rgba(255, 254, 252, 0.82);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
   border-bottom-color: #EAE7E1;
 }
-nav.is-stuck .logo-mark { height: 34px; border-radius: 10px; }
-.logo-mark { transition: height .22s ease, border-radius .22s ease; }
+nav.is-stuck .logo-mark { width: 32px; height: 32px; }
+nav.is-stuck .logo-text { font-size: 13px; }
+nav.is-stuck .nav-links { gap: 26px; }
+nav.is-stuck .nav-links a { font-size: 14px; }
+.logo-mark, .logo-text, .nav-links, .nav-links a {
+  transition: width .22s ease, height .22s ease, border-radius .22s ease,
+              font-size .22s ease, gap .22s ease;
+}
 
 
 /* ─── LAYOUT PRIMITIVES ──────────────────────────
@@ -340,7 +355,7 @@ footer { padding: 56px 40px 40px; max-width: 1100px; margin: 60px auto 0; border
 }
 @media (max-width: 700px) {
   nav { padding: 24px 28px; }
-  html { scroll-padding-top: 96px; }
+  html { scroll-padding-top: 78px; }
   .wrap { padding: 0 24px; }
   .band { padding: 40px 24px; }
   .chip-row { grid-template-columns: 1fr; }
@@ -408,7 +423,7 @@ footer { padding: 56px 40px 40px; max-width: 1100px; margin: 60px auto 0; border
 
 <nav>
   <a class="logo" href="index.html">
-    <span class="logo-mark"></span>
+    <img class="logo-mark" src="logo-kj-mark.webp" alt="" width="42" height="42" />
     <span class="logo-text">Kajal<br>Jain</span>
   </a>
   <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
