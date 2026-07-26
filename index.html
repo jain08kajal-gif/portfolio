@@ -40,12 +40,25 @@ nav {
   align-items: center;
   gap: 10px;
 }
+/* Logomark: compact KJ monogram. Geometric and solid so it
+   stays legible at nav scale, gradient retained so it still
+   ties to the hero and pill accents. */
 .logo-mark {
-  width: 28px;
-  height: 48px;
-  border-radius: 14px;
-  background: linear-gradient(180deg, #49DA9A 0%, #34BBE6 30%, #4355DB 60%, #D23BE7 100%);
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(140deg, #49DA9A 0%, #34BBE6 32%, #4355DB 64%, #D23BE7 100%);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+  line-height: 1;
+  color: #fff;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  user-select: none;
 }
 .logo-text {
   font-size: 15px;
@@ -91,7 +104,7 @@ nav.is-stuck {
   backdrop-filter: saturate(180%) blur(14px);
   border-bottom-color: #EAE7E1;
 }
-nav.is-stuck .logo-mark { width: 17px; height: 28px; border-radius: 8px; }
+nav.is-stuck .logo-mark { width: 30px; height: 30px; border-radius: 9px; font-size: 12px; }
 nav.is-stuck .logo-text { font-size: 13px; }
 nav.is-stuck .nav-links { gap: 26px; }
 nav.is-stuck .nav-links a { font-size: 14px; }
@@ -563,34 +576,113 @@ nav.is-stuck .nav-links a { font-size: 14px; }
   padding: 96px 60px 88px;
 }
 .contact-inner {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   background: #F0EEEB;
   border-radius: 28px;
-  padding: 72px 60px;
+  padding: 76px 60px;
   text-align: center;
 }
-.contact-eyebrow {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #4F4132;
-  margin-bottom: 18px;
+
+/* Drifting colour field, drawn from the logo gradient.
+   Negative z-index paints over the card background but
+   under all content, so text contrast is unaffected. */
+.contact-blob {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  pointer-events: none;
+  will-change: transform;
+}
+.contact-blob--1 {
+  width: 460px; height: 460px; top: -180px; left: -120px;
+  background: #49DA9A;
+  animation: drift-a 19s ease-in-out infinite;
+}
+.contact-blob--2 {
+  width: 420px; height: 420px; bottom: -200px; right: -100px;
+  background: #34BBE6;
+  animation: drift-b 23s ease-in-out infinite;
+}
+.contact-blob--3 {
+  width: 360px; height: 360px; top: 30%; left: 48%;
+  background: #D23BE7;
+  opacity: 0.34;
+  animation: drift-c 27s ease-in-out infinite;
+}
+@keyframes drift-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(120px, 70px) scale(1.14); }
+  66%      { transform: translate(50px, 130px) scale(0.94); }
+}
+@keyframes drift-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%      { transform: translate(-130px, -80px) scale(1.1); }
+  70%      { transform: translate(-60px, -140px) scale(0.9); }
+}
+@keyframes drift-c {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50%      { transform: translate(-72%, -30%) scale(1.2); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-blob { animation: none; }
+}
+
+.contact-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px 7px 13px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(20, 20, 20, 0.06);
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #141414;
+  margin-bottom: 24px;
+}
+.contact-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #1F8A4C;
+  box-shadow: 0 0 0 0 rgba(31, 138, 76, 0.5);
+  animation: status-pulse 2.4s ease-out infinite;
+  flex-shrink: 0;
+}
+@keyframes status-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(31, 138, 76, 0.5); }
+  70%  { box-shadow: 0 0 0 7px rgba(31, 138, 76, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(31, 138, 76, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-status-dot { animation: none; }
+}
+.contact-note {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #3F3F3F;
+  max-width: 460px;
+  margin: 20px auto 0;
 }
 .contact-title {
-  font-size: clamp(28px, 3.8vw, 42px);
+  font-size: clamp(27px, 3.4vw, 38px);
   font-weight: 700;
   letter-spacing: -0.03em;
-  line-height: 1.14;
+  line-height: 1.16;
   color: #141414;
   text-wrap: balance;
-  max-width: 620px;
+  max-width: 640px;
   margin: 0 auto 20px;
 }
 .contact-sub {
   font-size: 16px;
   line-height: 1.7;
   color: #3F3F3F;
-  max-width: 520px;
+  max-width: 560px;
   margin: 0 auto 36px;
 }
 .contact-mail {
@@ -628,23 +720,17 @@ nav.is-stuck .nav-links a { font-size: 14px; }
 .contact-links a:hover { color: #141414; border-color: #141414; }
 
 /* ─── FOOTER ─────────────────────────────────── */
+/* Footer is now a single credit line: contact details
+   live in the contact section directly above it. */
 footer {
-  padding: 56px 60px 40px;
+  padding: 8px 60px 40px;
   max-width: 1160px;
   margin: 0 auto;
-  border-top: 1px solid #EAE7E1;
-  margin-top: 24px;
-}
-.footer-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 .footer-credit {
   text-align: center;
   font-size: 12px;
   color: #3F3F3F;
-  margin-top: 32px;
 }
 .footer-credit a {
   color: #3F3F3F;
@@ -656,27 +742,6 @@ footer {
   vertical-align: -1px;
   margin-right: 2px;
 }
-.footer-name {
-  font-size: 15px;
-  font-weight: 700;
-}
-.footer-email {
-  font-size: 13px;
-  color: #3F3F3F;
-  margin-top: 4px;
-}
-.footer-links {
-  display: flex;
-  gap: 28px;
-  list-style: none;
-}
-.footer-links a {
-  font-size: 14px;
-  color: #3F3F3F;
-  text-decoration: none;
-  transition: color .2s;
-}
-.footer-links a:hover { color: #141414; }
 
 /* ─── RESPONSIVE ─────────────────────────────── */
 @media (max-width: 900px) {
@@ -690,11 +755,14 @@ footer {
   .about-carousel { max-width: 280px; margin: 0 auto; }
   .manual-grid { grid-template-columns: 1fr; }
   .manual-card ul { columns: 1; }
-  .contact { padding: 64px 24px 56px; }
-  .contact-inner { padding: 48px 26px; border-radius: 22px; }
+  .contact { padding: 64px 24px 40px; }
+  .contact-inner { padding: 52px 26px; border-radius: 22px; }
+  .contact-blob { filter: blur(60px); }
+  .contact-blob--1 { width: 300px; height: 300px; top: -120px; left: -90px; }
+  .contact-blob--2 { width: 280px; height: 280px; bottom: -130px; right: -80px; }
+  .contact-blob--3 { width: 240px; height: 240px; }
   .contact-mail { width: 100%; justify-content: center; padding: 15px 24px; font-size: 15px; }
   .contact-links { flex-wrap: wrap; gap: 20px; }
-  .footer-row { flex-direction: column; align-items: flex-start; gap: 20px; }
 }
 @media (max-width: 700px) {
   nav { position: relative; }
@@ -774,7 +842,7 @@ footer {
 
 <nav>
   <div class="logo">
-    <span class="logo-mark"></span>
+    <span class="logo-mark">KJ</span>
     <span class="logo-text">Kajal<br>Jain</span>
   </div>
   <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
@@ -922,34 +990,28 @@ footer {
 <!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="contact-inner">
-    <p class="contact-eyebrow">Contact</p>
-    <h2 class="contact-title">Let's talk about the problem you're stuck on.</h2>
-    <p class="contact-sub">I'm open to Senior Product Designer roles, and always happy to talk through a hard product problem. Email is the fastest way to reach me.</p>
-    <a class="contact-mail" href="mailto:jain08kajal@gmail.com">
+    <span class="contact-blob contact-blob--1" aria-hidden="true"></span>
+    <span class="contact-blob contact-blob--2" aria-hidden="true"></span>
+    <span class="contact-blob contact-blob--3" aria-hidden="true"></span>
+
+    <p class="contact-status"><span class="contact-status-dot"></span>Open to new roles</p>
+    <h2 class="contact-title">Looking for a senior designer who can own the ambiguous part?</h2>
+    <p class="contact-sub">I'm a Senior Product Designer with 6+ years on complex B2C and B2B products, most recently design systems at scale and 0-to-1 platform work. I'm open to senior roles on teams where design decisions carry real weight.</p>
+    <a class="contact-mail" href="mailto:jain08kajal@gmail.com?subject=Role%20opportunity%20for%20Kajal%20Jain">
       jain08kajal@gmail.com
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
+    <p class="contact-note">Happy to share more detail on any project, including work I can't show publicly.</p>
     <ul class="contact-links">
+      <li><a href="KajalJain_Resume26.pdf" target="_blank" rel="noopener">Resume</a></li>
       <li><a href="https://www.linkedin.com/in/kajal-jain8" target="_blank" rel="noopener">LinkedIn</a></li>
       <li><a href="https://www.behance.net/KajalDesigns" target="_blank" rel="noopener">Behance</a></li>
-      <li><a href="KajalJain_Resume26.pdf" target="_blank" rel="noopener">Resume</a></li>
     </ul>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-row">
-    <div>
-      <p class="footer-name">Kajal Jain</p>
-      <p class="footer-email">jain08kajal@gmail.com</p>
-    </div>
-    <ul class="footer-links">
-      <li><a href="KajalJain_Resume26.pdf" target="_blank" rel="noopener">Resume</a></li>
-      <li><a href="https://www.linkedin.com/in/kajal-jain8" target="_blank" rel="noopener">LinkedIn</a></li>
-      <li><a href="https://www.behance.net/KajalDesigns" target="_blank" rel="noopener">Behance</a></li>
-    </ul>
-  </div>
   <p class="footer-credit">Built with <a href="https://claude.ai" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C12 8 13.5 10.5 22 12C13.5 13.5 12 16 12 22C12 16 10.5 13.5 2 12C10.5 10.5 12 8 12 2Z"/></svg>Claude</a></p>
 </footer>
 
