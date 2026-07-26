@@ -390,6 +390,33 @@ mark {
 }
 .article-body .callout p:last-child { margin-bottom: 0; }
 
+/* L8: evidence figure: a screenshot that backs a claim.
+   Breaks out wider than the reading column so dashboard
+   text stays legible. */
+.figure {
+  width: 100vw;
+  max-width: 1040px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-top: 24px;
+  margin-bottom: 8px;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+.figure img {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid #E4E0D8;
+}
+.figure figcaption {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #3F3F3F;
+  margin-top: 10px;
+  text-align: center;
+}
+
 /* ─── OUTCOME STAT GRID ───────────────────────── */
 .stat-grid {
   display: grid;
@@ -472,6 +499,7 @@ footer {
   .compare-card { padding: 24px 16px; }
   .compare-card--mobile .compare-item { flex-basis: 28%; min-width: 90px; }
   .stat-grid { grid-template-columns: 1fr 1fr; }
+  .figure { padding: 0; }
   .nav-toggle { display: flex; }
   .nav-links {
     position: absolute;
@@ -595,7 +623,7 @@ footer {
 
   <div class="key-takeaway">
     <p class="key-takeaway-label">Key takeaway</p>
-    <p>Rebuilt Loco's design system across three platforms in four weeks for a 5 to 6 person team, against a fixed showcase date at iGB L!VE London. <mark>Semantic tokens meant the full rebrand shipped in a single evening instead of a screen-by-screen rebuild</mark>, engagement held steady through the transition, and the system is still used to build new flows today.</p>
+    <p>Rebuilt Loco's design system across three platforms in four weeks for a 5 to 6 person team, against a fixed showcase date at iGB L!VE London. <mark>Semantic tokens meant the full rebrand shipped in a single evening instead of a screen-by-screen rebuild</mark>, all 160k active users held through the transition, and the system is still used to build new flows today.</p>
   </div>
 
   <section>
@@ -692,31 +720,39 @@ footer {
       <p>Because every component referenced semantic tokens, <mark>we applied the new identity across the entire product in a single evening.</mark> The manual alternative was estimated at two to three weeks of screen-by-screen updates, which would have pushed us past the iGB L!VE date. A quiet decision made in week one saved the launch in week three.</p>
     </div>
 
-    <p>Thirty days after launch, engagement held roughly flat through a complete visual overhaul, and around 85% of screens shipped entirely from shared components with no bespoke mockups needed.</p>
+    <p>Thirty days after launch, every headline engagement metric sat within a quarter of a percent of its pre-launch value, and around 85% of screens shipped entirely from shared components with no bespoke mockups needed.</p>
     <div class="stat-grid">
       <div class="stat-card">
-        <p class="stat-label">Monthly active viewers</p>
-        <p class="stat-value">~160k</p>
-        <p class="stat-sub">flat through launch</p>
+        <p class="stat-label">Overall active users</p>
+        <p class="stat-value">160k</p>
+        <p class="stat-sub">0.25% change</p>
       </div>
       <div class="stat-card">
-        <p class="stat-label">Weekly active viewers</p>
-        <p class="stat-value">~38k</p>
-        <p class="stat-sub">held steady</p>
+        <p class="stat-label">Overall new users</p>
+        <p class="stat-value">161k</p>
+        <p class="stat-sub">0.14% change</p>
       </div>
       <div class="stat-card">
         <p class="stat-label">Avg. session duration</p>
-        <p class="stat-value">~3.5 min</p>
-        <p class="stat-sub">slightly up post-launch</p>
+        <p class="stat-value">3m 38s</p>
+        <p class="stat-sub">up 0.13%</p>
       </div>
       <div class="stat-card">
-        <p class="stat-label">Engagement change</p>
-        <p class="stat-value">~0.3%</p>
-        <p class="stat-sub">by design</p>
+        <p class="stat-label">Weekly active users</p>
+        <p class="stat-value">38.2k</p>
+        <p class="stat-sub">held through launch</p>
       </div>
     </div>
-    <p>For a redesign whose explicit goal was continuity, <mark>flat engagement across roughly 160k monthly actives is the result</mark>: a new brand introduced without costing the business a point of engagement, and no spike in UI-related support tickets through the transition.</p>
-    <p>Loco was pushing into new international markets, including Vietnam, around the same time, and the redesigned experience held up as the front door for that expansion: steady-state traffic ran several times the pre-launch baseline, with a low bounce rate and an average session well above the platform average.</p>
+    <figure class="figure">
+      <img src="loco-metrics-overall.webp" alt="Product analytics dashboard for the 30 days after launch, showing 160k overall active users down 0.25%, 161k new users down 0.14%, average session duration of 3m 38s up 0.13%, and 38.2k weekly active users" />
+      <figcaption>Post-launch analytics, 30-day window. A complete visual overhaul with no measurable cost to engagement.</figcaption>
+    </figure>
+    <p>For a redesign whose explicit goal was continuity, <mark>holding 160k active users steady through a full rebrand is the result</mark>: a new identity introduced without costing the business a point of engagement, and no spike in UI-related support tickets through the transition.</p>
+    <p>Loco was pushing into new international markets around the same time, and the redesigned experience became the front door for that expansion. In Vietnam, <mark>traffic climbed from a near-flat baseline to a steady state several times higher</mark>, and the quality of those sessions held up: a 14.2% bounce rate, an average session of 8m 6s, and 2.46 sessions per user, meaning people were returning rather than passing through.</p>
+    <figure class="figure">
+      <img src="loco-metrics-vietnam.webp" alt="Analytics dashboard for Vietnam showing 4.28k visitors, 14.2% bounce rate, 10.6k session totals, average session duration of 8m 6s, and 2.46 sessions per user, with traffic climbing sharply through the launch period" />
+      <figcaption>Vietnam traffic through the launch period. Volume grew several times over, with bounce rate falling and session length well above the platform average.</figcaption>
+    </figure>
     <ul>
       <li><b>The system outlived the launch.</b> The token architecture and component library remain the foundation for new feature work today.</li>
       <li><b>Theme support shipped essentially for free</b> in a later release, the tokens' original purpose, delivered as a byproduct.</li>
