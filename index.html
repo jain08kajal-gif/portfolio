@@ -485,7 +485,7 @@ nav {
 }
 .manual-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   gap: 16px;
 }
 .manual-card {
@@ -515,6 +515,8 @@ nav {
   font-size: 13.5px;
   line-height: 1.8;
   color: #3F3F3F;
+  columns: 2;
+  column-gap: 40px;
 }
 .manual-card li { position: relative; padding-left: 14px; }
 .manual-card li::before {
@@ -590,6 +592,7 @@ footer {
   .about-grid { grid-template-columns: 1fr; gap: 32px; }
   .about-carousel { max-width: 280px; margin: 0 auto; }
   .manual-grid { grid-template-columns: 1fr; }
+  .manual-card ul { columns: 1; }
   .footer-row { flex-direction: column; align-items: flex-start; gap: 20px; }
 }
 @media (max-width: 700px) {
@@ -799,34 +802,15 @@ footer {
   <div class="manual-grid">
 
     <div class="manual-card">
-      <span class="manual-num">01</span>
       <h3>Where I add value</h3>
       <ul>
         <li>Framing ambiguous problems into clear structure</li>
         <li>Aligning stakeholders when product direction isn't defined yet</li>
         <li>Systems thinking on features that ripple across the ecosystem</li>
         <li>Connecting business goals to user needs</li>
-      </ul>
-    </div>
-
-    <div class="manual-card">
-      <span class="manual-num">02</span>
-      <h3>Currently building depth in</h3>
-      <ul>
         <li>AI product design</li>
         <li>Experimentation and metrics-driven decisions</li>
         <li>Product strategy at 0-to-1 scope</li>
-      </ul>
-    </div>
-
-    <div class="manual-card">
-      <span class="manual-num">03</span>
-      <h3>Teams I work best with</h3>
-      <ul>
-        <li>Debate ideas respectfully</li>
-        <li>Value curiosity over certainty</li>
-        <li>Care about craft</li>
-        <li>Ship thoughtfully, keep learning</li>
       </ul>
     </div>
 
