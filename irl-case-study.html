@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Keeping 6 Designers Consistent Across 3 Platforms, Kajal Jain</title>
-<meta name="description" content="Case study: keeping a 6-designer team consistent across app, web, and mobile web while rebranding Loco's viewer experience in four weeks." />
+<title>Designing Vertical Mobile Streaming for Loco, Kajal Jain</title>
+<meta name="description" content="Case study: designing Loco&#39;s vertical mobile streaming experience, taking a desktop screen-share platform into spontaneous, mobile-first IRL streaming." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
@@ -362,8 +362,33 @@ footer { padding: 56px 40px 40px; max-width: 1100px; margin: 60px auto 0; border
 }
 
 </style>
+<style>
+/* IRL additions on the shared v2 system */
+.phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+.phase-card { background: #FFFFFF; border: 1px solid #E4E0D8; border-radius: 16px; padding: 24px 26px; }
+.phase-num { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #4F4132; margin-bottom: 8px; }
+.phase-card h3 { font-size: 17px; font-weight: 700; letter-spacing: -0.015em; color: #141414; margin-bottom: 10px; line-height: 1.3; }
+.phase-card p { font-size: 14.5px; line-height: 1.6; margin-bottom: 0; }
+.flow-list { list-style: none; margin-top: 24px; counter-reset: step; }
+.flow-list li {
+  position: relative; padding-left: 44px; margin-bottom: 18px;
+  font-size: 16px; line-height: 1.7; color: #3F3F3F;
+}
+.flow-list li::before {
+  counter-increment: step; content: counter(step);
+  position: absolute; left: 0; top: 1px;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: #4F4132; color: #fff;
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.flow-list li:last-child { margin-bottom: 0; }
+.flow-list b { color: #141414; font-weight: 700; }
+@media (max-width: 900px) { .phase-grid { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
+
 
 <div id="site-lock" style="position:fixed; inset:0; z-index:9999; background:#FFFEFC; display:flex; align-items:center; justify-content:center; padding:24px; font-family:'DM Sans', system-ui, sans-serif;">
   <form id="site-lock-form" style="max-width:320px; width:100%; text-align:center;">
@@ -407,22 +432,21 @@ footer { padding: 56px 40px 40px; max-width: 1100px; margin: 60px auto 0; border
     <li><a href="https://www.behance.net/KajalDesigns" target="_blank" rel="noopener">Behance</a></li>
   </ul>
 </nav>
-
 <!-- ══ HERO ══ -->
 <header class="wrap hero">
   <a class="back-link" href="index.html#work">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
     Back to work
   </a>
-  <p class="kicker">Loco: Viewer experience &nbsp;·&nbsp; <a class="hero-visit" href="https://loco.com/" target="_blank" rel="noopener">Visit Loco →</a></p>
-  <h1 class="hero-title">Keeping 6 designers consistent across 3 platforms in 4 weeks</h1>
-  <p class="hero-lede">A full visual rebrand of Loco's viewer experience across app, web, and mobile web, delivered against a launch date that could not move.</p>
+  <p class="kicker">Loco: Vertical Mobile Streaming &nbsp;&#183;&nbsp; <a class="hero-visit" href="https://loco.com/" target="_blank" rel="noopener">Visit Loco &#8594;</a></p>
+  <h1 class="hero-title">Taking a desktop streaming platform into mobile IRL</h1>
+  <p class="hero-lede">Designing vertical mobile streaming for Loco: letting creators go live from a phone in a few taps, on a platform built entirely around desktop screen-share.</p>
   <div class="tag-row">
-    <span class="tag">Design systems</span>
-    <span class="tag">Semantic tokens</span>
-    <span class="tag">Cross-platform</span>
-    <span class="tag">Team alignment</span>
-    <span class="tag">Engineering partnership</span>
+    <span class="tag">0 to 1</span>
+    <span class="tag">Competitive benchmarking</span>
+    <span class="tag">Mobile-first</span>
+    <span class="tag">Creator tools</span>
+    <span class="tag">New market entry</span>
   </div>
 
   <div class="article-meta">
@@ -431,73 +455,73 @@ footer { padding: 56px 40px 40px; max-width: 1100px; margin: 60px auto 0; border
       <p class="meta-item-value">Loco</p>
     </div>
     <div>
+      <p class="meta-item-label">Role</p>
+      <p class="meta-item-value">Product Designer</p>
+    </div>
+    <div>
       <p class="meta-item-label">Surfaces</p>
-      <p class="meta-item-value">App, Web, Mobile web</p>
+      <p class="meta-item-value">Mobile app, Web viewing</p>
     </div>
     <div>
-      <p class="meta-item-label">Timeline</p>
-      <p class="meta-item-value">4 weeks, fixed launch</p>
-    </div>
-    <div>
-      <p class="meta-item-label">Team</p>
-      <p class="meta-item-value">5 to 6 designers</p>
+      <p class="meta-item-label">Scope</p>
+      <p class="meta-item-value">MVP, phased launch</p>
     </div>
   </div>
 
-  <p class="intro">Loco is a premier Indian live-streaming and esports platform dedicated to gaming entertainment. Users can watch top streamers, follow major esports tournaments, and broadcast their own gameplay using the companion Loco streaming Dashboard. It is available globally across Android, iOS, and web browsers.</p>
+  <p class="intro">Loco is a premier Indian live-streaming and esports platform. Until this project, going live meant screen-sharing from a desktop, which worked for gaming but excluded an entire category of creator: the mobile-first, lifestyle, in-real-life streamer.</p>
 
   <div class="key-takeaway">
     <p class="key-takeaway-label">Key takeaway</p>
-    <p>Semantic tokens turned a missing brand from a blocker into a variable. When the final identity arrived with one week left, <mark>we applied it across the entire product in a single evening</mark> instead of a two to three week screen-by-screen rebuild. All 160k active users held through the transition.</p>
-  </div>
-
-  <div class="bignum-grid">
-    <div>
-      <p class="bignum-val">1</p>
-      <p class="bignum-lab">Evening to apply the final<br>brand across the product</p>
-    </div>
-    <div>
-      <p class="bignum-val">85%</p>
-      <p class="bignum-lab">Of screens shipped from<br>shared components</p>
-    </div>
-    <div>
-      <p class="bignum-val">160k</p>
-      <p class="bignum-lab">Active users held<br>through the rebrand</p>
-    </div>
-    <div>
-      <p class="bignum-val">90%+</p>
-      <p class="bignum-lab">Of screens passed the<br>post-launch consistency audit</p>
-    </div>
+    <p>Designed the MVP for vertical mobile streaming, a new content format on a platform built for horizontal desktop gaming. <mark>The hardest problem was not the camera, it was making a second format legible</mark> next to the existing one without fragmenting discovery for either.</p>
   </div>
 </header>
+
+<div class="figure figure-bleed" style="margin-top:0">
+  <img src="irl-viewer-app.webp" alt="Loco vertical mobile streaming viewer experience" />
+</div>
 
 <!-- ══ CONTEXT ══ -->
 <section class="wrap sec">
   <p class="kicker">Context</p>
-  <h2 class="display">A deadline set by someone else</h2>
+  <h2 class="display">A gap that was costing creators and markets</h2>
   <div class="prose">
-    <p class="lede">Refresh the entire visual language across three platforms in four weeks, without changing a single user flow, and without the final brand in hand.</p>
-    <p>Loco was redesigning its viewer experience across the app, web, and mobile web. For its audience, the app is the product, so a visual overhaul of that surface carried real risk.</p>
-    <p><mark>The deadline was set by an external event, not by us.</mark> The refreshed product was going to be shown at <a class="inline-link" href="https://www.igblive.com/" target="_blank" rel="noopener">iGB L!VE in London</a>, an industry event at ExCeL that draws around 15,000 attendees. That was the version global partners and press would see, so the date could not move by a single day.</p>
-    <p>Working backwards from that date produced four constraints that shaped every decision after it.</p>
+    <p class="lede">Loco had no way for streamers to broadcast spontaneously from a phone, on a platform limited to desktop screen-share.</p>
+    <p>Mobile-first creators and lifestyle streamers had no route onto the platform at all, while Twitch, YouTube, and TikTok Live already offered mobile broadcasting. The exposure was concrete: creators leaving for platforms where going live was easier, audiences who consume on mobile never arriving, and the loss of the frequent, casual interactions that mobile streaming makes possible.</p>
+    <p>The timing mattered more than the feature gap. <mark>Loco was expanding into South Korea and the Philippines, where vertical mobile streaming is deeply ingrained in user behaviour.</mark> Platforms like AfreecaTV and Kumu built their positions on exactly this format, so arriving in those markets without it would have limited adoption from the start.</p>
+    <p>There was also a category shift underneath it. IRL content, meaning lifestyle, travel, and social interaction, was growing well beyond gaming, and that audience wants unfiltered and personality-driven rather than structured and produced.</p>
   </div>
   <div class="chip-row">
-    <div class="chip">A launch date that could not move</div>
-    <div class="chip">Existing user flows were untouchable</div>
-    <div class="chip">The final brand did not exist yet</div>
-    <div class="chip">Six designers building in parallel</div>
+    <div class="chip">No mobile broadcast capability at all</div>
+    <div class="chip">Two stream formats would now share one platform</div>
+    <div class="chip">MVP had to ship lean, on existing infrastructure</div>
+    <div class="chip">A new creator segment with different expectations</div>
   </div>
 </section>
 
 <!-- ══ MY ROLE ══ -->
 <section class="wrap sec">
   <p class="kicker">My role</p>
-  <h2 class="display">Four surfaces, and the system beneath them</h2>
+  <h2 class="display">Product Designer on a new content format</h2>
   <div class="prose">
-    <p class="lede">Product Designer on the viewer experience, owning four of the highest-traffic surfaces alongside the shared component work the rest of the team built on.</p>
-    <p>I was responsible for designing several high visibility experiences, including the <mark>Homepage, Livestream, Fullscreen Livestream, and Leaderboard.</mark></p>
-    <p>Rather than recreating reference screens one by one, I focused on building reusable components that could be shared across the team. My goal was to make each screen easy to maintain while keeping the experience consistent across different platforms.</p>
-    <p>Since several designers were working in parallel, regular conversations became just as important as the components themselves. We frequently aligned on visual decisions to reduce differences before they spread across the product.</p>
+    <p class="lede">PLACEHOLDER: replace with your specific scope. Which flows did you own, who did you work with, and what were you accountable for?</p>
+    <p>The product requirements were owned by the PM. My work covered the design of the streamer and viewer experiences, the competitive benchmarking that informed them, and the decisions about how a second stream format would live alongside the existing one.</p>
+    <p>PLACEHOLDER: name the other people involved, for example the PM, engineering leads, and any other designers, and what you specifically drove.</p>
+  </div>
+</section>
+
+<!-- ══ RESEARCH ══ -->
+<section class="wrap sec">
+  <p class="kicker">Research</p>
+  <h2 class="display">What the incumbents had already solved</h2>
+  <div class="prose">
+    <p>Vertical mobile streaming is a mature pattern elsewhere, so the useful question was not what to build but what users already expect. I benchmarked the viewing and going-live experiences across the platforms this audience uses daily.</p>
+    <p>I structured the analysis around the moments where a new viewer either stays or leaves: <mark>discovery, entry, high energy moments, and the process of going live</mark>. Framing it by moment rather than by feature made the gaps comparable across very different products.</p>
+    <p>The entry moment turned out to be the most instructive. Across TikTok Live, BIGO, YouTube Live, and Twitch, the platforms that hold a new viewer answer three questions in the first few seconds: what is happening right now, whether the viewer can influence it, and whether they are arriving early, mid-way, or at the end. Without those signals, a viewer who lands mid-stream is simply confused, and confusion at entry is the cheapest churn there is.</p>
+  </div>
+
+  <div class="slot">
+    <p class="slot-title">Asset slot: benchmark analysis</p>
+    <p class="slot-note">A view of your own comparison framework, for example the moment-by-moment gap table. Use your own artifact rather than competitor screenshots, since a structured analysis you produced is stronger evidence than a grid of other people&#39;s apps, and avoids filling your portfolio with third-party UI.</p>
   </div>
 </section>
 
@@ -506,44 +530,44 @@ footer { padding: 56px 40px 40px; max-width: 1100px; margin: 60px auto 0; border
   <p class="kicker">Approach</p>
   <h2 class="display">What each constraint forced us to decide</h2>
   <div class="prose">
-    <p>Rather than treat the constraints as background, I used them to set scope. Each one had a design response, and naming those responses early is what kept six people building the same product.</p>
+    <p>The MVP had to be lean enough to ship fast while establishing a format the platform had never carried. Each constraint had a design response.</p>
   </div>
 
   <div class="map-grid">
     <div class="map-card">
       <p class="map-problem">Constraint 01</p>
-      <h3>A launch date that could not move</h3>
+      <h3>Two formats, one platform</h3>
       <ul>
-        <li>Scoped the work as a visual system migration, not a UX redesign</li>
-        <li>Communicated that trade-off to stakeholders upfront rather than discovering it late</li>
-        <li>Invested week one in reusable components, accepting slower visible progress early for compounding speed after</li>
+        <li>Made the visual distinction between vertical IRL and horizontal gaming streams explicit, so users could tell content types apart at a glance</li>
+        <li>Gave vertical streams a dedicated space on the mobile homepage rather than mixing them into the existing feed</li>
+        <li>Kept viewing available on both mobile and desktop, while broadcasting stayed mobile only</li>
       </ul>
     </div>
     <div class="map-card">
       <p class="map-problem">Constraint 02</p>
-      <h3>Existing user flows were untouchable</h3>
+      <h3>Going live had to be near-frictionless</h3>
       <ul>
-        <li>Held every journey and interaction pattern fixed, changing only the visual layer</li>
-        <li>Set the success criterion as continuity: change how it looks, not how it behaves</li>
-        <li>Freed engineering capacity to focus entirely on the reskin</li>
+        <li>Designed a one-tap Go Live entry point placed prominently on the homepage</li>
+        <li>Kept setup to the minimum that still produces a discoverable stream: title, thumbnail, category, and language</li>
+        <li>Added a preview and countdown before broadcast, so creators see themselves before an audience does</li>
       </ul>
     </div>
     <div class="map-card">
       <p class="map-problem">Constraint 03</p>
-      <h3>The final brand did not exist yet</h3>
+      <h3>Ship lean on existing infrastructure</h3>
       <ul>
-        <li>Championed semantic design tokens over hard-coded colour values</li>
-        <li>Built every component against roles like surface and accent, not hex codes</li>
-        <li>Let the team build on placeholders, with the real brand swapped in later, everywhere at once</li>
+        <li>Reused Loco&#39;s existing chat, sticker, and monetization systems rather than building parallel ones</li>
+        <li>Held advanced capability such as co-streaming and scheduling for post-MVP, gated on adoption</li>
+        <li>Converted finished streams into VODs automatically, so a lean feature still produced lasting content</li>
       </ul>
     </div>
     <div class="map-card">
       <p class="map-problem">Constraint 04</p>
-      <h3>Six designers building in parallel</h3>
+      <h3>A live social format needs safety from day one</h3>
       <ul>
-        <li>Made the system the single source of truth rather than relying on manual review</li>
-        <li>Ran frequent alignment sessions to catch divergence before it spread</li>
-        <li>Stayed embedded with engineering, resolving component questions within the hour</li>
+        <li>Gave streamers a chat toggle, so they can control the environment during sensitive or focused streams</li>
+        <li>Let streamers appoint moderators with word blocking, mute, timeout, and delete controls</li>
+        <li>Gave viewers report and block, rather than relying on streamer-side moderation alone</li>
       </ul>
     </div>
   </div>
@@ -552,169 +576,93 @@ footer { padding: 56px 40px 40px; max-width: 1100px; margin: 60px auto 0; border
 <!-- ══ THE DECISION ══ -->
 <section class="wrap sec">
   <p class="kicker">The decision that mattered</p>
-  <h2 class="display">Designing against a brand that did not exist</h2>
+  <h2 class="display">Designing the empty states before the happy path</h2>
   <div class="prose">
-    <p>Engineering asked for tokens to simplify light and dark theming. The bigger use case was that tokens would let the whole team build the product against a brand that had not been delivered yet.</p>
-    <p>By referencing semantic roles instead of fixed hex values, <mark>the missing identity stopped being a blocker and became a variable.</mark> Everyone could build on placeholders, and the real brand could be swapped in later, everywhere, at once.</p>
-    <p>Every component I built referenced tokens rather than colours. At the time it felt like a technical improvement. It turned out to be the decision that saved the launch.</p>
-  </div>
-
-  <!-- ASSET SLOT: token architecture -->
-  <div class="slot">
-    <p class="slot-title">Asset slot: token architecture</p>
-    <p class="slot-note">A Figma screenshot of the semantic token structure goes here, ideally showing role names mapped to values. This is the single strongest image for this case study because it proves the decision the whole story turns on.</p>
+    <p class="lede">PLACEHOLDER: confirm this is the decision you would defend, or replace it with the one you would.</p>
+    <p>A swipe-based discovery feed only works when there is something to swipe to. At launch, a brand new format on an existing platform has almost no live content, which meant <mark>the failure states were the likely states, not the edge cases.</mark></p>
+    <p>So the design had to answer what a viewer sees when they run out of live vertical streams, what the homepage shows when very few people are broadcasting, and what happens when a streamer&#39;s camera goes off or their connection drops mid-stream. Each of those got a designed answer: past streams with high viewership as fallback content, a clearly marked mix of live and recent, and a friendly placeholder with chat still active rather than a dead screen.</p>
+    <p>PLACEHOLDER: add the trade-off you accepted here, and how you argued for spending MVP time on empty and failure states rather than on more features.</p>
   </div>
 </section>
 
-<!-- ══ SYSTEM ══ -->
+<!-- ══ FLOW ══ -->
 <section class="wrap sec">
-  <p class="kicker">The system</p>
-  <h2 class="display">One library, six designers, three platforms</h2>
+  <p class="kicker">The flow</p>
+  <h2 class="display">From homepage to live in a few taps</h2>
   <div class="prose">
-    <p>The library had to serve three platforms and five other designers at once, which meant components needed to hold up in contexts I would never see myself. Building for that from the start cost more in week one and paid back every week after.</p>
-    <p>Around <mark>85% of screens shipped entirely from shared components</mark>, with no bespoke mockups needed.</p>
+    <p>The streamer journey was designed to remove every step that was not strictly necessary between the impulse to stream and being live.</p>
+    <ol class="flow-list">
+      <li><b>Go Live.</b> A single entry point on the homepage, with permissions handled on first use.</li>
+      <li><b>Stream setup.</b> Title, thumbnail, category, and language, plus controls for mature content, chat, and moderators. Camera and mic toggles are available before anything goes out.</li>
+      <li><b>Preview and countdown.</b> The streamer sees exactly how they will appear, then a countdown gives them a moment to compose before broadcast.</li>
+      <li><b>Live.</b> Chat, viewer count, elapsed time, camera and mic controls, moderation, and stream sharing, all reachable without leaving the broadcast.</li>
+      <li><b>Summary.</b> A post-stream view of how the session performed, with sharing, and the stream saved as a VOD.</li>
+    </ol>
   </div>
 
-  <figure class="figure">
-    <img src="loco-ds-components.webp" alt="Figma canvas showing the video player and video card components, with every variant laid out across App, Mweb, and Web columns and marked ready for dev" />
-    <figcaption>Video player and video card components, built out across App, mobile web, and web. Each state was documented as a variant rather than a separate screen, so engineers could pull the exact case they needed and mark it ready for dev.</figcaption>
-  </figure>
+  <div class="slot">
+    <p class="slot-title">Asset slot: streamer flow screens</p>
+    <p class="slot-note">Screens for Go Live, stream setup, preview, countdown, live, and summary. Laid out in sequence these carry the section on their own, so this is the highest-value upload for this page.</p>
+  </div>
 
-  <figure class="figure">
-    <img src="loco-ds-buttons.webp" alt="Figma canvas showing the button system with primary, secondary and tertiary hierarchy across large, medium and small sizes, in default, hover and disabled states, alongside icon buttons and streamer profile components" />
-    <figcaption>The button system: primary, secondary, and tertiary hierarchy across three sizes, each with default, hover, and disabled states. Defining the matrix once meant no one had to invent a button under deadline.</figcaption>
-  </figure>
+  <div class="slot">
+    <p class="slot-title">Asset slot: viewer experience screens</p>
+    <p class="slot-note">Homepage vertical carousel, the live viewing screen with chat and stickers, and swipe-based discovery. Ideally include one empty or fallback state, since that is the decision the section above argues for.</p>
+  </div>
 </section>
 
-<!-- ══ BEFORE / AFTER: DESKTOP ══ -->
-<div class="band band--web">
-  <div class="band-inner">
-    <h3>Desktop</h3>
-    <div class="compare-row">
-      <div class="compare-item">
-        <img src="loco-desktop-old.webp" alt="Loco desktop homepage, old design" />
-        <p class="compare-label">Old UI</p>
-      </div>
-      <div class="compare-item">
-        <img src="loco-desktop-new-after.webp" alt="Loco desktop homepage, redesigned with final style guide applied" />
-        <p class="compare-label">New UI, after final style guide</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ BEFORE / AFTER: APP ══ -->
-<div class="band band--app">
-  <div class="band-inner">
-    <h3>App</h3>
-    <p class="band-caption">A change log was maintained for each key screen, so the team could trace what moved and why.</p>
-    <div class="compare-row">
-      <div class="compare-item">
-        <img src="loco-app-old.webp" alt="Loco app livestream screen, old design" />
-        <p class="compare-label">Old UI</p>
-      </div>
-      <div class="compare-item">
-        <img src="loco-app-new-after.webp" alt="Loco app livestream screen, redesigned before final style guide" />
-        <p class="compare-label">New UI, before final style guide</p>
-      </div>
-      <div class="compare-item">
-        <img src="loco-app-new-before.webp" alt="Loco app livestream screen, redesigned with final style guide applied" />
-        <p class="compare-label">New UI, after final style guide</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ WORKING SESSION ══ -->
+<!-- ══ PHASES ══ -->
 <section class="wrap sec">
-  <p class="kicker">Delivery</p>
-  <h2 class="display">Letting the system carry the specification</h2>
+  <p class="kicker">Scope</p>
+  <h2 class="display">A launch shaped in three phases</h2>
   <div class="prose">
-    <p>With four weeks, it was not practical to mock every screen before development began, so we let the system carry the specification instead. Clear styling guidelines acted as the single source of truth, which <mark>let engineers build most screens without waiting on detailed mock ups.</mark></p>
-    <p>That only works if someone answers the gaps quickly. My teammate and I stayed embedded through implementation, tracking Slack and staying available in the war room, usually resolving component questions within the hour. Some needed a new screen, most only needed a decision on how an existing component should behave.</p>
-    <p>What I took from it was a sharper read on what engineers need under deadline. Their questions were rarely about the design itself. <mark>They were about reducing uncertainty so they could move forward with confidence.</mark> A well structured system answers most of those before they are asked, and being present answers the rest fast enough that builds never stall on design.</p>
+    <p>Rather than one large release, the feature was planned in phases so the lightest version could reach creators early and the heavier social mechanics could be justified by real adoption.</p>
   </div>
-
-  <!-- ASSET SLOT: process -->
-  <div class="slot">
-    <p class="slot-title">Asset slot: process artifacts</p>
-    <p class="slot-note">A FigJam alignment board, a change log screen, or a redacted war-room thread. One image is enough here. It should show the working method, not the polish.</p>
+  <div class="phase-grid">
+    <div class="phase-card">
+      <p class="phase-num">Phase 1</p>
+      <h3>Solo streaming</h3>
+      <p>One streamer, one camera. Go live, chat, stickers, moderation, and a stream summary. The lean core that proves creators want the format at all.</p>
+    </div>
+    <div class="phase-card">
+      <p class="phase-num">Phase 2</p>
+      <h3>Guests, audio only</h3>
+      <p>Multiple guests join by voice while the host stays on camera. Lowers the barrier to participation and enables the fan-call and talk-show formats these markets already expect.</p>
+    </div>
+    <div class="phase-card">
+      <p class="phase-num">Phase 3</p>
+      <h3>Guests with video</h3>
+      <p>Guests join on camera in a tiled layout with host moderation. Drives content variety, longer sessions, and creator cross-discovery.</p>
+    </div>
   </div>
 </section>
 
 <!-- ══ OUTCOME ══ -->
 <section class="wrap sec">
   <p class="kicker">Outcome</p>
-  <h2 class="display">The evening the entire product changed colour</h2>
+  <h2 class="display">PLACEHOLDER: what actually happened</h2>
   <div class="prose">
-    <p class="lede">Three weeks in, the agency delivered the final brand: new colours, gradients, iconography, with one week left before launch.</p>
-    <p>Because every component referenced semantic tokens, <mark>we applied the new identity across the entire product in a single evening.</mark> The manual alternative was estimated at two to three weeks of screen-by-screen updates, which would have pushed us past the iGB L!VE date. A quiet decision made in week one saved the launch in week three.</p>
-    <p>The success criterion was continuity: change how the product looks without changing how it behaves. Thirty days after launch, every headline engagement metric sat within a quarter of a percent of its pre-launch value, and around 85% of screens shipped entirely from shared components with no bespoke mockups needed.</p>
-  </div>
-
-  <div class="stat-grid">
-    <div class="stat-card">
-      <p class="stat-label">Overall active users</p>
-      <p class="stat-value">160k</p>
-      <p class="stat-sub">0.25% change</p>
-    </div>
-    <div class="stat-card">
-      <p class="stat-label">Overall new users</p>
-      <p class="stat-value">161k</p>
-      <p class="stat-sub">0.14% change</p>
-    </div>
-    <div class="stat-card">
-      <p class="stat-label">Avg. session duration</p>
-      <p class="stat-value">3m 38s</p>
-      <p class="stat-sub">up 0.13%</p>
-    </div>
-    <div class="stat-card">
-      <p class="stat-label">Weekly active users</p>
-      <p class="stat-value">38.2k</p>
-      <p class="stat-sub">held through launch</p>
-    </div>
-  </div>
-
-  <figure class="figure figure-bleed">
-    <img src="loco-metrics-overall.webp" alt="Product analytics dashboard for the 30 days after launch, showing 160k overall active users, 161k new users, average session duration of 3m 38s, and 38.2k weekly active users" />
-    <figcaption>Post-launch analytics, 30-day window. A complete visual overhaul with no measurable cost to engagement.</figcaption>
-  </figure>
-
-  <div class="prose" style="margin-top:44px">
-    <p>For a redesign whose explicit goal was continuity, <mark>holding 160k active users steady through a full rebrand is the result</mark>: a new identity introduced without costing the business a point of engagement, and no spike in UI-related support tickets through the transition.</p>
-    <p>Loco was pushing into new international markets around the same time, and the redesigned experience became the front door for that expansion. In Vietnam, <mark>traffic climbed from a near-flat baseline to a steady state several times higher</mark>, and the quality of those sessions held: a 14.2% bounce rate, an average session of 8m 6s, and 2.46 sessions per user, meaning people were returning rather than passing through.</p>
-  </div>
-
-  <figure class="figure figure-bleed">
-    <img src="loco-metrics-vietnam.webp" alt="Analytics dashboard for Vietnam showing 4.28k visitors, 14.2% bounce rate, 10.6k session totals, average session duration of 8m 6s, and 2.46 sessions per user" />
-    <figcaption>Vietnam traffic through the launch period. Volume grew several times over, with bounce rate falling and session length well above the platform average.</figcaption>
-  </figure>
-
-  <div class="prose" style="margin-top:44px">
-    <ul class="pts">
-      <li><b>The system outlived the launch.</b> The token architecture and component library remain the foundation for new feature work today.</li>
-      <li><b>Theme support shipped essentially for free</b> in a later release, the tokens' original purpose, delivered as a byproduct.</li>
-      <li><b>The post-launch audit found inconsistencies on under 10% of screens</b>, resolved in one cleanup sprint and folded back into the guidelines.</li>
-    </ul>
+    <p class="lede">PLACEHOLDER: this section needs your real numbers or, if the feature has not launched, an honest statement of where it stands.</p>
+    <p>The success measures defined for the feature were: number of vertical streams created, viewer watch time and average session duration, unique streamers and viewers adopting the format, streamer revenue through stickers, retention and return visits, and the diversity of content categories beyond gaming.</p>
+    <p>PLACEHOLDER: replace with results against those measures. If the feature is unreleased or you left before launch, say so plainly. A case study that ends with &#34;here is what we defined as success and here is where it stood when I handed it over&#34; is credible. One that implies results it does not have is not.</p>
   </div>
 </section>
 
 <!-- ══ REFLECTION ══ -->
 <section class="wrap sec">
   <p class="kicker">What I learned</p>
-  <h2 class="display">Building the system was the easy half</h2>
+  <h2 class="display">PLACEHOLDER: your honest reflection</h2>
   <div class="prose">
-    <p>Creating reusable components is only part of the job. The bigger challenge is helping people use them consistently. Even with a well structured system, <mark>six designers under deadline pressure will make six slightly different calls</mark>, however good the library is.</p>
-    <p>Looking back, I would introduce lightweight checkpoints throughout the project instead of reviewing everything after the work was complete. A fifteen minute shared component review before any flow was marked ready would have caught most inconsistencies at the source, without slowing the team down.</p>
+    <p class="lede">PLACEHOLDER: two or three paragraphs in your own voice.</p>
+    <p>Prompts, in case they help. Designing a format the platform had never carried meant borrowing conventions from products your users already knew: how did you decide what to adopt and what to do differently? Did designing empty and failure states first prove correct once real content volume arrived? What would you change about how the two stream formats coexist?</p>
   </div>
 
   <div class="callout">
     <p class="callout-tag">The durable lesson</p>
-    <h3>A design system is not a component library</h3>
-    <p>It is a shared decision making tool, and its value comes from how reliably the team reaches for it under pressure. That is a people problem as much as a craft one, and it is the part I would invest in earlier next time.</p>
+    <h3>PLACEHOLDER: the one line you want remembered</h3>
+    <p>One sentence that generalises past this project.</p>
   </div>
 </section>
-
 <footer>
   <div class="footer-row">
     <div>

@@ -3,362 +3,381 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Designing an MVP for a WMS App, Kajal Jain</title>
-<meta name="description" content="Case study: designing an MVP warehouse management system for Fynd, from warehouse site visits through to a shipped web and handheld app." />
+<title>Designing an MVP Warehouse Management System, Kajal Jain</title>
+<meta name="description" content="Case study: designing an MVP warehouse management system for Fynd as sole design DRI, from warehouse floor research through a shipped web and handheld app." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
 
-/* ─── RESET ─────────────────────────────────── */
+/* ═══════════════════════════════════════════════
+   CASE STUDY SYSTEM v2
+   Editorial layout. Images and type carry the pacing.
+
+   INK
+     #141414  Ink        headings + emphasis
+     #3F3F3F  Ink muted  body copy
+     #4F4132  Structure  rules, kickers, bullets
+     #FF3700  Action     links ONLY
+     #2F6BB3  Signal     key takeaway ONLY
+
+   TYPE
+     Hero      clamp(32,4.6vw,48)/ 700   two lines at 780
+     Display   clamp(25,3.2vw,34)/ 700   section headings
+     Bignum    clamp(40,5.5vw,64)/ 700   stat numerals
+     Lede      19 / 500 / ink
+     Body      16 / 400 / ink muted
+     Kicker    12 / 700 / .12em / uppercase / structure
+
+   WIDTHS
+     Page      1100  outer container
+     Prose      720  reading column, centred
+     Wide      1040  figures and grids
+   ═══════════════════════════════════════════════ */
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 120px; }
 body {
   font-family: 'DM Sans', system-ui, sans-serif;
   background: #FFFEFC;
   color: #141414;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ─── NAV ────────────────────────────────────── */
 nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #FFFEFC;
+  border-bottom: 1px solid transparent;
+  transition: padding .22s ease, border-color .22s ease;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 30px 60px;
 }
-.logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
 .logo-mark {
-  width: 28px;
-  height: 48px;
-  border-radius: 14px;
+  width: 28px; height: 48px; border-radius: 14px;
   background: linear-gradient(180deg, #49DA9A 0%, #34BBE6 30%, #4355DB 60%, #D23BE7 100%);
   flex-shrink: 0;
 }
-.logo-text {
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: #141414;
-}
-.nav-links {
-  display: flex;
-  gap: 36px;
-  list-style: none;
-}
-.nav-links a {
-  font-size: 15px;
-  font-weight: 400;
-  color: #3F3F3F;
-  text-decoration: none;
-  transition: color .2s;
-}
+.logo-text { font-size: 15px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; color: #141414; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-size: 15px; font-weight: 400; color: #3F3F3F; text-decoration: none; transition: color .2s; }
 .nav-links a:hover { color: #141414; }
 .nav-toggle {
-  display: none;
-  width: 36px;
-  height: 36px;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  color: #141414;
-  flex-shrink: 0;
+  display: none; width: 36px; height: 36px; align-items: center; justify-content: center;
+  background: none; border: none; padding: 0; cursor: pointer; color: #141414; flex-shrink: 0;
 }
 .nav-toggle svg { width: 22px; height: 22px; }
 
-/* ─── ARTICLE HEADER ─────────────────────────── */
-.article-header {
-  max-width: 780px;
-  margin: 0 auto;
-  padding: 16px 24px 40px;
+/* Sticky nav: condenses once the page scrolls */
+nav.is-stuck {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom-color: #EAE7E1;
 }
+nav.is-stuck .logo-mark { height: 34px; border-radius: 10px; }
+.logo-mark { transition: height .22s ease, border-radius .22s ease; }
+
+
+/* ─── LAYOUT PRIMITIVES ──────────────────────────
+   Two centred measures on one shared spine:
+     Reading  780  all text, centred in the page
+     Wide    1040  grids and figures, same centre
+   Everything shares a centre line, so left edges of
+   text always align while wide blocks breathe out
+   symmetrically on both sides.                     */
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 40px; }
+
+.measure,
+.prose,
+.hero > .kicker,
+.hero > .hero-title,
+.hero > .hero-lede,
+.hero > .tag-row,
+.hero > .intro,
+.hero > .article-meta,
+.hero > .key-takeaway,
+.sec > .kicker,
+.sec > .display,
+.sec > .chip-row,
+.sec > .callout,
+.sec > .slot {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero > .back-link {
+  display: flex;
+  max-width: 780px;
+  margin: 0 auto 40px;
+  justify-content: flex-start;
+}
+
+/* ─── HERO ───────────────────────────────────── */
+.hero { padding: 8px 0 20px; }
 .back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  color: #3F3F3F;
-  text-decoration: none;
-  margin-bottom: 28px;
-  transition: color .2s;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500; color: #3F3F3F;
+  text-decoration: none; margin-bottom: 40px; transition: color .2s;
 }
 .back-link:hover { color: #141414; }
 .back-link svg { width: 13px; height: 13px; }
-.article-eyebrow {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #3F3F3F;
-  margin-bottom: 12px;
+.kicker {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: #4F4132; margin-bottom: 14px;
 }
-.article-title {
-  font-size: clamp(28px, 4vw, 40px);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  margin-bottom: 28px;
+.hero-title {
+  font-size: clamp(32px, 4.6vw, 48px);
+  font-weight: 700; letter-spacing: -0.03em; line-height: 1.12;
+  color: #141414; text-wrap: balance;
+  margin-bottom: 26px;
 }
+.hero-lede {
+  font-size: 19px; line-height: 1.65; font-weight: 500;
+  color: #141414; margin-bottom: 30px;
+}
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 44px; }
+.tag {
+  font-size: 13px; font-weight: 500; color: #4F4132;
+  border: 1px solid #DDD6C8; border-radius: 100px; padding: 6px 15px;
+}
+.intro { margin-bottom: 32px; }
+
+/* Project meta: the factual card, sits directly under the title */
 .article-meta {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  background: #F0EEEB;
-  border-radius: 16px;
-  padding: 20px 24px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  background: #F0EEEB; border-radius: 16px; padding: 20px 24px;
+  margin-bottom: 32px;
 }
 .meta-item-label {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #3F3F3F;
-  margin-bottom: 4px;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+  text-transform: uppercase; color: #3F3F3F; margin-bottom: 4px;
 }
-.meta-item-value {
-  font-size: 14px;
-  font-weight: 700;
-  color: #141414;
+.meta-item-value { font-size: 14px; font-weight: 700; color: #141414; margin-bottom: 0; }
+.hero-visit {
+  font-size: 13px; font-weight: 700; color: #FF3700;
+  text-decoration: none; white-space: nowrap;
+}
+.hero-visit:hover { text-decoration: underline; }
+
+/* ─── BIG NUMBER BLOCK ───────────────────────── */
+.bignum-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 20px; padding: 44px 0; margin-bottom: 8px;
+  border-top: 1px solid #EAE7E1; border-bottom: 1px solid #EAE7E1;
+}
+.bignum-val {
+  font-size: clamp(40px, 5.5vw, 64px);
+  font-weight: 700; letter-spacing: -0.04em; line-height: 1;
+  color: #141414; margin-bottom: 10px;
+}
+.bignum-lab {
+  font-size: 13px; line-height: 1.45; color: #3F3F3F; font-weight: 500;
 }
 
-/* ─── ARTICLE HERO IMAGE ─────────────────────── */
-.article-hero {
-  max-width: 1040px;
-  margin: 0 auto;
-  padding: 0 24px 8px;
+/* ─── SECTIONS ───────────────────────────────── */
+.sec { padding: 76px 0; }
+.sec + .sec { border-top: 1px solid #EAE7E1; }
+.display {
+  font-size: clamp(25px, 3.2vw, 34px);
+  font-weight: 700; letter-spacing: -0.025em; line-height: 1.2;
+  color: #141414; text-wrap: balance;
+  margin-bottom: 22px;
 }
-.article-hero img {
-  width: 100%;
-  display: block;
-}
+.lede { font-size: 19px; line-height: 1.65; font-weight: 500; color: #141414; margin-bottom: 20px; }
+p { font-size: 16px; line-height: 1.75; color: #3F3F3F; margin-bottom: 16px; }
+p:last-child { margin-bottom: 0; }
+mark { background: none; color: #141414; font-weight: 600; }
+a.inline-link { color: #4F4132; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+a.inline-link:hover { color: #141414; }
 
-/* ─── ARTICLE BODY ───────────────────────────── */
-.article-body {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 56px 24px 40px;
-}
-.article-body section {
-  margin-bottom: 44px;
-}
-.article-body h2 {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  margin-bottom: 16px;
-}
-.article-body h3 {
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: -0.005em;
-  margin: 24px 0 8px;
-}
-.article-body p {
-  font-size: 15.5px;
-  line-height: 1.75;
-  color: #3F3F3F;
-  margin-bottom: 14px;
-}
-.article-body p:last-child { margin-bottom: 0; }
-/* L1: key takeaway: the one thing to read.
-   Cool tint, drawn from the logo gradient, so it separates
-   from the warm neutrals used by every other card. */
+/* ─── KEY TAKEAWAY ───────────────────────────── */
 .key-takeaway {
-  background: #EBF2F8;
-  border-left: 3px solid #2F6BB3;
-  border-radius: 4px 12px 12px 4px;
-  padding: 22px 26px;
-  margin: 8px 0 40px;
+  background: #EBF2F8; border-left: 3px solid #2F6BB3;
+  border-radius: 4px 14px 14px 4px; padding: 26px 30px; margin: 0 0 8px;
 }
 .key-takeaway-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #2F6BB3;
-  margin-bottom: 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #2F6BB3; margin-bottom: 10px;
 }
-.key-takeaway p {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.65;
-  color: #141414;
-  margin-bottom: 0;
-}
-.article-body ul {
-  list-style: none;
-  margin-top: 4px;
-}
-.article-body li {
-  position: relative;
-  padding-left: 18px;
-  font-size: 15.5px;
-  line-height: 1.75;
-  color: #3F3F3F;
-  margin-bottom: 10px;
-}
-.article-body li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 10px;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #4F4132;
-}
-.article-body li:last-child { margin-bottom: 0; }
-.article-body a.inline-link {
-  color: #4F4132;
-  font-weight: 500;
+.key-takeaway p { font-size: 17px; font-weight: 500; line-height: 1.6; color: #141414; margin-bottom: 0; }
+
+/* ─── PROBLEM CHIPS ──────────────────────────── */
+.chip-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 28px; }
+.chip {
+  background: #F0EEEB; border-radius: 12px; padding: 16px 18px;
+  font-size: 15px; font-weight: 500; line-height: 1.5; color: #141414;
 }
 
-/* ─── CHALLENGE / PERSONA GRIDS ───────────────── */
-.chip-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-top: 12px;
+/* ─── CONSTRAINT TO RESPONSE MAP ─────────────── */
+.map-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 32px; }
+.map-card {
+  background: #FFFFFF; border: 1px solid #E4E0D8;
+  border-radius: 16px; padding: 26px 28px;
 }
-.chip {
-  background: #F0EEEB;
-  border-radius: 12px;
-  padding: 14px 16px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #141414;
+.map-problem {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #4F4132; margin-bottom: 8px;
 }
-.persona-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-top: 12px;
+.map-card h3 {
+  font-size: 18px; font-weight: 700; letter-spacing: -0.015em;
+  line-height: 1.3; color: #141414; margin-bottom: 16px;
 }
-.persona-card {
-  background: #F0EEEB;
-  border-radius: 16px;
-  padding: 20px 20px;
+.map-card ul { list-style: none; }
+.map-card li {
+  position: relative; padding-left: 18px; font-size: 15px;
+  line-height: 1.6; color: #3F3F3F; margin-bottom: 10px;
 }
-.persona-name {
-  font-size: 15px;
-  font-weight: 700;
-  margin-bottom: 2px;
+.map-card li::before {
+  content: ''; position: absolute; left: 0; top: 9px;
+  width: 5px; height: 5px; border-radius: 50%; background: #4F4132;
 }
-.persona-role {
-  font-size: 12.5px;
-  color: #3F3F3F;
-  margin-bottom: 12px;
+.map-card li:last-child { margin-bottom: 0; }
+
+/* ─── LISTS ──────────────────────────────────── */
+ul.pts { list-style: none; margin-top: 8px; }
+ul.pts li {
+  position: relative; padding-left: 20px; font-size: 16px;
+  line-height: 1.75; color: #3F3F3F; margin-bottom: 12px;
 }
-.persona-goals-label {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #3F3F3F;
-  margin-bottom: 8px;
+ul.pts li::before {
+  content: ''; position: absolute; left: 0; top: 11px;
+  width: 5px; height: 5px; border-radius: 50%; background: #4F4132;
 }
-.persona-card ul { margin-top: 0; }
-.persona-card li {
-  font-size: 13px;
-  line-height: 1.6;
-  margin-bottom: 6px;
+ul.pts li:last-child { margin-bottom: 0; }
+ul.pts b { color: #141414; font-weight: 700; }
+
+/* ─── CALLOUT ────────────────────────────────── */
+.callout {
+  background: #FFFFFF; border: 1px solid #E4E0D8; border-left: 3px solid #4F4132;
+  border-radius: 4px 16px 16px 4px; padding: 28px 32px; margin: 32px auto 0;
 }
+.callout-tag {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #4F4132; margin-bottom: 8px;
+}
+.callout h3 {
+  font-size: 21px; font-weight: 700; letter-spacing: -0.02em;
+  line-height: 1.25; color: #141414; margin-bottom: 12px;
+}
+.callout p { font-size: 16px; margin-bottom: 12px; }
+.callout p:last-child { margin-bottom: 0; }
+
+/* ─── FIGURES ────────────────────────────────── */
+.figure { margin: 36px 0 0; }
+.figure img { width: 100%; display: block; border-radius: 12px; border: 1px solid #E4E0D8; }
+.figure figcaption { font-size: 13.5px; line-height: 1.6; color: #3F3F3F; margin-top: 12px; }
+/* Wide measure: fills the wrap, same centre line as text */
+.figure-bleed { width: 100%; margin-top: 40px; }
+.fig-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 36px; }
+.fig-duo img { width: 100%; display: block; border-radius: 12px; border: 1px solid #E4E0D8; }
+.fig-quad { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 36px; }
+.fig-quad img { width: 100%; display: block; border-radius: 12px; border: 1px solid #E4E0D8; }
+
+/* ─── ASSET SLOT (placeholder, delete when filled) ─ */
+.slot {
+  border: 1px dashed #C9C2B4; border-radius: 14px;
+  background: #FAF8F5; padding: 44px 32px; text-align: center; margin-top: 32px;
+}
+.slot-title { font-size: 15px; font-weight: 700; color: #4F4132; margin-bottom: 6px; }
+.slot-note { font-size: 13.5px; line-height: 1.6; color: #7A7264; max-width: 460px; margin: 0 auto; }
+
+/* ─── COMPARE BANDS ──────────────────────────── */
+.band {
+  width: 100vw; max-width: 100vw; margin-left: 50%; transform: translateX(-50%);
+  padding: 64px 40px; box-sizing: border-box;
+}
+.band--web { background: #E7E0D3; }
+.band--app { background: #F0EEEB; }
+.band-inner { max-width: 1100px; margin: 0 auto; }
+.band h3 {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: #4F4132; text-align: center; margin-bottom: 8px;
+}
+.band-caption { font-size: 14px; color: #4F4132; text-align: center; margin-bottom: 32px; opacity: .85; }
+.compare-row { display: flex; gap: 3%; align-items: flex-start; justify-content: center; flex-wrap: wrap; }
+.band--web .compare-item { flex: 0 1 46%; }
+.band--web img { width: 100%; display: block; border-radius: 8px; }
+.band--app .compare-item { flex: 0 1 24%; min-width: 140px; max-width: 280px; }
+.band--app img { width: 100%; display: block; }
+.compare-label { font-size: 13px; font-weight: 600; color: #4F4132; margin-top: 14px; text-align: center; }
+
+/* ─── STAT CARDS ─────────────────────────────── */
+.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 28px 0 0; }
+.stat-card { background: #F0EEEB; border-radius: 14px; padding: 20px 20px 18px; }
+.stat-label {
+  font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+  text-transform: uppercase; color: #3F3F3F; margin-bottom: 8px;
+}
+.stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; color: #141414; margin-bottom: 0; }
+.stat-sub { font-size: 12.5px; color: #3F3F3F; margin-top: 5px; margin-bottom: 0; }
 
 /* ─── FOOTER ─────────────────────────────────── */
-footer {
-  padding: 56px 60px 40px;
-  max-width: 1160px;
-  margin: 0 auto;
-  border-top: 1px solid #EAE7E1;
-  margin-top: 24px;
-}
-.footer-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.footer-credit {
-  text-align: center;
-  font-size: 12px;
-  color: #3F3F3F;
-  margin-top: 32px;
-}
-.footer-credit a {
-  color: #3F3F3F;
-  text-decoration: underline;
-}
-.footer-credit svg {
-  width: 12px;
-  height: 12px;
-  vertical-align: -1px;
-  margin-right: 2px;
-}
+footer { padding: 56px 40px 40px; max-width: 1100px; margin: 60px auto 0; border-top: 1px solid #EAE7E1; }
+.footer-row { display: flex; justify-content: space-between; align-items: center; }
+.footer-credit { text-align: center; font-size: 12px; color: #3F3F3F; margin-top: 32px; }
+.footer-credit a { color: #3F3F3F; text-decoration: underline; }
+.footer-credit svg { width: 12px; height: 12px; vertical-align: -1px; margin-right: 2px; }
 .footer-name { font-size: 15px; font-weight: 700; }
 .footer-email { font-size: 13px; color: #3F3F3F; margin-top: 4px; }
 .footer-links { display: flex; gap: 28px; list-style: none; }
-.footer-links a {
-  font-size: 14px;
-  color: #3F3F3F;
-  text-decoration: none;
-  transition: color .2s;
-}
+.footer-links a { font-size: 14px; color: #3F3F3F; text-decoration: none; transition: color .2s; }
 .footer-links a:hover { color: #141414; }
 
 /* ─── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 900px) {
+  .bignum-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
+  .map-grid { grid-template-columns: 1fr; }
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+  .fig-duo, .fig-quad { grid-template-columns: 1fr; }
+  .sec { padding: 56px 0; }
+}
 @media (max-width: 700px) {
-  nav { padding: 24px 28px; position: relative; }
+  nav { padding: 24px 28px; }
+  html { scroll-padding-top: 96px; }
+  .wrap { padding: 0 24px; }
+  .band { padding: 40px 24px; }
+  .chip-row { grid-template-columns: 1fr; }
   .article-meta { grid-template-columns: 1fr 1fr; }
-  .chip-grid { grid-template-columns: 1fr; }
-  .persona-grid { grid-template-columns: 1fr; }
+  .band--app .compare-item { flex-basis: 30%; min-width: 96px; }
   .footer-row { flex-direction: column; align-items: flex-start; gap: 20px; }
   .nav-toggle { display: flex; }
   .nav-links {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    background: #FFFEFC;
-    box-shadow: 0 16px 32px rgba(20,20,20,0.10);
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transition: max-height .3s ease, opacity .25s ease;
-    z-index: 40;
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: #FFFEFC; box-shadow: 0 16px 32px rgba(20,20,20,0.10);
+    max-height: 0; overflow: hidden; opacity: 0; visibility: hidden;
+    transition: max-height .3s ease, opacity .25s ease; z-index: 40;
   }
-  .nav-links.is-open {
-    max-height: 320px;
-    opacity: 1;
-    visibility: visible;
-    padding: 8px 28px 20px;
-  }
+  .nav-links.is-open { max-height: 320px; opacity: 1; visibility: visible; padding: 8px 28px 20px; }
   .nav-links li { width: 100%; }
-  .nav-links a {
-    display: block;
-    padding: 13px 0;
-    font-size: 15px;
-    border-bottom: 1px solid #EAE7E1;
-  }
+  .nav-links a { display: block; padding: 13px 0; font-size: 15px; border-bottom: 1px solid #EAE7E1; }
   .nav-links li:last-child a { border-bottom: none; }
 }
 
 </style>
+<style>
+/* WMS additions on the shared v2 system */
+.persona-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+.persona-card { background: #F0EEEB; border-radius: 16px; padding: 24px 24px; }
+.persona-name { font-size: 17px; font-weight: 700; color: #141414; margin-bottom: 2px; }
+.persona-role { font-size: 13px; color: #3F3F3F; margin-bottom: 16px; }
+.persona-goals-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #4F4132; margin-bottom: 10px; }
+.persona-card ul { list-style: none; }
+.persona-card li { position: relative; padding-left: 16px; font-size: 14px; line-height: 1.6; color: #3F3F3F; margin-bottom: 8px; }
+.persona-card li::before { content: ''; position: absolute; left: 0; top: 8px; width: 4px; height: 4px; border-radius: 50%; background: #4F4132; }
+.persona-card li:last-child { margin-bottom: 0; }
+@media (max-width: 900px) { .persona-grid { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
+
 
 <div id="site-lock" style="position:fixed; inset:0; z-index:9999; background:#FFFEFC; display:flex; align-items:center; justify-content:center; padding:24px; font-family:'DM Sans', system-ui, sans-serif;">
   <form id="site-lock-form" style="max-width:320px; width:100%; text-align:center;">
@@ -373,9 +392,7 @@ footer {
   var PASSWORD = 'kajal2026';
   var lock = document.getElementById('site-lock');
   if (!lock) return;
-  if (sessionStorage.getItem('site-unlocked') === 'true') {
-    lock.style.display = 'none';
-  }
+  if (sessionStorage.getItem('site-unlocked') === 'true') { lock.style.display = 'none'; }
   var form = document.getElementById('site-lock-form');
   var input = document.getElementById('site-lock-input');
   var error = document.getElementById('site-lock-error');
@@ -384,10 +401,7 @@ footer {
     if (input.value === PASSWORD) {
       sessionStorage.setItem('site-unlocked', 'true');
       lock.style.display = 'none';
-    } else {
-      error.style.display = 'block';
-      input.value = '';
-    }
+    } else { error.style.display = 'block'; input.value = ''; }
   });
 })();
 </script>
@@ -407,14 +421,23 @@ footer {
     <li><a href="https://www.behance.net/KajalDesigns" target="_blank" rel="noopener">Behance</a></li>
   </ul>
 </nav>
-
-<header class="article-header">
+<!-- ══ HERO ══ -->
+<header class="wrap hero">
   <a class="back-link" href="index.html#work">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
     Back to work
   </a>
-  <p class="article-eyebrow">Fynd: Warehouse Management System</p>
-  <h1 class="article-title">Designing an MVP for a WMS app</h1>
+  <p class="kicker">Fynd: Warehouse Management System &nbsp;&#183;&nbsp; <a class="hero-visit" href="https://www.fynd.com/en-in/wms" target="_blank" rel="noopener">Visit WMS &#8594;</a></p>
+  <h1 class="hero-title">Designing a warehouse system for buildings that are all different</h1>
+  <p class="hero-lede">An MVP warehouse management system for Fynd, built as sole design DRI across a web app for managers and a handheld app for floor workers.</p>
+  <div class="tag-row">
+    <span class="tag">0 to 1</span>
+    <span class="tag">Complex B2B</span>
+    <span class="tag">Field research</span>
+    <span class="tag">Multi-device</span>
+    <span class="tag">Systems thinking</span>
+  </div>
+
   <div class="article-meta">
     <div>
       <p class="meta-item-label">Company</p>
@@ -429,142 +452,257 @@ footer {
       <p class="meta-item-value">Design Manager, PM, EM, Devs</p>
     </div>
     <div>
-      <p class="meta-item-label">Tools</p>
-      <p class="meta-item-value">Figma, FigJam, Slack</p>
+      <p class="meta-item-label">Surfaces</p>
+      <p class="meta-item-value">Web app, Handheld app</p>
+    </div>
+  </div>
+
+  <p class="intro">Fynd was building a supply chain suite for Reliance Jio, a key client. A Warehouse Management System, paired with a Transportation Management System, would give full visibility and control from purchase order through to delivery.</p>
+
+  <div class="key-takeaway">
+    <p class="key-takeaway-label">Key takeaway</p>
+    <p>Sole design DRI on a 0 to 1 warehouse management system, covering a manager web app and a worker handheld app. <mark>Shipped with 100% inventory traceability at item level and 100% picking accuracy</mark>, with 99.9% of orders processed within SLA.</p>
+  </div>
+
+  <div class="bignum-grid">
+    <div>
+      <p class="bignum-val">100%</p>
+      <p class="bignum-lab">Inventory traceability<br>at item level</p>
+    </div>
+    <div>
+      <p class="bignum-val">100%</p>
+      <p class="bignum-lab">Picking accuracy<br>after rollout</p>
+    </div>
+    <div>
+      <p class="bignum-val">99.9%</p>
+      <p class="bignum-lab">Of orders processed<br>within SLA</p>
+    </div>
+    <div>
+      <p class="bignum-val">10%</p>
+      <p class="bignum-lab">Improvement in<br>manpower efficiency</p>
     </div>
   </div>
 </header>
 
-<div class="article-hero">
+<div class="figure figure-bleed" style="margin-top:0">
   <img src="WMS.webp" alt="Warehouse Management System dashboard" />
 </div>
 
-<main class="article-body">
-
-  <div class="key-takeaway">
-    <p class="key-takeaway-label">Key takeaway</p>
-    <p>Designed an MVP warehouse management system for Fynd from the ground up, as sole DRI. Shipped with 100% inventory traceability, 100% picking accuracy, and 99.9% of orders processed within SLA.</p>
+<!-- ══ CONTEXT ══ -->
+<section class="wrap sec">
+  <p class="kicker">Context</p>
+  <h2 class="display">No two warehouses work the same way</h2>
+  <div class="prose">
+    <p class="lede">Build an MVP that lets a mid-sized warehouse run end to end, for a client whose sites vary in layout, process, and staffing.</p>
+    <p>The brief was to cover the basics well: a web app for warehouse managers to monitor operations, a Pick Pack app for floor workers using RFID so data updates without manual entry, and a workflow builder able to cover different warehouse processes.</p>
+    <p>The hard part was not the feature list. <mark>Warehouses vary widely in layout and process, with no single standard to design for</mark>, so anything designed around one site would break at the next.</p>
+    <p>The project also started without the usual scaffolding, which shaped how the work had to be run.</p>
   </div>
+  <div class="chip-row">
+    <div class="chip">No prior knowledge of how warehouses actually operate</div>
+    <div class="chip">No shared documentation or scrum cadence early on</div>
+    <div class="chip">Timelines stayed undefined until there were screens to react to</div>
+    <div class="chip">No single warehouse standard to design against</div>
+  </div>
+</section>
 
-  <section>
-    <h2>Background</h2>
-    <p>Fynd was building out a supply chain suite for Reliance Jio, a key client. A Warehouse Management System (WMS), paired with a Transportation Management System (TMS), would give full visibility and control from purchase order to delivery.</p>
-  </section>
+<!-- ══ MY ROLE ══ -->
+<section class="wrap sec">
+  <p class="kicker">My role</p>
+  <h2 class="display">Sole design DRI, end to end</h2>
+  <div class="prose">
+    <p class="lede">I owned the full design process: translating business requirements into user flows, running the research, and syncing weekly with the Design Manager and dev team on technical constraints.</p>
+    <p>With no other designer on the project, decisions that would normally be debated in a design team had to be made and defended alone, then validated against engineering feasibility each week.</p>
+  </div>
+</section>
 
-  <section>
-    <h2>My role</h2>
-    <p>I was the DRI for this project, owning the end-to-end design process, translating business requirements into user flows, and syncing weekly with the Design Manager and dev team on technical constraints.</p>
-  </section>
-
-  <section>
-    <h2>Objectives</h2>
-    <ul>
-      <li>Build an MVP with basic features for a mid-sized warehouse to run smoothly.</li>
-      <li>Create a web app for warehouse managers to monitor operations, and a Pick Pack app for warehouse workers to use RFID for automatic data updating.</li>
-      <li>Build a workflow builder covering use cases across different warehouse processes.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Challenges</h2>
-    <div class="chip-grid">
-      <div class="chip">No prior knowledge of how warehouses actually operate</div>
-      <div class="chip">No shared documentation or scrum cadence in the early phase</div>
-      <div class="chip">Timelines and strategy stayed undefined until we had screens to react to</div>
-      <div class="chip">Warehouses vary widely in layout and process, with no single standard to design for</div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Research</h2>
-    <h3>Warehouse visit</h3>
-    <p>We visited one of India's largest warehouses to see firsthand how packages move from intake to delivery.</p>
-    <h3>Competitor benchmarking</h3>
-    <p>We benchmarked WMS platforms already in use by Jio's other vendors:</p>
-    <ul>
+<!-- ══ RESEARCH ══ -->
+<section class="wrap sec">
+  <p class="kicker">Research</p>
+  <h2 class="display">Learning the floor before drawing anything</h2>
+  <div class="prose">
+    <p>None of us had designed for warehouse operations before, so the first move was to go and watch one work.</p>
+    <p>We visited one of India&#8217;s largest warehouses to see firsthand how packages move from intake to delivery. <mark>Seeing the floor is what surfaced the constraints that mattered most</mark>: workers moving constantly between locations, gloved hands, scanners rather than keyboards, and steps that could not pause for a screen to load.</p>
+    <p>Alongside that, we benchmarked the WMS platforms already in use by Jio&#8217;s other vendors, to understand what the client&#8217;s teams were already fluent in.</p>
+    <ul class="pts">
       <li>Vineretail</li>
       <li>Unicommerce</li>
       <li>SAP</li>
       <li>Increff</li>
       <li>Stock One</li>
     </ul>
-  </section>
+  </div>
 
-  <section>
-    <h2>Defining user personas</h2>
-    <p>The needs of three personas informed the direction of the application.</p>
-    <div class="persona-grid">
-      <div class="persona-card">
-        <p class="persona-name">Ravina</p>
-        <p class="persona-role">Supervisor</p>
-        <p class="persona-goals-label">Goals</p>
-        <ul>
-          <li>Optimize inventory and minimize stockouts</li>
-          <li>Increase productivity, reduce operational costs</li>
-          <li>Ensure timely order fulfillment</li>
-        </ul>
-      </div>
-      <div class="persona-card">
-        <p class="persona-name">Ajay</p>
-        <p class="persona-role">Admin</p>
-        <p class="persona-goals-label">Goals</p>
-        <ul>
-          <li>Ensure system stability across warehouses</li>
-          <li>Define configurations with stakeholders</li>
-          <li>Optimize performance and data accuracy</li>
-        </ul>
-      </div>
-      <div class="persona-card">
-        <p class="persona-name">Shyam</p>
-        <p class="persona-role">Worker</p>
-        <p class="persona-goals-label">Goals</p>
-        <ul>
-          <li>Complete tasks accurately and on time</li>
-          <li>Handle inventory safely and efficiently</li>
-          <li>Work smoothly within the team</li>
-        </ul>
-      </div>
+  <h3 style="font-size:14px;font-weight:700;letter-spacing:0.02em;text-transform:uppercase;color:#4F4132;margin:44px auto 0;max-width:780px">Three people the system had to serve</h3>
+  <div class="persona-grid">
+    <div class="persona-card">
+      <p class="persona-name">Ravina</p>
+      <p class="persona-role">Supervisor</p>
+      <p class="persona-goals-label">Goals</p>
+      <ul>
+        <li>Optimize inventory and minimize stockouts</li>
+        <li>Increase productivity, reduce operational costs</li>
+        <li>Ensure timely order fulfillment</li>
+      </ul>
     </div>
-  </section>
+    <div class="persona-card">
+      <p class="persona-name">Ajay</p>
+      <p class="persona-role">Admin</p>
+      <p class="persona-goals-label">Goals</p>
+      <ul>
+        <li>Ensure system stability across warehouses</li>
+        <li>Define configurations with stakeholders</li>
+        <li>Optimize performance and data accuracy</li>
+      </ul>
+    </div>
+    <div class="persona-card">
+      <p class="persona-name">Shyam</p>
+      <p class="persona-role">Worker</p>
+      <p class="persona-goals-label">Goals</p>
+      <ul>
+        <li>Complete tasks accurately and on time</li>
+        <li>Handle inventory safely and efficiently</li>
+        <li>Work smoothly within the team</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <h2>Wireframes</h2>
-    <p>Low-fidelity wireframes for the web app drove the structural decisions:</p>
-    <ul>
-      <li>Using cards to demarcate content for visual segmentation</li>
-      <li>Clear headlines and breadcrumbs to track navigation</li>
-    </ul>
-  </section>
+<!-- ══ CONSTRAINT TO RESPONSE ══ -->
+<section class="wrap sec">
+  <p class="kicker">Approach</p>
+  <h2 class="display">What each constraint forced me to decide</h2>
+  <div class="prose">
+    <p>Each constraint had a design response. Naming those responses early is what kept a 0 to 1 build from becoming a pile of one-off screens.</p>
+  </div>
 
-  <section>
-    <h2>Final UI</h2>
-    <p>A minimal set of page templates, reused throughout. Content surfaced through white cards on a light background rather than one-off layouts.</p>
-    <h3>Inbound listing &amp; detail</h3>
-    <p>Consignments are visible with status at a glance, tracked at the item level until stock is added to inventory. The form's left nav stays static on scroll, so workers can jump to any section instantly.</p>
-    <h3>Task screens for on-ground workers</h3>
-    <p>Workers scan an item code at each task step to track its status through the system.</p>
-    <ul>
-      <li>Stationary tasks (e.g. quality checks) use a desktop screen with a connected handheld scanner.</li>
-      <li>Mobile handheld devices cover tasks that require moving between locations.</li>
-    </ul>
-    <h3>Task completion</h3>
-    <p>Once all items are scanned, a barcode generates automatically via the OMS API and the worker marks the order packed. Each scan gives immediate feedback and auto-advances to the next item, usable via scanner or touch.</p>
-  </section>
+  <div class="map-grid">
+    <div class="map-card">
+      <p class="map-problem">Constraint 01</p>
+      <h3>No single warehouse standard</h3>
+      <ul>
+        <li>Designed a configurable workflow builder rather than one fixed, correct flow</li>
+        <li>Treated process variation as a setting, not as a redesign</li>
+        <li>PLACEHOLDER: add the specific configuration decisions you made</li>
+      </ul>
+    </div>
+    <div class="map-card">
+      <p class="map-problem">Constraint 02</p>
+      <h3>Workers move, managers sit</h3>
+      <ul>
+        <li>Split the system by context of use rather than by feature</li>
+        <li>Stationary tasks such as quality checks run on desktop with a tethered scanner</li>
+        <li>Tasks requiring movement between locations run on handheld devices</li>
+      </ul>
+    </div>
+    <div class="map-card">
+      <p class="map-problem">Constraint 03</p>
+      <h3>No domain knowledge on the team</h3>
+      <ul>
+        <li>Ran a warehouse site visit before committing to any structure</li>
+        <li>Benchmarked the platforms Jio&#8217;s vendors already used</li>
+        <li>Built three personas to keep supervisor, admin, and worker needs distinct</li>
+      </ul>
+    </div>
+    <div class="map-card">
+      <p class="map-problem">Constraint 04</p>
+      <h3>No documentation or cadence early on</h3>
+      <ul>
+        <li>Used screens as the alignment artifact, since strategy firmed up only once there was something to react to</li>
+        <li>Set a weekly sync with the Design Manager and dev team on technical constraints</li>
+        <li>PLACEHOLDER: add what you would formalise earlier next time</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-  <section>
-    <h2>Result</h2>
-    <p>The system was tested and shipped with:</p>
-    <ul>
-      <li>100% inventory traceability at item level</li>
-      <li>100% picking accuracy</li>
-      <li>99.9% orders processed within SLA</li>
-      <li>10% improved manpower efficiency</li>
-    </ul>
+<!-- ══ THE DECISION ══ -->
+<section class="wrap sec">
+  <p class="kicker">The decision that mattered</p>
+  <h2 class="display">Designing for variability instead of for one warehouse</h2>
+  <div class="prose">
+    <p class="lede">PLACEHOLDER: this section carries the most weight with hiring managers. Replace the draft below with the decision you would actually defend in an interview.</p>
+    <p>The obvious path was to design the flow we had watched on our site visit and ship that. It would have been faster and it would have worked, for exactly one warehouse.</p>
+    <p>Instead I treated process variation as the core requirement rather than an edge case. <mark>The workflow builder meant a new site could be configured rather than redesigned</mark>, which is what let a single MVP serve warehouses that organise their floors differently.</p>
+    <p>PLACEHOLDER: add the trade-off. What did configurability cost, in build time, in interface complexity, or in what you had to leave out of the MVP?</p>
+  </div>
+
+  <div class="slot">
+    <p class="slot-title">Asset slot: workflow builder</p>
+    <p class="slot-note">A screenshot of the workflow builder or a configuration flow. This is the image that proves the decision above, so it does more work here than any other screen.</p>
+  </div>
+</section>
+
+<!-- ══ CRAFT ══ -->
+<section class="wrap sec">
+  <p class="kicker">The interface</p>
+  <h2 class="display">A small set of templates, reused everywhere</h2>
+  <div class="prose">
+    <p>Low fidelity wireframes drove the structural decisions: cards to segment dense content, and clear headlines and breadcrumbs so people could tell where they were in a deep hierarchy.</p>
+    <p>The final UI ran on a minimal set of page templates rather than one-off layouts, with content surfaced through white cards on a light background.</p>
+    <p><b>Inbound listing and detail.</b> Consignments show status at a glance and stay tracked at item level until stock enters inventory. The form&#8217;s left nav stays fixed on scroll, so workers can jump to any section instantly.</p>
+    <p><b>Task screens for floor workers.</b> Workers scan an item code at each step, which tracks its status through the system without manual entry.</p>
+    <p><b>Task completion.</b> Once all items are scanned, a barcode generates automatically through the OMS API and the worker marks the order packed. <mark>Each scan gives immediate feedback and auto-advances to the next item</mark>, so the interaction works by scanner or by touch without changing the flow.</p>
+  </div>
+
+  <div class="slot">
+    <p class="slot-title">Asset slot: key screens</p>
+    <p class="slot-note">Two to four screens: inbound listing, a handheld task screen, and the task completion state. Handheld and desktop side by side would show the context-of-use split described above.</p>
+  </div>
+</section>
+
+<!-- ══ OUTCOME ══ -->
+<section class="wrap sec">
+  <p class="kicker">Outcome</p>
+  <h2 class="display">Shipped, and measured on the floor</h2>
+  <div class="prose">
+    <p class="lede">The system was tested and shipped, and the numbers that mattered were operational rather than cosmetic.</p>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <p class="stat-label">Inventory traceability</p>
+      <p class="stat-value">100%</p>
+      <p class="stat-sub">at item level</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-label">Picking accuracy</p>
+      <p class="stat-value">100%</p>
+      <p class="stat-sub">after rollout</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-label">Orders within SLA</p>
+      <p class="stat-value">99.9%</p>
+      <p class="stat-sub">processed on time</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-label">Manpower efficiency</p>
+      <p class="stat-value">+10%</p>
+      <p class="stat-sub">improvement</p>
+    </div>
+  </div>
+
+  <div class="prose" style="margin-top:44px">
+    <p>PLACEHOLDER: add one or two sentences on what these numbers meant in practice. For example, what item level traceability changed for a supervisor chasing a missing consignment, or what 10% manpower efficiency was worth to the client.</p>
     <p>Live product: <a class="inline-link" href="https://www.fynd.com/en-in/wms" target="_blank" rel="noopener">fynd.com/en-in/wms</a></p>
-  </section>
+  </div>
+</section>
 
-</main>
+<!-- ══ REFLECTION ══ -->
+<section class="wrap sec">
+  <p class="kicker">What I learned</p>
+  <h2 class="display">PLACEHOLDER: your honest reflection</h2>
+  <div class="prose">
+    <p class="lede">PLACEHOLDER: this section is currently missing from the case study and hiring managers look for it specifically. Two or three paragraphs is enough.</p>
+    <p>Prompts, in case they help. What would you do differently now? One site visit informed the whole design, so would you have validated with floor workers sooner or more often? Did designing for configurability turn out to be the right call, or did it add complexity that a simpler system would have avoided? What did being sole DRI teach you about making decisions without a design team to argue with?</p>
+  </div>
 
+  <div class="callout">
+    <p class="callout-tag">The durable lesson</p>
+    <h3>PLACEHOLDER: the one line you want remembered</h3>
+    <p>One sentence that generalises past this project, in the way the Loco case study ends on a design system being a shared decision making tool rather than a component library.</p>
+  </div>
+</section>
 <footer>
   <div class="footer-row">
     <div>
@@ -595,6 +733,23 @@ footer {
       toggle.setAttribute('aria-expanded', 'false');
     });
   });
+})();
+</script>
+
+
+<script>
+(function () {
+  var nav = document.querySelector('nav');
+  if (!nav) return;
+  var ticking = false;
+  function update() {
+    nav.classList.toggle('is-stuck', window.scrollY > 8);
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+  update();
 })();
 </script>
 

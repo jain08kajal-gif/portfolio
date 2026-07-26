@@ -12,17 +12,24 @@
 
 /* ─── RESET ─────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 120px; }
 body {
   font-family: 'DM Sans', system-ui, sans-serif;
   background: #FFFEFC;
   color: #141414;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ─── NAV ────────────────────────────────────── */
 nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: #FFFEFC;
+  border-bottom: 1px solid transparent;
+  transition: padding .22s ease, border-color .22s ease;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -74,6 +81,16 @@ nav {
   flex-shrink: 0;
 }
 .nav-toggle svg { width: 22px; height: 22px; }
+
+/* Sticky nav: condenses once the page scrolls */
+nav.is-stuck {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom-color: #EAE7E1;
+}
+nav.is-stuck .logo-mark { height: 34px; border-radius: 10px; }
+.logo-mark { transition: height .22s ease, border-radius .22s ease; }
+
 
 /* ─── HERO ───────────────────────────────────── */
 .hero {
@@ -759,7 +776,7 @@ footer {
       <p class="case-eyebrow">IRL <span class="case-tag">0→1</span></p>
       <h3 class="case-title">Vertical mobile streaming</h3>
       <p class="case-desc">A mobile-first, vertical watch experience for live gaming and creator streams, designed for one-handed use and fast switching between shows.</p>
-      <a class="case-cta" href="#">Read more
+      <a class="case-cta" href="irl-case-study.html">Read more
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
@@ -927,6 +944,23 @@ footer {
 
   render();
   restart();
+})();
+</script>
+
+
+<script>
+(function () {
+  var nav = document.querySelector('nav');
+  if (!nav) return;
+  var ticking = false;
+  function update() {
+    nav.classList.toggle('is-stuck', window.scrollY > 8);
+    ticking = false;
+  }
+  window.addEventListener('scroll', function () {
+    if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+  }, { passive: true });
+  update();
 })();
 </script>
 
