@@ -12,7 +12,7 @@
 
 /* ─── RESET ─────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 120px; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 body {
   font-family: 'DM Sans', system-ui, sans-serif;
   background: #FFFEFC;
@@ -82,14 +82,23 @@ nav {
 }
 .nav-toggle svg { width: 22px; height: 22px; }
 
-/* Sticky nav: condenses once the page scrolls */
+/* Sticky nav: strips down to a slim bar once the page scrolls */
 nav.is-stuck {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: rgba(255, 254, 252, 0.82);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  backdrop-filter: saturate(180%) blur(14px);
   border-bottom-color: #EAE7E1;
 }
-nav.is-stuck .logo-mark { height: 34px; border-radius: 10px; }
-.logo-mark { transition: height .22s ease, border-radius .22s ease; }
+nav.is-stuck .logo-mark { width: 17px; height: 28px; border-radius: 8px; }
+nav.is-stuck .logo-text { font-size: 13px; }
+nav.is-stuck .nav-links { gap: 26px; }
+nav.is-stuck .nav-links a { font-size: 14px; }
+.logo-mark, .logo-text, .nav-links, .nav-links a {
+  transition: width .22s ease, height .22s ease, border-radius .22s ease,
+              font-size .22s ease, gap .22s ease;
+}
 
 
 /* ─── HERO ───────────────────────────────────── */
@@ -547,6 +556,77 @@ nav.is-stuck .logo-mark { height: 34px; border-radius: 10px; }
   background: #4F4132;
 }
 
+/* ─── CONTACT ────────────────────────────────── */
+.contact {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 96px 60px 88px;
+}
+.contact-inner {
+  background: #F0EEEB;
+  border-radius: 28px;
+  padding: 72px 60px;
+  text-align: center;
+}
+.contact-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #4F4132;
+  margin-bottom: 18px;
+}
+.contact-title {
+  font-size: clamp(28px, 3.8vw, 42px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.14;
+  color: #141414;
+  text-wrap: balance;
+  max-width: 620px;
+  margin: 0 auto 20px;
+}
+.contact-sub {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #3F3F3F;
+  max-width: 520px;
+  margin: 0 auto 36px;
+}
+.contact-mail {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: #4F4132;
+  border-radius: 100px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition: background .2s ease, transform .2s ease;
+}
+.contact-mail:hover { background: #362B20; transform: translateY(-1px); }
+.contact-mail svg { width: 15px; height: 15px; transition: transform .2s ease; }
+.contact-mail:hover svg { transform: translateX(3px); }
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  list-style: none;
+  margin-top: 32px;
+}
+.contact-links a {
+  font-size: 14px;
+  color: #3F3F3F;
+  text-decoration: none;
+  border-bottom: 1px solid #D8D2C6;
+  padding-bottom: 2px;
+  transition: color .2s, border-color .2s;
+}
+.contact-links a:hover { color: #141414; border-color: #141414; }
+
 /* ─── FOOTER ─────────────────────────────────── */
 footer {
   padding: 56px 60px 40px;
@@ -610,6 +690,10 @@ footer {
   .about-carousel { max-width: 280px; margin: 0 auto; }
   .manual-grid { grid-template-columns: 1fr; }
   .manual-card ul { columns: 1; }
+  .contact { padding: 64px 24px 56px; }
+  .contact-inner { padding: 48px 26px; border-radius: 22px; }
+  .contact-mail { width: 100%; justify-content: center; padding: 15px 24px; font-size: 15px; }
+  .contact-links { flex-wrap: wrap; gap: 20px; }
   .footer-row { flex-direction: column; align-items: flex-start; gap: 20px; }
 }
 @media (max-width: 700px) {
@@ -699,6 +783,7 @@ footer {
   <ul class="nav-links" id="nav-links">
     <li><a href="#work">Work</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
     <li><a href="KajalJain_Resume26.pdf" target="_blank" rel="noopener">Resume</a></li>
     <li><a href="https://www.linkedin.com/in/kajal-jain8" target="_blank" rel="noopener">Linkedin</a></li>
     <li><a href="https://www.behance.net/KajalDesigns" target="_blank" rel="noopener">Behance</a></li>
@@ -831,6 +916,24 @@ footer {
       </ul>
     </div>
 
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <p class="contact-eyebrow">Contact</p>
+    <h2 class="contact-title">Let's talk about the problem you're stuck on.</h2>
+    <p class="contact-sub">I'm open to Senior Product Designer roles, and always happy to talk through a hard product problem. Email is the fastest way to reach me.</p>
+    <a class="contact-mail" href="mailto:jain08kajal@gmail.com">
+      jain08kajal@gmail.com
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+    <ul class="contact-links">
+      <li><a href="https://www.linkedin.com/in/kajal-jain8" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="https://www.behance.net/KajalDesigns" target="_blank" rel="noopener">Behance</a></li>
+      <li><a href="KajalJain_Resume26.pdf" target="_blank" rel="noopener">Resume</a></li>
+    </ul>
   </div>
 </section>
 
