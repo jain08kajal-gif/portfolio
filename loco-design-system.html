@@ -4,13 +4,37 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Keeping 6 Designers Consistent Across 3 Platforms, Kajal Jain</title>
-<meta name="description" content="Case study: keeping a 6-designer team consistent across app, web, and mobile web while rebranding Loco's viewer experience in four weeks, with the final brand applied across the product in a single evening." />
+<meta name="description" content="Case study: keeping a 6-designer team consistent across app, web, and mobile web while rebranding Loco's viewer experience in four weeks." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
 
-/* ─── RESET ─────────────────────────────────── */
+/* ═══════════════════════════════════════════════
+   CASE STUDY SYSTEM v2
+   Editorial layout. Images and type carry the pacing.
+
+   INK
+     #141414  Ink        headings + emphasis
+     #3F3F3F  Ink muted  body copy
+     #4F4132  Structure  rules, kickers, bullets
+     #FF3700  Action     links ONLY
+     #2F6BB3  Signal     key takeaway ONLY
+
+   TYPE
+     Hero      clamp(32,4.6vw,48)/ 700   two lines at 780
+     Display   clamp(25,3.2vw,34)/ 700   section headings
+     Bignum    clamp(40,5.5vw,64)/ 700   stat numerals
+     Lede      19 / 500 / ink
+     Body      16 / 400 / ink muted
+     Kicker    12 / 700 / .12em / uppercase / structure
+
+   WIDTHS
+     Page      1100  outer container
+     Prose      720  reading column, centred
+     Wide      1040  figures and grids
+   ═══════════════════════════════════════════════ */
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
@@ -28,509 +52,294 @@ nav {
   align-items: center;
   padding: 30px 60px;
 }
-.logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
 .logo-mark {
-  width: 28px;
-  height: 48px;
-  border-radius: 14px;
+  width: 28px; height: 48px; border-radius: 14px;
   background: linear-gradient(180deg, #49DA9A 0%, #34BBE6 30%, #4355DB 60%, #D23BE7 100%);
   flex-shrink: 0;
 }
-.logo-text {
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: #141414;
-}
-.nav-links {
-  display: flex;
-  gap: 36px;
-  list-style: none;
-}
-.nav-links a {
-  font-size: 15px;
-  font-weight: 400;
-  color: #3F3F3F;
-  text-decoration: none;
-  transition: color .2s;
-}
+.logo-text { font-size: 15px; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; color: #141414; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-size: 15px; font-weight: 400; color: #3F3F3F; text-decoration: none; transition: color .2s; }
 .nav-links a:hover { color: #141414; }
 .nav-toggle {
-  display: none;
-  width: 36px;
-  height: 36px;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  color: #141414;
-  flex-shrink: 0;
+  display: none; width: 36px; height: 36px; align-items: center; justify-content: center;
+  background: none; border: none; padding: 0; cursor: pointer; color: #141414; flex-shrink: 0;
 }
 .nav-toggle svg { width: 22px; height: 22px; }
 
-/* ─── ARTICLE HEADER ─────────────────────────── */
-.article-header {
+/* ─── LAYOUT PRIMITIVES ──────────────────────────
+   Two centred measures on one shared spine:
+     Reading  780  all text, centred in the page
+     Wide    1040  grids and figures, same centre
+   Everything shares a centre line, so left edges of
+   text always align while wide blocks breathe out
+   symmetrically on both sides.                     */
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 40px; }
+
+.measure,
+.prose,
+.hero > .kicker,
+.hero > .hero-title,
+.hero > .hero-lede,
+.hero > .tag-row,
+.hero > .intro,
+.hero > .article-meta,
+.hero > .key-takeaway,
+.sec > .kicker,
+.sec > .display,
+.sec > .chip-row,
+.sec > .callout,
+.sec > .slot {
   max-width: 780px;
-  margin: 0 auto;
-  padding: 16px 24px 40px;
+  margin-left: auto;
+  margin-right: auto;
 }
+.hero > .back-link {
+  display: flex;
+  max-width: 780px;
+  margin: 0 auto 40px;
+  justify-content: flex-start;
+}
+
+/* ─── HERO ───────────────────────────────────── */
+.hero { padding: 8px 0 20px; }
 .back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  color: #3F3F3F;
-  text-decoration: none;
-  margin-bottom: 28px;
-  transition: color .2s;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500; color: #3F3F3F;
+  text-decoration: none; margin-bottom: 40px; transition: color .2s;
 }
 .back-link:hover { color: #141414; }
 .back-link svg { width: 13px; height: 13px; }
-.article-eyebrow-row {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  gap: 8px 16px;
-  margin-bottom: 12px;
+.kicker {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: #4F4132; margin-bottom: 14px;
 }
-.article-eyebrow {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #3F3F3F;
-  margin-bottom: 0;
+.hero-title {
+  font-size: clamp(32px, 4.6vw, 48px);
+  font-weight: 700; letter-spacing: -0.03em; line-height: 1.12;
+  color: #141414; text-wrap: balance;
+  margin-bottom: 26px;
 }
-/* L0: page title: size and weight only, never colour */
-.article-title {
-  font-size: clamp(30px, 4.2vw, 42px);
-  font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.18;
-  color: #141414;
-  text-wrap: balance;
-  margin-bottom: 28px;
+.hero-lede {
+  font-size: 19px; line-height: 1.65; font-weight: 500;
+  color: #141414; margin-bottom: 30px;
 }
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 44px; }
+.tag {
+  font-size: 13px; font-weight: 500; color: #4F4132;
+  border: 1px solid #DDD6C8; border-radius: 100px; padding: 6px 15px;
+}
+.intro { margin-bottom: 32px; }
+
+/* Project meta: the factual card, sits directly under the title */
 .article-meta {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  background: #F0EEEB;
-  border-radius: 16px;
-  padding: 20px 24px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  background: #F0EEEB; border-radius: 16px; padding: 20px 24px;
+  margin-bottom: 32px;
 }
 .meta-item-label {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #3F3F3F;
-  margin-bottom: 4px;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+  text-transform: uppercase; color: #3F3F3F; margin-bottom: 4px;
 }
-.meta-item-value {
-  font-size: 14px;
-  font-weight: 700;
-  color: #141414;
+.meta-item-value { font-size: 14px; font-weight: 700; color: #141414; margin-bottom: 0; }
+.hero-visit {
+  font-size: 13px; font-weight: 700; color: #FF3700;
+  text-decoration: none; white-space: nowrap;
 }
-.article-header a.inline-link {
-  display: inline-block;
-  font-size: 13px;
-  font-weight: 700;
-  color: #FF3700;
-  text-decoration: none;
-  white-space: nowrap;
-}
-.article-header a.inline-link:hover { text-decoration: underline; }
+.hero-visit:hover { text-decoration: underline; }
 
-/* ═══════════════════════════════════════════════
-   CASE STUDY HIERARCHY SYSTEM
-   Reusable across all case study pages.
+/* ─── BIG NUMBER BLOCK ───────────────────────── */
+.bignum-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 20px; padding: 44px 0; margin-bottom: 8px;
+  border-top: 1px solid #EAE7E1; border-bottom: 1px solid #EAE7E1;
+}
+.bignum-val {
+  font-size: clamp(40px, 5.5vw, 64px);
+  font-weight: 700; letter-spacing: -0.04em; line-height: 1;
+  color: #141414; margin-bottom: 10px;
+}
+.bignum-lab {
+  font-size: 13px; line-height: 1.45; color: #3F3F3F; font-weight: 500;
+}
 
-   INK SCALE (never mix roles)
-     #141414  Ink        headings + emphasis
-     #3F3F3F  Ink muted  body copy, labels
-     #4F4132  Structure  rules, tags, bullets, borders
-     #FF3700  Action     links ONLY, never decoration
-     #2F6BB3  Signal     key takeaway ONLY, one per page
+/* ─── SECTIONS ───────────────────────────────── */
+.sec { padding: 76px 0; }
+.sec + .sec { border-top: 1px solid #EAE7E1; }
+.display {
+  font-size: clamp(25px, 3.2vw, 34px);
+  font-weight: 700; letter-spacing: -0.025em; line-height: 1.2;
+  color: #141414; text-wrap: balance;
+  margin-bottom: 22px;
+}
+.lede { font-size: 19px; line-height: 1.65; font-weight: 500; color: #141414; margin-bottom: 20px; }
+p { font-size: 16px; line-height: 1.75; color: #3F3F3F; margin-bottom: 16px; }
+p:last-child { margin-bottom: 0; }
+mark { background: none; color: #141414; font-weight: 600; }
+a.inline-link { color: #4F4132; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+a.inline-link:hover { color: #141414; }
 
-   TYPE SCALE
-     L0  Title      clamp(30,4.2vw,42) / 700 / ink
-     L1  Takeaway   16 / 500 / ink        on #F0EEEB card
-     L2  Section    22 / 700 / ink        + hairline rule
-     L3  Lede       17.5 / 500 / ink      one per section
-     L4  Callout    17 / 700 / ink        on white card
-     L5  Emphasis   inherit / 600 / ink   weight+colour only
-     L6  Body       15.5 / 400 / ink muted
-     L7  Label      11 / 700 / 0.08em / uppercase
-
-   RULE: each level changes ONE thing relative to body.
-   Never size + colour + weight together.
-   ═══════════════════════════════════════════════ */
-
-.article-body {
-  max-width: 780px;
-  margin: 0 auto;
-  padding: 8px 24px 40px;
-}
-.article-body section {
-  margin-bottom: 40px;
-}
-/* L2: section heading, with hairline rule for rhythm */
-.article-body section + section:not(.section--bleed) {
-  border-top: 1px solid #EAE7E1;
-  padding-top: 40px;
-}
-.article-body h2 {
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-  line-height: 1.3;
-  color: #141414;
-  margin-bottom: 14px;
-}
-.article-body h3 {
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: #4F4132;
-  margin: 28px 0 10px;
-}
-.compare-card h3 {
-  text-align: center;
-  margin: 0 0 20px;
-  font-size: 14px;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  color: #4F4132;
-}
-.compare-row {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-.compare-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: #3F3F3F;
-  margin-top: 10px;
-  text-align: center;
-}
-.compare-caption {
-  font-size: 13px;
-  color: #3F3F3F;
-  text-align: center;
-  margin-bottom: 20px;
-}
-.compare-card {
-  border-radius: 20px;
-  padding: 40px 30px;
-  width: 100vw;
-  max-width: 1140px;
-  margin-left: 50%;
-  margin-bottom: 28px;
-  transform: translateX(-50%);
-  box-sizing: border-box;
-}
-.compare-card:last-child { margin-bottom: 0; }
-.compare-card--web { background: #E7E0D3; }
-.compare-card--mobile { background: #F0EEEB; }
-.compare-card--web .compare-row {
-  align-items: center;
-  justify-content: center;
-  gap: 2%;
-}
-.compare-card--web .compare-item { flex: 0 1 44%; }
-.compare-card--web img {
-  width: 100%;
-  display: block;
-  border-radius: 6px;
-}
-.compare-card--mobile .compare-row {
-  align-items: flex-start;
-  justify-content: center;
-  gap: 4%;
-}
-.compare-card--mobile .compare-item { flex: 0 1 22%; min-width: 130px; max-width: 260px; }
-.compare-card--mobile img {
-  width: 100%;
-  display: block;
-}
-.article-body p {
-  font-size: 15.5px;
-  line-height: 1.75;
-  color: #3F3F3F;
-  margin-bottom: 14px;
-}
-.article-body p:last-child { margin-bottom: 0; }
-/* L1: key takeaway: the one thing to read.
-   Cool tint, drawn from the logo gradient, so it separates
-   from the warm neutrals used by every other card. */
+/* ─── KEY TAKEAWAY ───────────────────────────── */
 .key-takeaway {
-  background: #EBF2F8;
-  border-left: 3px solid #2F6BB3;
-  border-radius: 4px 12px 12px 4px;
-  padding: 22px 26px;
-  margin: 8px 0 40px;
+  background: #EBF2F8; border-left: 3px solid #2F6BB3;
+  border-radius: 4px 14px 14px 4px; padding: 26px 30px; margin: 0 0 8px;
 }
 .key-takeaway-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #2F6BB3;
-  margin-bottom: 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #2F6BB3; margin-bottom: 10px;
 }
-.key-takeaway p {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.65;
-  color: #141414;
-  margin-bottom: 0;
-}
-.key-takeaway mark { font-weight: 700; }
-.article-body ul {
-  list-style: none;
-  margin-top: 4px;
-}
-.article-body li {
-  position: relative;
-  padding-left: 18px;
-  font-size: 15.5px;
-  line-height: 1.75;
-  color: #3F3F3F;
-  margin-bottom: 10px;
-}
-.article-body li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 10px;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #4F4132;
-}
-.article-body li:last-child { margin-bottom: 0; }
-.article-body li b {
-  color: #141414;
-  font-weight: 700;
-}
-.article-body a.inline-link {
-  color: #4F4132;
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-.article-body a.inline-link:hover { color: #141414; }
+.key-takeaway p { font-size: 17px; font-weight: 500; line-height: 1.6; color: #141414; margin-bottom: 0; }
 
-/* L3: section lede: the skim line, one per section */
-.article-body .lede {
-  font-size: 17.5px;
-  line-height: 1.6;
-  font-weight: 500;
-  color: #141414;
-  margin-bottom: 18px;
+/* ─── PROBLEM CHIPS ──────────────────────────── */
+.chip-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 28px; }
+.chip {
+  background: #F0EEEB; border-radius: 12px; padding: 16px 18px;
+  font-size: 15px; font-weight: 500; line-height: 1.5; color: #141414;
 }
 
-/* L5: in-body emphasis: weight + ink only.
-   No size change, so line rhythm stays even. */
-mark {
-  background: none;
-  color: #141414;
-  font-weight: 600;
+/* ─── CONSTRAINT TO RESPONSE MAP ─────────────── */
+.map-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 32px; }
+.map-card {
+  background: #FFFFFF; border: 1px solid #E4E0D8;
+  border-radius: 16px; padding: 26px 28px;
 }
-.article-title mark {
-  color: inherit;
-  font-weight: inherit;
+.map-problem {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #4F4132; margin-bottom: 8px;
 }
+.map-card h3 {
+  font-size: 18px; font-weight: 700; letter-spacing: -0.015em;
+  line-height: 1.3; color: #141414; margin-bottom: 16px;
+}
+.map-card ul { list-style: none; }
+.map-card li {
+  position: relative; padding-left: 18px; font-size: 15px;
+  line-height: 1.6; color: #3F3F3F; margin-bottom: 10px;
+}
+.map-card li::before {
+  content: ''; position: absolute; left: 0; top: 9px;
+  width: 5px; height: 5px; border-radius: 50%; background: #4F4132;
+}
+.map-card li:last-child { margin-bottom: 0; }
 
-/* L4: callout: the narrative moments worth stopping for */
-.article-body .callout {
-  background: #FFFFFF;
-  border: 1px solid #E4E0D8;
-  border-left: 3px solid #4F4132;
-  border-radius: 4px 14px 14px 4px;
-  padding: 24px 28px;
-  margin: 28px 0;
+/* ─── LISTS ──────────────────────────────────── */
+ul.pts { list-style: none; margin-top: 8px; }
+ul.pts li {
+  position: relative; padding-left: 20px; font-size: 16px;
+  line-height: 1.75; color: #3F3F3F; margin-bottom: 12px;
 }
-.article-body .callout-tag {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #4F4132;
-  margin-bottom: 8px;
+ul.pts li::before {
+  content: ''; position: absolute; left: 0; top: 11px;
+  width: 5px; height: 5px; border-radius: 50%; background: #4F4132;
 }
-.article-body .callout h3 {
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  text-transform: none;
-  color: #141414;
-  margin: 0 0 10px;
-  text-align: left;
-}
-.article-body .callout p {
-  font-size: 15.5px;
-  line-height: 1.7;
-  color: #3F3F3F;
-  margin-bottom: 12px;
-}
-.article-body .callout p:last-child { margin-bottom: 0; }
+ul.pts li:last-child { margin-bottom: 0; }
+ul.pts b { color: #141414; font-weight: 700; }
 
-/* L8: evidence figure: a screenshot that backs a claim.
-   Breaks out wider than the reading column so dashboard
-   text stays legible. */
-.figure {
-  width: 100vw;
-  max-width: 1040px;
-  margin-left: 50%;
-  transform: translateX(-50%);
-  margin-top: 24px;
-  margin-bottom: 8px;
-  padding: 0 24px;
-  box-sizing: border-box;
+/* ─── CALLOUT ────────────────────────────────── */
+.callout {
+  background: #FFFFFF; border: 1px solid #E4E0D8; border-left: 3px solid #4F4132;
+  border-radius: 4px 16px 16px 4px; padding: 28px 32px; margin: 32px auto 0;
 }
-.figure img {
-  width: 100%;
-  display: block;
-  border-radius: 10px;
-  border: 1px solid #E4E0D8;
+.callout-tag {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #4F4132; margin-bottom: 8px;
 }
-.figure figcaption {
-  font-size: 13px;
-  line-height: 1.6;
-  color: #3F3F3F;
-  margin-top: 10px;
-  text-align: center;
+.callout h3 {
+  font-size: 21px; font-weight: 700; letter-spacing: -0.02em;
+  line-height: 1.25; color: #141414; margin-bottom: 12px;
 }
+.callout p { font-size: 16px; margin-bottom: 12px; }
+.callout p:last-child { margin-bottom: 0; }
 
-/* ─── OUTCOME STAT GRID ───────────────────────── */
-.stat-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin: 16px 0 20px;
+/* ─── FIGURES ────────────────────────────────── */
+.figure { margin: 36px 0 0; }
+.figure img { width: 100%; display: block; border-radius: 12px; border: 1px solid #E4E0D8; }
+.figure figcaption { font-size: 13.5px; line-height: 1.6; color: #3F3F3F; margin-top: 12px; }
+/* Wide measure: fills the wrap, same centre line as text */
+.figure-bleed { width: 100%; margin-top: 40px; }
+.fig-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 36px; }
+.fig-duo img { width: 100%; display: block; border-radius: 12px; border: 1px solid #E4E0D8; }
+.fig-quad { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 36px; }
+.fig-quad img { width: 100%; display: block; border-radius: 12px; border: 1px solid #E4E0D8; }
+
+/* ─── ASSET SLOT (placeholder, delete when filled) ─ */
+.slot {
+  border: 1px dashed #C9C2B4; border-radius: 14px;
+  background: #FAF8F5; padding: 44px 32px; text-align: center; margin-top: 32px;
 }
-.stat-card {
-  background: #F0EEEB;
-  border-radius: 12px;
-  padding: 16px 16px 14px;
+.slot-title { font-size: 15px; font-weight: 700; color: #4F4132; margin-bottom: 6px; }
+.slot-note { font-size: 13.5px; line-height: 1.6; color: #7A7264; max-width: 460px; margin: 0 auto; }
+
+/* ─── COMPARE BANDS ──────────────────────────── */
+.band {
+  width: 100vw; max-width: 100vw; margin-left: 50%; transform: translateX(-50%);
+  padding: 64px 40px; box-sizing: border-box;
 }
+.band--web { background: #E7E0D3; }
+.band--app { background: #F0EEEB; }
+.band-inner { max-width: 1100px; margin: 0 auto; }
+.band h3 {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  color: #4F4132; text-align: center; margin-bottom: 8px;
+}
+.band-caption { font-size: 14px; color: #4F4132; text-align: center; margin-bottom: 32px; opacity: .85; }
+.compare-row { display: flex; gap: 3%; align-items: flex-start; justify-content: center; flex-wrap: wrap; }
+.band--web .compare-item { flex: 0 1 46%; }
+.band--web img { width: 100%; display: block; border-radius: 8px; }
+.band--app .compare-item { flex: 0 1 24%; min-width: 140px; max-width: 280px; }
+.band--app img { width: 100%; display: block; }
+.compare-label { font-size: 13px; font-weight: 600; color: #4F4132; margin-top: 14px; text-align: center; }
+
+/* ─── STAT CARDS ─────────────────────────────── */
+.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 28px 0 0; }
+.stat-card { background: #F0EEEB; border-radius: 14px; padding: 20px 20px 18px; }
 .stat-label {
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #3F3F3F;
-  margin-bottom: 6px;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.04em;
+  text-transform: uppercase; color: #3F3F3F; margin-bottom: 8px;
 }
-.stat-value {
-  font-size: 22px;
-  font-weight: 700;
-  color: #141414;
-  letter-spacing: -0.01em;
-  margin-bottom: 0;
-}
-.stat-sub {
-  font-size: 12px;
-  color: #3F3F3F;
-  margin-top: 4px;
-  margin-bottom: 0;
-}
+.stat-value { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; color: #141414; margin-bottom: 0; }
+.stat-sub { font-size: 12.5px; color: #3F3F3F; margin-top: 5px; margin-bottom: 0; }
 
 /* ─── FOOTER ─────────────────────────────────── */
-footer {
-  padding: 56px 60px 40px;
-  max-width: 1160px;
-  margin: 0 auto;
-  border-top: 1px solid #EAE7E1;
-  margin-top: 24px;
-}
-.footer-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.footer-credit {
-  text-align: center;
-  font-size: 12px;
-  color: #3F3F3F;
-  margin-top: 32px;
-}
-.footer-credit a {
-  color: #3F3F3F;
-  text-decoration: underline;
-}
-.footer-credit svg {
-  width: 12px;
-  height: 12px;
-  vertical-align: -1px;
-  margin-right: 2px;
-}
+footer { padding: 56px 40px 40px; max-width: 1100px; margin: 60px auto 0; border-top: 1px solid #EAE7E1; }
+.footer-row { display: flex; justify-content: space-between; align-items: center; }
+.footer-credit { text-align: center; font-size: 12px; color: #3F3F3F; margin-top: 32px; }
+.footer-credit a { color: #3F3F3F; text-decoration: underline; }
+.footer-credit svg { width: 12px; height: 12px; vertical-align: -1px; margin-right: 2px; }
 .footer-name { font-size: 15px; font-weight: 700; }
 .footer-email { font-size: 13px; color: #3F3F3F; margin-top: 4px; }
 .footer-links { display: flex; gap: 28px; list-style: none; }
-.footer-links a {
-  font-size: 14px;
-  color: #3F3F3F;
-  text-decoration: none;
-  transition: color .2s;
-}
+.footer-links a { font-size: 14px; color: #3F3F3F; text-decoration: none; transition: color .2s; }
 .footer-links a:hover { color: #141414; }
 
 /* ─── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 900px) {
+  .bignum-grid { grid-template-columns: repeat(2, 1fr); gap: 28px 20px; }
+  .map-grid { grid-template-columns: 1fr; }
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+  .fig-duo, .fig-quad { grid-template-columns: 1fr; }
+  .sec { padding: 56px 0; }
+}
 @media (max-width: 700px) {
   nav { padding: 24px 28px; position: relative; }
+  .wrap { padding: 0 24px; }
+  .band { padding: 40px 24px; }
+  .chip-row { grid-template-columns: 1fr; }
   .article-meta { grid-template-columns: 1fr 1fr; }
+  .band--app .compare-item { flex-basis: 30%; min-width: 96px; }
   .footer-row { flex-direction: column; align-items: flex-start; gap: 20px; }
-  .compare-card { padding: 24px 16px; }
-  .compare-card--mobile .compare-item { flex-basis: 28%; min-width: 90px; }
-  .stat-grid { grid-template-columns: 1fr 1fr; }
-  .figure { padding: 0; }
   .nav-toggle { display: flex; }
   .nav-links {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    background: #FFFEFC;
-    box-shadow: 0 16px 32px rgba(20,20,20,0.10);
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transition: max-height .3s ease, opacity .25s ease;
-    z-index: 40;
+    position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: #FFFEFC; box-shadow: 0 16px 32px rgba(20,20,20,0.10);
+    max-height: 0; overflow: hidden; opacity: 0; visibility: hidden;
+    transition: max-height .3s ease, opacity .25s ease; z-index: 40;
   }
-  .nav-links.is-open {
-    max-height: 320px;
-    opacity: 1;
-    visibility: visible;
-    padding: 8px 28px 20px;
-  }
+  .nav-links.is-open { max-height: 320px; opacity: 1; visibility: visible; padding: 8px 28px 20px; }
   .nav-links li { width: 100%; }
-  .nav-links a {
-    display: block;
-    padding: 13px 0;
-    font-size: 15px;
-    border-bottom: 1px solid #EAE7E1;
-  }
+  .nav-links a { display: block; padding: 13px 0; font-size: 15px; border-bottom: 1px solid #EAE7E1; }
   .nav-links li:last-child a { border-bottom: none; }
 }
 
@@ -551,9 +360,7 @@ footer {
   var PASSWORD = 'kajal2026';
   var lock = document.getElementById('site-lock');
   if (!lock) return;
-  if (sessionStorage.getItem('site-unlocked') === 'true') {
-    lock.style.display = 'none';
-  }
+  if (sessionStorage.getItem('site-unlocked') === 'true') { lock.style.display = 'none'; }
   var form = document.getElementById('site-lock-form');
   var input = document.getElementById('site-lock-input');
   var error = document.getElementById('site-lock-error');
@@ -562,10 +369,7 @@ footer {
     if (input.value === PASSWORD) {
       sessionStorage.setItem('site-unlocked', 'true');
       lock.style.display = 'none';
-    } else {
-      error.style.display = 'block';
-      input.value = '';
-    }
+    } else { error.style.display = 'block'; input.value = ''; }
   });
 })();
 </script>
@@ -586,16 +390,14 @@ footer {
   </ul>
 </nav>
 
-<header class="article-header">
+<!-- ══ HERO ══ -->
+<header class="wrap hero">
   <a class="back-link" href="index.html#work">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
     Back to work
   </a>
-  <div class="article-eyebrow-row">
-    <p class="article-eyebrow">Loco Viewer App: Web, Mobile Web, App</p>
-    <a class="inline-link" href="https://loco.com/" target="_blank" rel="noopener">Visit Loco →</a>
-  </div>
-  <h1 class="article-title">Keeping 6 designers consistent across 3 platforms in 4 weeks</h1>
+  <p class="kicker">Loco: Viewer experience &nbsp;·&nbsp; <a class="hero-visit" href="https://loco.com/" target="_blank" rel="noopener">Visit Loco →</a></p>
+  <h1 class="hero-title">Keeping 6 designers consistent across 3 platforms in 4 weeks</h1>
   <div class="article-meta">
     <div>
       <p class="meta-item-label">Company</p>
@@ -611,164 +413,272 @@ footer {
     </div>
     <div>
       <p class="meta-item-label">Team</p>
-      <p class="meta-item-value">5–6 designers</p>
+      <p class="meta-item-value">5 to 6 designers</p>
+    </div>
+  </div>
+  <p class="hero-lede">A full visual rebrand of Loco's viewer experience across app, web, and mobile web, delivered against a launch date that could not move.</p>
+  <div class="tag-row">
+    <span class="tag">Design systems</span>
+    <span class="tag">Semantic tokens</span>
+    <span class="tag">Cross-platform</span>
+    <span class="tag">Team alignment</span>
+    <span class="tag">Engineering partnership</span>
+  </div>
+
+  <p class="intro">Loco is a premier Indian live-streaming and esports platform dedicated to gaming entertainment. Users can watch top streamers, follow major esports tournaments, and broadcast their own gameplay using the companion Loco streaming Dashboard. It is available globally across Android, iOS, and web browsers.</p>
+
+  <div class="key-takeaway">
+    <p class="key-takeaway-label">Key takeaway</p>
+    <p>Semantic tokens turned a missing brand from a blocker into a variable. When the final identity arrived with one week left, <mark>we applied it across the entire product in a single evening</mark> instead of a two to three week screen-by-screen rebuild. All 160k active users held through the transition.</p>
+  </div>
+
+  <div class="bignum-grid">
+    <div>
+      <p class="bignum-val">1</p>
+      <p class="bignum-lab">Evening to apply the final<br>brand across the product</p>
+    </div>
+    <div>
+      <p class="bignum-val">85%</p>
+      <p class="bignum-lab">Of screens shipped from<br>shared components</p>
+    </div>
+    <div>
+      <p class="bignum-val">160k</p>
+      <p class="bignum-lab">Active users held<br>through the rebrand</p>
+    </div>
+    <div>
+      <p class="bignum-val">90%+</p>
+      <p class="bignum-lab">Of screens passed the<br>post-launch consistency audit</p>
     </div>
   </div>
 </header>
 
+<!-- ══ CONTEXT ══ -->
+<section class="wrap sec">
+  <p class="kicker">Context</p>
+  <h2 class="display">A deadline set by someone else</h2>
+  <div class="prose">
+    <p class="lede">Refresh the entire visual language across three platforms in four weeks, without changing a single user flow, and without the final brand in hand.</p>
+    <p>Loco was redesigning its viewer experience across the app, web, and mobile web. For its audience, the app is the product, so a visual overhaul of that surface carried real risk.</p>
+    <p><mark>The deadline was set by an external event, not by us.</mark> The refreshed product was going to be shown at <a class="inline-link" href="https://www.igblive.com/" target="_blank" rel="noopener">iGB L!VE in London</a>, an industry event at ExCeL that draws around 15,000 attendees. That was the version global partners and press would see, so the date could not move by a single day.</p>
+    <p>Working backwards from that date produced four constraints that shaped every decision after it.</p>
+  </div>
+  <div class="chip-row">
+    <div class="chip">A launch date that could not move</div>
+    <div class="chip">Existing user flows were untouchable</div>
+    <div class="chip">The final brand did not exist yet</div>
+    <div class="chip">Six designers building in parallel</div>
+  </div>
+</section>
 
-<main class="article-body">
-
-  <p>Loco is a premier Indian live-streaming and esports platform dedicated to gaming entertainment. Users can watch top streamers, follow major esports tournaments, and broadcast their own gameplay using the companion Loco streaming Dashboard. It is available globally across Android, iOS, and web browsers.</p>
-
-  <div class="key-takeaway">
-    <p class="key-takeaway-label">Key takeaway</p>
-    <p>Rebuilt Loco's design system across three platforms in four weeks for a 5 to 6 person team, against a fixed showcase date at iGB L!VE London. <mark>Semantic tokens meant the full rebrand shipped in a single evening instead of a screen-by-screen rebuild</mark>, all 160k active users held through the transition, and the system is still used to build new flows today.</p>
+<!-- ══ CONSTRAINT TO RESPONSE ══ -->
+<section class="wrap sec">
+  <p class="kicker">Approach</p>
+  <h2 class="display">What each constraint forced us to decide</h2>
+  <div class="prose">
+    <p>Rather than treat the constraints as background, I used them to set scope. Each one had a design response, and naming those responses early is what kept six people building the same product.</p>
   </div>
 
-  <section>
-    <h2>Context</h2>
-    <p class="lede">Refresh the entire visual language across three platforms in four weeks, without changing a single user flow, and without the final brand in hand.</p>
-    <p>Loco was redesigning its viewer experience across the app, web, and mobile web. The goal was to refresh the visual language within four weeks while keeping the existing user experience intact.</p>
-    <p><mark>The deadline was set by an external event, not by us.</mark> The refreshed product was going to be shown at <a class="inline-link" href="https://www.igblive.com/" target="_blank" rel="noopener">iGB L!VE in London</a>, an industry event at ExCeL that draws around 15,000 attendees. That was the version global partners and press would see, so the date could not move by a single day.</p>
-    <p>The timeline was ambitious, so the team made a conscious decision to focus on visual consistency rather than rethink interactions. Existing flows already worked well enough and engineering capacity was limited, making a complete UX redesign unrealistic for the release.</p>
-    <p>At the same time, the product branding was still evolving. <mark>Final colours, gradients, and iconography were being created by an external agency and would arrive several weeks after the project had already begun.</mark></p>
-    <p>Six designers worked on different parts of the product in parallel. While this allowed us to move quickly, it also introduced a new challenge. Keeping the experience consistent across every screen would depend on how well we collaborated, not simply on having a design system.</p>
-  </section>
-
-  <section>
-    <h2>Constraint</h2>
-    <p>This project came with several constraints that shaped every design decision.</p>
-    <ul>
-      <li><b>A launch date that could not move.</b> The redesign had to cover three platforms within four weeks, anchored to the iGB L!VE showcase in London.</li>
-      <li><b>Flows were untouchable.</b> Existing user journeys needed to remain unchanged so engineering could deliver within the release timeline.</li>
-      <li><b>The brand did not exist yet.</b> The final visual identity was unavailable during the first half of the project, so the system had to be flexible enough to absorb branding changes later.</li>
-      <li><b>Six designers in parallel.</b> Consistency could not rely on manual reviews alone. We needed a shared way of building interfaces that everyone could follow.</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>My role</h2>
-    <p class="lede">I owned four of the highest-traffic surfaces, and pushed for semantic tokens over hard-coded colours, which turned out to be the decision that saved the launch.</p>
-    <p>I was responsible for designing several high visibility experiences, including the Homepage, Livestream, Fullscreen Livestream, and Leaderboard.</p>
-    <p>Rather than recreating reference screens one by one, I focused on building reusable components that could be shared across the team. My goal was to make each screen easy to maintain while keeping the experience consistent across different platforms.</p>
-    <p>One of the most valuable decisions we made was introducing semantic design tokens instead of applying colours directly inside components. The original motivation came from engineering, who wanted a simpler way to support light and dark themes. As I built my flows, every component referenced these tokens instead of fixed colours. At the time it felt like a technical improvement, but it later became one of the biggest advantages of the project.</p>
-
-    <div class="callout">
-      <p class="callout-tag">The decision that mattered</p>
-      <h3>Designing against a brand that did not exist</h3>
-      <p>Engineering asked for tokens to simplify light and dark theming. The bigger use case was that tokens would let the whole team build the product against a brand that had not been delivered yet.</p>
-      <p>By referencing semantic roles instead of fixed hex values, <mark>the missing identity stopped being a blocker and became a variable</mark>. Everyone could build on placeholders and swap the real brand in later, everywhere, at once.</p>
+  <div class="map-grid">
+    <div class="map-card">
+      <p class="map-problem">Constraint 01</p>
+      <h3>A launch date that could not move</h3>
+      <ul>
+        <li>Scoped the work as a visual system migration, not a UX redesign</li>
+        <li>Communicated that trade-off to stakeholders upfront rather than discovering it late</li>
+        <li>Invested week one in reusable components instead of recreating reference screens</li>
+      </ul>
     </div>
+    <div class="map-card">
+      <p class="map-problem">Constraint 02</p>
+      <h3>Existing user flows were untouchable</h3>
+      <ul>
+        <li>Held every journey and interaction pattern fixed, changing only the visual layer</li>
+        <li>Set the success criterion as continuity: change how it looks, not how it behaves</li>
+        <li>Freed engineering capacity to focus entirely on the reskin</li>
+      </ul>
+    </div>
+    <div class="map-card">
+      <p class="map-problem">Constraint 03</p>
+      <h3>The final brand did not exist yet</h3>
+      <ul>
+        <li>Championed semantic design tokens over hard-coded colour values</li>
+        <li>Built every component against roles like surface and accent, not hex codes</li>
+        <li>Let the team build on placeholders, with the real brand swapped in later, everywhere at once</li>
+      </ul>
+    </div>
+    <div class="map-card">
+      <p class="map-problem">Constraint 04</p>
+      <h3>Six designers building in parallel</h3>
+      <ul>
+        <li>Made the system the single source of truth rather than relying on manual review</li>
+        <li>Ran frequent alignment sessions to catch divergence before it spread</li>
+        <li>Stayed embedded with engineering, resolving component questions within the hour</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <p>Since several designers were working in parallel, regular conversations became just as important as the components themselves. We frequently aligned on visual decisions to reduce differences before they spread across the product.</p>
-  </section>
+<!-- ══ THE DECISION ══ -->
+<section class="wrap sec">
+  <p class="kicker">The decision that mattered</p>
+  <h2 class="display">Designing against a brand that did not exist</h2>
+  <div class="prose">
+    <p>Engineering asked for tokens to simplify light and dark theming. The bigger use case was that tokens would let the whole team build the product against a brand that had not been delivered yet.</p>
+    <p>By referencing semantic roles instead of fixed hex values, <mark>the missing identity stopped being a blocker and became a variable.</mark> Everyone could build on placeholders, and the real brand could be swapped in later, everywhere, at once.</p>
+    <p>I owned four of the highest-traffic surfaces while this was taking shape: Homepage, Livestream, Fullscreen Livestream, and Leaderboard. Every component I built referenced tokens rather than colours. At the time it felt like a technical improvement. It turned out to be the decision that saved the launch.</p>
+  </div>
 
-  <section class="section--bleed">
-    <div class="compare-card compare-card--web">
-      <h3>Desktop</h3>
-      <div class="compare-row">
-        <div class="compare-item">
-          <img src="loco-desktop-old.webp" alt="Loco desktop homepage, old design" />
-          <p class="compare-label">Old UI</p>
-        </div>
-        <div class="compare-item">
-          <img src="loco-desktop-new-after.webp" alt="Loco desktop homepage, redesigned, with final style guide applied" />
-          <p class="compare-label">New UI, after final style guide</p>
-        </div>
+  <!-- ASSET SLOT: token architecture -->
+  <div class="slot">
+    <p class="slot-title">Asset slot: token architecture</p>
+    <p class="slot-note">A Figma screenshot of the semantic token structure goes here, ideally showing role names mapped to values. This is the single strongest image for this case study because it proves the decision the whole story turns on.</p>
+  </div>
+</section>
+
+<!-- ══ SYSTEM ══ -->
+<section class="wrap sec">
+  <p class="kicker">The system</p>
+  <h2 class="display">One library, six designers, three platforms</h2>
+  <div class="prose">
+    <p>Rather than recreating reference screens one by one, I focused on reusable components that could be shared across the team, so each screen stayed easy to maintain and consistent across platforms.</p>
+    <p>Around <mark>85% of screens shipped entirely from shared components</mark>, with no bespoke mockups needed.</p>
+  </div>
+
+  <!-- ASSET SLOT: component library -->
+  <div class="slot">
+    <p class="slot-title">Asset slot: component library</p>
+    <p class="slot-note">Two to four Figma screenshots of the component library, type scale, colour roles, or spacing system. Drop them into a .fig-quad grid here. These are the images that make a design system case study feel visual rather than written.</p>
+  </div>
+</section>
+
+<!-- ══ BEFORE / AFTER: DESKTOP ══ -->
+<div class="band band--web">
+  <div class="band-inner">
+    <h3>Desktop</h3>
+    <div class="compare-row">
+      <div class="compare-item">
+        <img src="loco-desktop-old.webp" alt="Loco desktop homepage, old design" />
+        <p class="compare-label">Old UI</p>
+      </div>
+      <div class="compare-item">
+        <img src="loco-desktop-new-after.webp" alt="Loco desktop homepage, redesigned with final style guide applied" />
+        <p class="compare-label">New UI, after final style guide</p>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="compare-card compare-card--mobile">
-      <h3>App</h3>
-      <p class="compare-caption">Documentation of change log for each key screen was maintained for future reference.</p>
-      <div class="compare-row">
-        <div class="compare-item">
-          <img src="loco-app-old.webp" alt="Loco app livestream screen, old design" />
-          <p class="compare-label">Old UI</p>
-        </div>
-        <div class="compare-item">
-          <img src="loco-app-new-after.webp" alt="Loco app livestream screen, redesigned, before final style guide" />
-          <p class="compare-label">New UI, before final style guide</p>
-        </div>
-        <div class="compare-item">
-          <img src="loco-app-new-before.webp" alt="Loco app livestream screen, redesigned, with final style guide applied" />
-          <p class="compare-label">New UI, after final style guide</p>
-        </div>
+<!-- ══ BEFORE / AFTER: APP ══ -->
+<div class="band band--app">
+  <div class="band-inner">
+    <h3>App</h3>
+    <p class="band-caption">A change log was maintained for each key screen, so the team could trace what moved and why.</p>
+    <div class="compare-row">
+      <div class="compare-item">
+        <img src="loco-app-old.webp" alt="Loco app livestream screen, old design" />
+        <p class="compare-label">Old UI</p>
+      </div>
+      <div class="compare-item">
+        <img src="loco-app-new-after.webp" alt="Loco app livestream screen, redesigned before final style guide" />
+        <p class="compare-label">New UI, before final style guide</p>
+      </div>
+      <div class="compare-item">
+        <img src="loco-app-new-before.webp" alt="Loco app livestream screen, redesigned with final style guide applied" />
+        <p class="compare-label">New UI, after final style guide</p>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <section>
-    <h2>Design decisions</h2>
-    <p class="lede">Scoped as a visual system migration, not a UX redesign. I communicated that trade-off to stakeholders upfront rather than discovering it late.</p>
-    <p>We deliberately prioritised consistency and scalability over introducing new user experiences. <mark>A coherent brand shipped on time was worth more than marginally better interactions shipped late.</mark></p>
-    <p>The same logic applied to how we handed work to engineering. With four weeks, it was not practical to mock every screen before development began, so we let the system carry the specification instead. Clear styling guidelines acted as the single source of truth, which <mark>let engineers build most screens without waiting on detailed mock ups.</mark></p>
+<!-- ══ WORKING SESSION ══ -->
+<section class="wrap sec">
+  <p class="kicker">Delivery</p>
+  <h2 class="display">Letting the system carry the specification</h2>
+  <div class="prose">
+    <p>With four weeks, it was not practical to mock every screen before development began, so we let the system carry the specification instead. Clear styling guidelines acted as the single source of truth, which <mark>let engineers build most screens without waiting on detailed mock ups.</mark></p>
     <p>That only works if someone answers the gaps quickly. My teammate and I stayed embedded through implementation, tracking Slack and staying available in the war room, usually resolving component questions within the hour. Some needed a new screen, most only needed a decision on how an existing component should behave.</p>
     <p>What I took from it was a sharper read on what engineers need under deadline. Their questions were rarely about the design itself. <mark>They were about reducing uncertainty so they could move forward with confidence.</mark> A well structured system answers most of those before they are asked, and being present answers the rest fast enough that builds never stall on design.</p>
-    <p>Working in parallel also meant some inconsistency was inevitable. Our priority was a strong shared foundation first, knowing smaller refinements could be handled once the release was out.</p>
-  </section>
+  </div>
 
-  <section>
-    <h2>Outcome</h2>
-    <p class="lede">The success criterion was deliberate: change how the product looks without changing how it behaves. The data confirmed exactly that.</p>
+  <!-- ASSET SLOT: process -->
+  <div class="slot">
+    <p class="slot-title">Asset slot: process artifacts</p>
+    <p class="slot-note">A FigJam alignment board, a change log screen, or a redacted war-room thread. One image is enough here. It should show the working method, not the polish.</p>
+  </div>
+</section>
 
-    <div class="callout">
-      <p class="callout-tag">Where it paid off</p>
-      <h3>The evening the entire product changed colour</h3>
-      <p>Three weeks in, the agency delivered the final brand: new colours, gradients, iconography, with one week left before launch.</p>
-      <p>Because every component referenced semantic tokens, <mark>we applied the new identity across the entire product in a single evening.</mark> The manual alternative was estimated at two to three weeks of screen-by-screen updates, which would have pushed us past the iGB L!VE date. A quiet decision made in week one saved the launch in week three.</p>
+<!-- ══ OUTCOME ══ -->
+<section class="wrap sec">
+  <p class="kicker">Outcome</p>
+  <h2 class="display">The evening the entire product changed colour</h2>
+  <div class="prose">
+    <p class="lede">Three weeks in, the agency delivered the final brand: new colours, gradients, iconography, with one week left before launch.</p>
+    <p>Because every component referenced semantic tokens, <mark>we applied the new identity across the entire product in a single evening.</mark> The manual alternative was estimated at two to three weeks of screen-by-screen updates, which would have pushed us past the iGB L!VE date. A quiet decision made in week one saved the launch in week three.</p>
+    <p>The success criterion was continuity: change how the product looks without changing how it behaves. Thirty days after launch, every headline engagement metric sat within a quarter of a percent of its pre-launch value, and around 85% of screens shipped entirely from shared components with no bespoke mockups needed.</p>
+  </div>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <p class="stat-label">Overall active users</p>
+      <p class="stat-value">160k</p>
+      <p class="stat-sub">0.25% change</p>
     </div>
-
-    <p>Thirty days after launch, every headline engagement metric sat within a quarter of a percent of its pre-launch value, and around 85% of screens shipped entirely from shared components with no bespoke mockups needed.</p>
-    <div class="stat-grid">
-      <div class="stat-card">
-        <p class="stat-label">Overall active users</p>
-        <p class="stat-value">160k</p>
-        <p class="stat-sub">0.25% change</p>
-      </div>
-      <div class="stat-card">
-        <p class="stat-label">Overall new users</p>
-        <p class="stat-value">161k</p>
-        <p class="stat-sub">0.14% change</p>
-      </div>
-      <div class="stat-card">
-        <p class="stat-label">Avg. session duration</p>
-        <p class="stat-value">3m 38s</p>
-        <p class="stat-sub">up 0.13%</p>
-      </div>
-      <div class="stat-card">
-        <p class="stat-label">Weekly active users</p>
-        <p class="stat-value">38.2k</p>
-        <p class="stat-sub">held through launch</p>
-      </div>
+    <div class="stat-card">
+      <p class="stat-label">Overall new users</p>
+      <p class="stat-value">161k</p>
+      <p class="stat-sub">0.14% change</p>
     </div>
-    <figure class="figure">
-      <img src="loco-metrics-overall.webp" alt="Product analytics dashboard for the 30 days after launch, showing 160k overall active users down 0.25%, 161k new users down 0.14%, average session duration of 3m 38s up 0.13%, and 38.2k weekly active users" />
-      <figcaption>Post-launch analytics, 30-day window. A complete visual overhaul with no measurable cost to engagement.</figcaption>
-    </figure>
+    <div class="stat-card">
+      <p class="stat-label">Avg. session duration</p>
+      <p class="stat-value">3m 38s</p>
+      <p class="stat-sub">up 0.13%</p>
+    </div>
+    <div class="stat-card">
+      <p class="stat-label">Weekly active users</p>
+      <p class="stat-value">38.2k</p>
+      <p class="stat-sub">held through launch</p>
+    </div>
+  </div>
+
+  <figure class="figure figure-bleed">
+    <img src="loco-metrics-overall.webp" alt="Product analytics dashboard for the 30 days after launch, showing 160k overall active users, 161k new users, average session duration of 3m 38s, and 38.2k weekly active users" />
+    <figcaption>Post-launch analytics, 30-day window. A complete visual overhaul with no measurable cost to engagement.</figcaption>
+  </figure>
+
+  <div class="prose" style="margin-top:44px">
     <p>For a redesign whose explicit goal was continuity, <mark>holding 160k active users steady through a full rebrand is the result</mark>: a new identity introduced without costing the business a point of engagement, and no spike in UI-related support tickets through the transition.</p>
-    <p>Loco was pushing into new international markets around the same time, and the redesigned experience became the front door for that expansion. In Vietnam, <mark>traffic climbed from a near-flat baseline to a steady state several times higher</mark>, and the quality of those sessions held up: a 14.2% bounce rate, an average session of 8m 6s, and 2.46 sessions per user, meaning people were returning rather than passing through.</p>
-    <figure class="figure">
-      <img src="loco-metrics-vietnam.webp" alt="Analytics dashboard for Vietnam showing 4.28k visitors, 14.2% bounce rate, 10.6k session totals, average session duration of 8m 6s, and 2.46 sessions per user, with traffic climbing sharply through the launch period" />
-      <figcaption>Vietnam traffic through the launch period. Volume grew several times over, with bounce rate falling and session length well above the platform average.</figcaption>
-    </figure>
-    <ul>
+    <p>Loco was pushing into new international markets around the same time, and the redesigned experience became the front door for that expansion. In Vietnam, <mark>traffic climbed from a near-flat baseline to a steady state several times higher</mark>, and the quality of those sessions held: a 14.2% bounce rate, an average session of 8m 6s, and 2.46 sessions per user, meaning people were returning rather than passing through.</p>
+  </div>
+
+  <figure class="figure figure-bleed">
+    <img src="loco-metrics-vietnam.webp" alt="Analytics dashboard for Vietnam showing 4.28k visitors, 14.2% bounce rate, 10.6k session totals, average session duration of 8m 6s, and 2.46 sessions per user" />
+    <figcaption>Vietnam traffic through the launch period. Volume grew several times over, with bounce rate falling and session length well above the platform average.</figcaption>
+  </figure>
+
+  <div class="prose" style="margin-top:44px">
+    <ul class="pts">
       <li><b>The system outlived the launch.</b> The token architecture and component library remain the foundation for new feature work today.</li>
       <li><b>Theme support shipped essentially for free</b> in a later release, the tokens' original purpose, delivered as a byproduct.</li>
       <li><b>The post-launch audit found inconsistencies on under 10% of screens</b>, resolved in one cleanup sprint and folded back into the guidelines.</li>
     </ul>
-  </section>
+  </div>
+</section>
 
-  <section>
-    <h2>What I learned</h2>
-    <p class="lede">Building the system was the easy half. Driving adoption was the hard half.</p>
+<!-- ══ REFLECTION ══ -->
+<section class="wrap sec">
+  <p class="kicker">What I learned</p>
+  <h2 class="display">Building the system was the easy half</h2>
+  <div class="prose">
     <p>Creating reusable components is only part of the job. The bigger challenge is helping people use them consistently. Even with a well structured system, <mark>six designers under deadline pressure will make six slightly different calls</mark>, however good the library is.</p>
     <p>Looking back, I would introduce lightweight checkpoints throughout the project instead of reviewing everything after the work was complete. A fifteen minute shared component review before any flow was marked ready would have caught most inconsistencies at the source, without slowing the team down.</p>
-    <p>The project reinforced an idea that continues to shape how I work today. <mark>A design system is not a component library. It is a shared decision making tool, and its value comes from how reliably the team reaches for it under pressure.</mark></p>
-  </section>
+  </div>
 
-</main>
+  <div class="callout">
+    <p class="callout-tag">The durable lesson</p>
+    <h3>A design system is not a component library</h3>
+    <p>It is a shared decision making tool, and its value comes from how reliably the team reaches for it under pressure. That is a people problem as much as a craft one, and it is the part I would invest in earlier next time.</p>
+  </div>
+</section>
 
 <footer>
   <div class="footer-row">
