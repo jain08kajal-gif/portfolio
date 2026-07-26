@@ -398,6 +398,15 @@ footer { padding: 56px 40px 40px; max-width: 1100px; margin: 60px auto 0; border
   </a>
   <p class="kicker">Loco: Viewer experience &nbsp;·&nbsp; <a class="hero-visit" href="https://loco.com/" target="_blank" rel="noopener">Visit Loco →</a></p>
   <h1 class="hero-title">Keeping 6 designers consistent across 3 platforms in 4 weeks</h1>
+  <p class="hero-lede">A full visual rebrand of Loco's viewer experience across app, web, and mobile web, delivered against a launch date that could not move.</p>
+  <div class="tag-row">
+    <span class="tag">Design systems</span>
+    <span class="tag">Semantic tokens</span>
+    <span class="tag">Cross-platform</span>
+    <span class="tag">Team alignment</span>
+    <span class="tag">Engineering partnership</span>
+  </div>
+
   <div class="article-meta">
     <div>
       <p class="meta-item-label">Company</p>
@@ -415,14 +424,6 @@ footer { padding: 56px 40px 40px; max-width: 1100px; margin: 60px auto 0; border
       <p class="meta-item-label">Team</p>
       <p class="meta-item-value">5 to 6 designers</p>
     </div>
-  </div>
-  <p class="hero-lede">A full visual rebrand of Loco's viewer experience across app, web, and mobile web, delivered against a launch date that could not move.</p>
-  <div class="tag-row">
-    <span class="tag">Design systems</span>
-    <span class="tag">Semantic tokens</span>
-    <span class="tag">Cross-platform</span>
-    <span class="tag">Team alignment</span>
-    <span class="tag">Engineering partnership</span>
   </div>
 
   <p class="intro">Loco is a premier Indian live-streaming and esports platform dedicated to gaming entertainment. Users can watch top streamers, follow major esports tournaments, and broadcast their own gameplay using the companion Loco streaming Dashboard. It is available globally across Android, iOS, and web browsers.</p>
@@ -470,6 +471,18 @@ footer { padding: 56px 40px 40px; max-width: 1100px; margin: 60px auto 0; border
   </div>
 </section>
 
+<!-- ══ MY ROLE ══ -->
+<section class="wrap sec">
+  <p class="kicker">My role</p>
+  <h2 class="display">Four surfaces, and the system beneath them</h2>
+  <div class="prose">
+    <p class="lede">Product Designer on the viewer experience, owning four of the highest-traffic surfaces alongside the shared component work the rest of the team built on.</p>
+    <p>I was responsible for designing several high visibility experiences, including the <mark>Homepage, Livestream, Fullscreen Livestream, and Leaderboard.</mark></p>
+    <p>Rather than recreating reference screens one by one, I focused on building reusable components that could be shared across the team. My goal was to make each screen easy to maintain while keeping the experience consistent across different platforms.</p>
+    <p>Since several designers were working in parallel, regular conversations became just as important as the components themselves. We frequently aligned on visual decisions to reduce differences before they spread across the product.</p>
+  </div>
+</section>
+
 <!-- ══ CONSTRAINT TO RESPONSE ══ -->
 <section class="wrap sec">
   <p class="kicker">Approach</p>
@@ -485,7 +498,7 @@ footer { padding: 56px 40px 40px; max-width: 1100px; margin: 60px auto 0; border
       <ul>
         <li>Scoped the work as a visual system migration, not a UX redesign</li>
         <li>Communicated that trade-off to stakeholders upfront rather than discovering it late</li>
-        <li>Invested week one in reusable components instead of recreating reference screens</li>
+        <li>Invested week one in reusable components, accepting slower visible progress early for compounding speed after</li>
       </ul>
     </div>
     <div class="map-card">
@@ -525,7 +538,7 @@ footer { padding: 56px 40px 40px; max-width: 1100px; margin: 60px auto 0; border
   <div class="prose">
     <p>Engineering asked for tokens to simplify light and dark theming. The bigger use case was that tokens would let the whole team build the product against a brand that had not been delivered yet.</p>
     <p>By referencing semantic roles instead of fixed hex values, <mark>the missing identity stopped being a blocker and became a variable.</mark> Everyone could build on placeholders, and the real brand could be swapped in later, everywhere, at once.</p>
-    <p>I owned four of the highest-traffic surfaces while this was taking shape: Homepage, Livestream, Fullscreen Livestream, and Leaderboard. Every component I built referenced tokens rather than colours. At the time it felt like a technical improvement. It turned out to be the decision that saved the launch.</p>
+    <p>Every component I built referenced tokens rather than colours. At the time it felt like a technical improvement. It turned out to be the decision that saved the launch.</p>
   </div>
 
   <!-- ASSET SLOT: token architecture -->
@@ -540,15 +553,19 @@ footer { padding: 56px 40px 40px; max-width: 1100px; margin: 60px auto 0; border
   <p class="kicker">The system</p>
   <h2 class="display">One library, six designers, three platforms</h2>
   <div class="prose">
-    <p>Rather than recreating reference screens one by one, I focused on reusable components that could be shared across the team, so each screen stayed easy to maintain and consistent across platforms.</p>
+    <p>The library had to serve three platforms and five other designers at once, which meant components needed to hold up in contexts I would never see myself. Building for that from the start cost more in week one and paid back every week after.</p>
     <p>Around <mark>85% of screens shipped entirely from shared components</mark>, with no bespoke mockups needed.</p>
   </div>
 
-  <!-- ASSET SLOT: component library -->
-  <div class="slot">
-    <p class="slot-title">Asset slot: component library</p>
-    <p class="slot-note">Two to four Figma screenshots of the component library, type scale, colour roles, or spacing system. Drop them into a .fig-quad grid here. These are the images that make a design system case study feel visual rather than written.</p>
-  </div>
+  <figure class="figure">
+    <img src="loco-ds-components.webp" alt="Figma canvas showing the video player and video card components, with every variant laid out across App, Mweb, and Web columns and marked ready for dev" />
+    <figcaption>Video player and video card components, built out across App, mobile web, and web. Each state was documented as a variant rather than a separate screen, so engineers could pull the exact case they needed and mark it ready for dev.</figcaption>
+  </figure>
+
+  <figure class="figure">
+    <img src="loco-ds-buttons.webp" alt="Figma canvas showing the button system with primary, secondary and tertiary hierarchy across large, medium and small sizes, in default, hover and disabled states, alongside icon buttons and streamer profile components" />
+    <figcaption>The button system: primary, secondary, and tertiary hierarchy across three sizes, each with default, hover, and disabled states. Defining the matrix once meant no one had to invent a button under deadline.</figcaption>
+  </figure>
 </section>
 
 <!-- ══ BEFORE / AFTER: DESKTOP ══ -->
