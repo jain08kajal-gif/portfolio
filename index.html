@@ -99,10 +99,57 @@ nav.is-stuck .logo-mark { width: 32px; height: 32px; }
 nav.is-stuck .logo-text { font-size: 13px; }
 nav.is-stuck .nav-links { gap: 26px; }
 nav.is-stuck .nav-links a { font-size: 14px; }
-.logo-mark, .logo-text, .nav-links, .nav-links a {
-  transition: width .22s ease, height .22s ease, border-radius .22s ease,
-              font-size .22s ease, gap .22s ease;
+.logo-text, .nav-links, .nav-links a {
+  transition: font-size .22s ease, gap .22s ease;
 }
+/* ─── NAV HOVER ──────────────────────────────────
+   Links: a rule wipes in from the left, and out to the
+   right on exit, so entry and exit read as one gesture.
+   Logomark: settles with a slight overshoot and lifts. */
+.nav-links a {
+  position: relative;
+  display: inline-block;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 1.5px;
+  background: #141414;
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform .38s cubic-bezier(.65, 0, .35, 1);
+}
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+.logo { position: relative; }
+.logo-mark {
+  transition: transform .45s cubic-bezier(.34, 1.45, .64, 1),
+              box-shadow .35s ease,
+              width .22s ease, height .22s ease;
+}
+.logo:hover .logo-mark {
+  transform: rotate(-7deg) scale(1.09);
+  box-shadow: 0 8px 22px rgba(20, 20, 20, 0.22);
+}
+.logo:active .logo-mark {
+  transform: rotate(-3deg) scale(1.02);
+  transition-duration: .12s;
+}
+.logo-text { transition: opacity .28s ease, transform .38s cubic-bezier(.34, 1.4, .64, 1); }
+.logo:hover .logo-text { transform: translateX(2px); }
+@media (prefers-reduced-motion: reduce) {
+  .logo:hover .logo-mark,
+  .logo:hover .logo-text { transform: none; }
+  .nav-links a::after { transition: none; }
+}
+
 
 
 /* ─── HERO ───────────────────────────────────── */
@@ -813,6 +860,7 @@ footer {
     border-bottom: 1px solid #EAE7E1;
   }
   .nav-links li:last-child a { border-bottom: none; }
+  .nav-links a::after { display: none; }
 }
 @media (max-width: 480px) {
   .logo-track { gap: 40px; }
