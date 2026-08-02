@@ -407,9 +407,9 @@ nav.is-stuck .nav-links a { font-size: 14px; }
    as distinct layers as it collects. One accent card only:
    more than one and the emphasis cancels out. */
 .case-card--alt { background: #E4E3E0; }
-.case-card--accent { background: #EBFF3D; }
+.case-card--accent { background: #DCE8DF; }
 .case-card--accent .case-tag {
-  background: rgba(20, 20, 20, 0.08);
+  background: rgba(20, 20, 20, 0.07);
   color: #141414;
 }
 .case-card:nth-of-type(1) { top: 104px; }
@@ -439,6 +439,14 @@ nav.is-stuck .nav-links a { font-size: 14px; }
 }
 .case-card:hover img.case-thumb {
   transform: scale(1.02);
+}
+/* Portrait thumbnail: constrain by height, not width, so the card
+   stays the same height as the landscape ones beside it. */
+.case-card img.case-thumb.case-thumb--portrait {
+  width: auto;
+  max-width: 38%;
+  max-height: 260px;
+  margin: 0 auto;
 }
 .case-copy { flex: 1; max-width: 340px; }
 .case-eyebrow {
@@ -989,7 +997,6 @@ footer {
     <div class="case-copy">
       <p class="case-eyebrow">Fynd <span class="case-tag">0→1</span></p>
       <h3 class="case-title">Simplify multi-warehouse inventory management</h3>
-      <p class="case-desc">A warehouse management system to monitor stock levels, move items between locations, and track fulfilment from a single dashboard.</p>
       <a class="case-cta" href="wms-case-study.html">Read more
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
@@ -1001,12 +1008,11 @@ footer {
     <div class="case-copy">
       <p class="case-eyebrow">Loco <span class="case-tag">0→1</span><span class="case-tag">New audience</span></p>
       <h3 class="case-title">Taking a gaming platform beyond gaming to reach Gen Z</h3>
-      <p class="case-desc">Loco's creators could only stream games from a desktop. Vertical mobile IRL streaming opens the platform to lifestyle content and a younger audience, without fragmenting discovery for the gaming streams already there.</p>
       <a class="case-cta" href="irl-case-study.html">Read more
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
-    <img class="case-thumb case-thumb--flat" src="irl-viewer-app.webp" alt="IRL vertical mobile streaming app" />
+    <img class="case-thumb case-thumb--flat case-thumb--portrait" src="irl-viewer-app.webp" alt="IRL vertical mobile streaming app" />
   </div>
 </section>
 
