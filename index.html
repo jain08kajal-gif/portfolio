@@ -212,68 +212,6 @@ nav.is-stuck .nav-links a { font-size: 14px; }
 @media (prefers-reduced-motion: reduce) {
   .hero-play, .hero-play:hover { transition: none; }
 }
-.hero-pill {
-  position: absolute;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 9px 16px;
-  background: #fff;
-  color: #141414;
-  font-size: 12.5px;
-  font-weight: 500;
-  letter-spacing: -0.005em;
-  white-space: nowrap;
-  border-radius: 100px;
-  box-shadow: 0 10px 24px rgba(20,20,20,0.16);
-  opacity: 0;
-  transform: translateY(10px) scale(0.86);
-  transition: opacity .3s ease, transform .3s ease;
-  pointer-events: none;
-  z-index: 5;
-}
-.hero-pill-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, #49DA9A, #34BBE6, #4355DB, #D23BE7);
-  flex-shrink: 0;
-}
-@keyframes pill-in {
-  0%   { opacity: 0; transform: translateY(10px) scale(0.86); }
-  65%  { opacity: 1; transform: translateY(-3px) scale(1.04); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-.hero-pill--1 { top: 10px; left: -46px; }
-.hero-pill--2 { bottom: 6px; left: -54px; }
-.hero-portrait-wrap.in-view .hero-pill--1 {
-  animation: pill-in .6s cubic-bezier(.34,1.56,.64,1) forwards;
-  animation-delay: .3s;
-}
-.hero-portrait-wrap.in-view .hero-pill--2 {
-  animation: pill-in .6s cubic-bezier(.34,1.56,.64,1) forwards;
-  animation-delay: .45s;
-}
-.hero-portrait-wrap:hover .hero-pill--1 { transform: translateY(-5px) rotate(-3deg) scale(1.04); }
-.hero-portrait-wrap:hover .hero-pill--2 { transform: translateY(-5px) rotate(-3deg) scale(1.04); }
-@media (max-width: 700px) {
-  .hero-pill {
-    display: inline-flex;
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-  .hero-portrait-wrap.in-view .hero-pill--1,
-  .hero-portrait-wrap.in-view .hero-pill--2 {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-  .hero-portrait-wrap:hover .hero-pill--1,
-  .hero-portrait-wrap:hover .hero-pill--2 {
-    transform: none;
-  }
-}
 .hero-headline {
   position: relative;
   font-size: clamp(26px, 3.4vw, 34px);
@@ -1042,8 +980,6 @@ footer {
       <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.29-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14Z"/></svg>
       <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg>
     </button>
-    <span class="hero-pill hero-pill--1"><span class="hero-pill-dot"></span>Kajal Jain</span>
-    <span class="hero-pill hero-pill--2"><span class="hero-pill-dot"></span>7+ years of experience</span>
   </div>
   <h1 class="hero-headline">
     <span class="headline-base">Senior Product Designer building scalable products through systems thinking, behavioural design and cross functional execution</span>
@@ -1215,20 +1151,7 @@ footer {
   });
 })();
 
-(function () {
-  var wrap = document.querySelector('.hero-portrait-wrap');
-  if (!wrap) return;
-  if (!('IntersectionObserver' in window)) {
-    wrap.classList.add('in-view');
-    return;
-  }
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      wrap.classList.toggle('in-view', entry.isIntersecting);
-    });
-  }, { threshold: 0.4 });
-  observer.observe(wrap);
-})();
+
 
 (function () {
   var carousel = document.getElementById('about-carousel');
