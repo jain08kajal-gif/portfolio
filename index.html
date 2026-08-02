@@ -15,7 +15,7 @@
 html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 body {
   font-family: 'DM Sans', system-ui, sans-serif;
-  background: #FFFEFC;
+  background: #F2F1EF;
   color: #141414;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -27,7 +27,7 @@ nav {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: #FFFEFC;
+  background: #F2F1EF;
   border-bottom: 1px solid transparent;
   transition: padding .22s ease, border-color .22s ease;
   display: flex;
@@ -90,7 +90,7 @@ nav {
 nav.is-stuck {
   padding-top: 10px;
   padding-bottom: 10px;
-  background: rgba(255, 254, 252, 0.82);
+  background: rgba(242, 241, 239, 0.82);
   -webkit-backdrop-filter: saturate(180%) blur(14px);
   backdrop-filter: saturate(180%) blur(14px);
   border-bottom-color: #EAE7E1;
@@ -393,20 +393,26 @@ nav.is-stuck .nav-links a { font-size: 14px; }
   display: flex;
   align-items: center;
   gap: 48px;
-  background: #F0EEEB;
+  background: #FFFFFF;
   border-radius: 24px;
   padding: 40px;
   margin-bottom: 32px;
   box-shadow: 0 -1px 0 rgba(20,20,20,0.05);
   transition: box-shadow .3s ease;
 }
+/* Loco card: warm sand picked up from the app screenshot's
+   tan and amber tones, so the thumbnail sits in the card
+   rather than on it. */
+/* Cards alternate white and grey against the #F2F1EF page,
+   so the stack reads as distinct layers as it collects. */
+.case-card--alt { background: #E4E3E0; }
 .case-card:nth-of-type(1) { top: 104px; }
 .case-card:nth-of-type(2) { top: 122px; }
 .case-card:nth-of-type(3) { top: 140px; }
 .case-card:nth-of-type(4) { top: 158px; }
 .case-card:last-of-type { margin-bottom: 0; }
 .case-card:hover {
-  box-shadow: 0 24px 48px rgba(20,20,20,0.10);
+  box-shadow: 0 12px 28px rgba(20,20,20,0.06);
 }
 @media (max-width: 900px) {
   .case-card { position: static; margin-bottom: 24px; box-shadow: none; }
@@ -417,13 +423,13 @@ nav.is-stuck .nav-links a { font-size: 14px; }
   max-width: 580px;
   border-radius: 12px;
   display: block;
-  box-shadow: 0 30px 50px -12px rgba(20,20,20,0.32), 0 14px 24px -14px rgba(20,20,20,0.24);
+  box-shadow: 0 14px 26px -12px rgba(20,20,20,0.16), 0 6px 12px -8px rgba(20,20,20,0.10);
   transition: transform .4s ease, filter .4s ease;
 }
 .case-card img.case-thumb.case-thumb--flat {
   border-radius: 0;
   box-shadow: none;
-  filter: drop-shadow(0 22px 34px rgba(20,20,20,0.14)) drop-shadow(0 10px 16px rgba(20,20,20,0.10));
+  filter: drop-shadow(0 12px 20px rgba(20,20,20,0.10)) drop-shadow(0 4px 8px rgba(20,20,20,0.06));
 }
 .case-card:hover img.case-thumb {
   transform: scale(1.02);
@@ -530,7 +536,7 @@ nav.is-stuck .nav-links a { font-size: 14px; }
   display: block;
   height: 100%;
   width: 0%;
-  background: #FFFEFC;
+  background: #F2F1EF;
   border-radius: 2px;
   transition: width .25s ease;
 }
@@ -580,7 +586,7 @@ nav.is-stuck .nav-links a { font-size: 14px; }
   gap: 16px;
 }
 .manual-card {
-  background: #F0EEEB;
+  background: #FFFFFF;
   border-radius: 20px;
   padding: 28px 30px;
   transition: transform .25s ease, box-shadow .25s ease;
@@ -631,7 +637,7 @@ nav.is-stuck .nav-links a { font-size: 14px; }
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  background: #F0EEEB;
+  background: #FFFFFF;
   border-radius: 28px;
   padding: 76px 60px;
   text-align: center;
@@ -837,7 +843,7 @@ footer {
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    background: #FFFEFC;
+    background: #F2F1EF;
     box-shadow: 0 16px 32px rgba(20,20,20,0.10);
     max-height: 0;
     overflow: hidden;
@@ -871,7 +877,7 @@ footer {
 </head>
 <body>
 
-<div id="site-lock" style="position:fixed; inset:0; z-index:9999; background:#FFFEFC; display:flex; align-items:center; justify-content:center; padding:24px; font-family:'DM Sans', system-ui, sans-serif;">
+<div id="site-lock" style="position:fixed; inset:0; z-index:9999; background:#F2F1EF; display:flex; align-items:center; justify-content:center; padding:24px; font-family:'DM Sans', system-ui, sans-serif;">
   <form id="site-lock-form" style="max-width:320px; width:100%; text-align:center;">
     <p style="font-size:13px; color:#3F3F3F; margin-bottom:16px;">This site is temporarily private.</p>
     <input id="site-lock-input" type="password" placeholder="Enter password" autocomplete="off" style="width:100%; box-sizing:border-box; padding:12px 18px; border:1px solid #D8D4CC; border-radius:100px; font-family:'DM Sans', sans-serif; font-size:14px; margin-bottom:12px; outline:none; text-align:center;" />
@@ -937,7 +943,6 @@ footer {
     <span class="headline-base">Senior Product Designer building scalable products through systems thinking<svg class="headline-icon icon-network" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path opacity="0.25" d="M152,40V72a8,8,0,0,1-8,8H112a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h32A8,8,0,0,1,152,40ZM80,168H48a8,8,0,0,0-8,8v32a8,8,0,0,0,8,8H80a8,8,0,0,0,8-8V176A8,8,0,0,0,80,168Zm128,0H176a8,8,0,0,0-8,8v32a8,8,0,0,0,8,8h32a8,8,0,0,0,8-8V176A8,8,0,0,0,208,168Z"></path><path d="M232,112H136V88h8a16,16,0,0,0,16-16V40a16,16,0,0,0-16-16H112A16,16,0,0,0,96,40V72a16,16,0,0,0,16,16h8v24H24a8,8,0,0,0,0,16H56v32H48a16,16,0,0,0-16,16v32a16,16,0,0,0,16,16H80a16,16,0,0,0,16-16V176a16,16,0,0,0-16-16H72V128H184v32h-8a16,16,0,0,0-16,16v32a16,16,0,0,0,16,16h32a16,16,0,0,0,16-16V176a16,16,0,0,0-16-16h-8V128h32a8,8,0,0,0,0-16ZM112,40h32V72H112ZM80,208H48V176H80Zm128,0H176V176h32Z"></path></svg>, behavioural design<svg class="headline-icon icon-scan-smiley" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path opacity="0.25" d="M192,128a64,64,0,1,1-64-64A64,64,0,0,1,192,128Z"></path><path d="M224,40V76a8,8,0,0,1-16,0V48H180a8,8,0,0,1,0-16h36A8,8,0,0,1,224,40Zm-8,132a8,8,0,0,0-8,8v28H180a8,8,0,0,0,0,16h36a8,8,0,0,0,8-8V180A8,8,0,0,0,216,172ZM76,208H48V180a8,8,0,0,0-16,0v36a8,8,0,0,0,8,8H76a8,8,0,0,0,0-16ZM40,84a8,8,0,0,0,8-8V48H76a8,8,0,0,0,0-16H40a8,8,0,0,0-8,8V76A8,8,0,0,0,40,84Zm88,116a72,72,0,1,1,72-72A72.08,72.08,0,0,1,128,200Zm56-72a56,56,0,1,0-56,56A56.06,56.06,0,0,0,184,128Zm-68-12a12,12,0,1,0-12,12A12,12,0,0,0,116,116Zm36-12a12,12,0,1,0,12,12A12,12,0,0,0,152,104Zm-5.29,42c-3.81,3.37-12,6-18.71,6s-14.9-2.63-18.71-6a8,8,0,1,0-10.58,12c7.83,6.91,20.35,10,29.29,10s21.46-3.09,29.29-10a8,8,0,1,0-10.58-12Z"></path></svg> and cross functional execution<svg class="headline-icon icon-users-three" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path opacity="0.25" d="M168,144a40,40,0,1,1-40-40A40,40,0,0,1,168,144ZM64,56A32,32,0,1,0,96,88,32,32,0,0,0,64,56Zm128,0a32,32,0,1,0,32,32A32,32,0,0,0,192,56Z"></path><path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1,0-16,24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.85,8,57,57,0,0,0-98.15,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z"></path></svg></span>
     <span class="headline-glow" aria-hidden="true">Senior Product Designer building scalable products through systems thinking<svg class="headline-icon icon-network" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path opacity="0.25" d="M152,40V72a8,8,0,0,1-8,8H112a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h32A8,8,0,0,1,152,40ZM80,168H48a8,8,0,0,0-8,8v32a8,8,0,0,0,8,8H80a8,8,0,0,0,8-8V176A8,8,0,0,0,80,168Zm128,0H176a8,8,0,0,0-8,8v32a8,8,0,0,0,8,8h32a8,8,0,0,0,8-8V176A8,8,0,0,0,208,168Z"></path><path d="M232,112H136V88h8a16,16,0,0,0,16-16V40a16,16,0,0,0-16-16H112A16,16,0,0,0,96,40V72a16,16,0,0,0,16,16h8v24H24a8,8,0,0,0,0,16H56v32H48a16,16,0,0,0-16,16v32a16,16,0,0,0,16,16H80a16,16,0,0,0,16-16V176a16,16,0,0,0-16-16H72V128H184v32h-8a16,16,0,0,0-16,16v32a16,16,0,0,0,16,16h32a16,16,0,0,0,16-16V176a16,16,0,0,0-16-16h-8V128h32a8,8,0,0,0,0-16ZM112,40h32V72H112ZM80,208H48V176H80Zm128,0H176V176h32Z"></path></svg>, behavioural design<svg class="headline-icon icon-scan-smiley" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path opacity="0.25" d="M192,128a64,64,0,1,1-64-64A64,64,0,0,1,192,128Z"></path><path d="M224,40V76a8,8,0,0,1-16,0V48H180a8,8,0,0,1,0-16h36A8,8,0,0,1,224,40Zm-8,132a8,8,0,0,0-8,8v28H180a8,8,0,0,0,0,16h36a8,8,0,0,0,8-8V180A8,8,0,0,0,216,172ZM76,208H48V180a8,8,0,0,0-16,0v36a8,8,0,0,0,8,8H76a8,8,0,0,0,0-16ZM40,84a8,8,0,0,0,8-8V48H76a8,8,0,0,0,0-16H40a8,8,0,0,0-8,8V76A8,8,0,0,0,40,84Zm88,116a72,72,0,1,1,72-72A72.08,72.08,0,0,1,128,200Zm56-72a56,56,0,1,0-56,56A56.06,56.06,0,0,0,184,128Zm-68-12a12,12,0,1,0-12,12A12,12,0,0,0,116,116Zm36-12a12,12,0,1,0,12,12A12,12,0,0,0,152,104Zm-5.29,42c-3.81,3.37-12,6-18.71,6s-14.9-2.63-18.71-6a8,8,0,1,0-10.58,12c7.83,6.91,20.35,10,29.29,10s21.46-3.09,29.29-10a8,8,0,1,0-10.58-12Z"></path></svg> and cross functional execution<svg class="headline-icon icon-users-three" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path opacity="0.25" d="M168,144a40,40,0,1,1-40-40A40,40,0,0,1,168,144ZM64,56A32,32,0,1,0,96,88,32,32,0,0,0,64,56Zm128,0a32,32,0,1,0,32,32A32,32,0,0,0,192,56Z"></path><path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1,0-16,24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.85,8,57,57,0,0,0-98.15,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z"></path></svg></span>
   </h1>
-  <p class="hero-sub">With 7+ years of experience, including 4+ years solving complex UX challenges across supply chain SaaS, streaming tools, and HR platforms</p>
   <a class="hero-cta" href="#work">View work
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
   </a>
@@ -963,11 +968,10 @@ footer {
 <section class="work" id="work">
   <h2 class="section-title">Case Studies</h2>
 
-  <div class="case-card">
+  <div class="case-card case-card--alt">
     <div class="case-copy">
       <p class="case-eyebrow">Loco <span class="case-tag">Strategy</span><span class="case-tag">Reskin</span></p>
-      <h3 class="case-title">Keeping 6 designers consistent across 3 platforms in 4 weeks</h3>
-      <p class="case-desc">Owned design-system consistency across a 6-designer team rebuilding three surfaces against a fixed showcase date. Semantic tokens meant the whole product re-skinned in a single evening once branding landed.</p>
+      <h3 class="case-title">Redesigning and scaling one product experience across 3 platforms in 4 weeks</h3>
       <a class="case-cta" href="loco-design-system.html">Read more
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
@@ -987,7 +991,7 @@ footer {
     <img class="case-thumb case-thumb--flat" src="WMS.webp" alt="Warehouse Management System dashboard" />
   </div>
 
-  <div class="case-card">
+  <div class="case-card case-card--alt">
     <div class="case-copy">
       <p class="case-eyebrow">IRL <span class="case-tag">0→1</span></p>
       <h3 class="case-title">Vertical mobile streaming</h3>
