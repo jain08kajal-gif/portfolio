@@ -177,6 +177,41 @@ nav.is-stuck .nav-links a { font-size: 14px; }
   object-fit: cover;
   display: block;
 }
+/* Play control for the intro clip. Sits on the lower edge of the
+   circle so it reads as attached to the media, not floating over it.
+   Wired only when the media slot holds a <video>. */
+.hero-play {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: #FFFFFF;
+  color: #141414;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 26px rgba(20, 20, 20, 0.18);
+  transition: transform .32s cubic-bezier(.34, 1.45, .64, 1), box-shadow .28s ease;
+  z-index: 6;
+}
+.hero-play:hover {
+  transform: translateX(-50%) scale(1.09);
+  box-shadow: 0 14px 32px rgba(20, 20, 20, 0.24);
+}
+.hero-play:active { transform: translateX(-50%) scale(1.02); }
+.hero-play svg { width: 20px; height: 20px; display: block; }
+.hero-play .icon-pause { display: none; }
+.hero-play.is-playing .icon-play  { display: none; }
+.hero-play.is-playing .icon-pause { display: block; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-play, .hero-play:hover { transition: none; }
+}
 .hero-pill {
   position: absolute;
   display: inline-flex;
@@ -211,30 +246,15 @@ nav.is-stuck .nav-links a { font-size: 14px; }
 }
 .hero-pill--1 { top: 10px; left: -46px; }
 .hero-pill--2 { bottom: 6px; left: -54px; }
-.hero-pill--3 {
-  top: 96px;
-  right: -34px;
-  width: 46px;
-  height: 46px;
-  padding: 0;
-  justify-content: center;
-  border-radius: 50%;
-}
-.pill-icon { width: 20px; height: 20px; color: #49DA9A; }
 .hero-portrait-wrap.in-view .hero-pill--1 {
   animation: pill-in .6s cubic-bezier(.34,1.56,.64,1) forwards;
   animation-delay: .3s;
 }
-.hero-portrait-wrap.in-view .hero-pill--3 {
+.hero-portrait-wrap.in-view .hero-pill--2 {
   animation: pill-in .6s cubic-bezier(.34,1.56,.64,1) forwards;
   animation-delay: .45s;
 }
-.hero-portrait-wrap.in-view .hero-pill--2 {
-  animation: pill-in .6s cubic-bezier(.34,1.56,.64,1) forwards;
-  animation-delay: .6s;
-}
 .hero-portrait-wrap:hover .hero-pill--1 { transform: translateY(-5px) rotate(-3deg) scale(1.04); }
-.hero-portrait-wrap:hover .hero-pill--3 { transform: translateY(-5px) rotate(6deg) scale(1.08); }
 .hero-portrait-wrap:hover .hero-pill--2 { transform: translateY(-5px) rotate(-3deg) scale(1.04); }
 @media (max-width: 700px) {
   .hero-pill {
@@ -244,15 +264,13 @@ nav.is-stuck .nav-links a { font-size: 14px; }
     transition: none;
   }
   .hero-portrait-wrap.in-view .hero-pill--1,
-  .hero-portrait-wrap.in-view .hero-pill--2,
-  .hero-portrait-wrap.in-view .hero-pill--3 {
+  .hero-portrait-wrap.in-view .hero-pill--2 {
     animation: none;
     opacity: 1;
     transform: none;
   }
   .hero-portrait-wrap:hover .hero-pill--1,
-  .hero-portrait-wrap:hover .hero-pill--2,
-  .hero-portrait-wrap:hover .hero-pill--3 {
+  .hero-portrait-wrap:hover .hero-pill--2 {
     transform: none;
   }
 }
@@ -358,11 +376,20 @@ nav.is-stuck .nav-links a { font-size: 14px; }
    slot: replace the placeholder div with an <img>,
    <video autoplay muted loop playsinline>, or a GIF
    and it will fill the tile with no CSS changes. */
-.showcase { padding: 0 60px 88px; max-width: 1160px; margin: 0 auto; }
+.showcase {
+  padding: 56px 60px 104px;
+  max-width: 1160px;
+  margin: 0 auto;
+}
 .showcase-grid {
   display: grid;
   grid-template-columns: 1.25fr 1fr 1fr;
-  grid-template-rows: 330px 270px;
+  grid-template-rows: 1.24fr 1fr;
+  /* Sized against the viewport so the grid can span it fully.
+     That is what lets the dark state apply only while the
+     screens are on screen, never bleeding into neighbours. */
+  height: min(84vh, 900px);
+  min-height: 540px;
   gap: 20px;
 }
 .tile {
@@ -423,10 +450,12 @@ nav.is-stuck .nav-links a { font-size: 14px; }
 }
 
 @media (max-width: 900px) {
-  .showcase { padding: 0 28px 64px; }
+  .showcase { padding: 32px 28px 64px; }
   .showcase-grid {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 300px 220px 220px;
+    height: auto;
+    min-height: 0;
   }
   .tile--feature { grid-column: 1 / -1; grid-row: auto; }
 }
@@ -440,9 +469,9 @@ nav.is-stuck .nav-links a { font-size: 14px; }
 /* ─── SCROLL-LINKED THEME SHIFT ──────────────────
    The page darkens while the showcase holds the
    viewport, then returns to light on the way into
-   the case studies. Driven by an IntersectionObserver
-   toggling .is-dark on <html>, so it is reversible
-   and costs nothing on scroll. */
+   the case studies. .is-dark is toggled on <html> only
+   while the grid spans the viewport, so the shift stays
+   contained to this section. */
 body { transition: background-color .7s ease, color .7s ease; }
 nav  { transition: padding .22s ease, border-color .22s ease, background-color .7s ease; }
 
@@ -546,13 +575,18 @@ html.is-dark .tile--ink { background: #2A2A2A; }
 .case-card:hover img.case-thumb {
   transform: scale(1.02);
 }
-/* Portrait thumbnail: constrain by height, not width, so the card
-   stays the same height as the landscape ones beside it. */
+/* Portrait thumbnail: fill the same box as the landscape thumbs
+   and crop, rather than scaling down to fit. Keeps all three cards
+   the same height while the screen itself reads much larger.
+   object-position favours the upper area, where the app UI sits. */
 .case-card img.case-thumb.case-thumb--portrait {
-  width: auto;
-  max-width: 38%;
-  max-height: 260px;
-  margin: 0 auto;
+  width: 58%;
+  max-width: 580px;
+  height: 338px;
+  max-height: none;
+  object-fit: cover;
+  object-position: center 22%;
+  border-radius: 14px;
 }
 .case-copy { flex: 1; max-width: 340px; }
 .case-eyebrow {
@@ -997,12 +1031,18 @@ footer {
 <section class="hero">
   <div class="hero-portrait-wrap">
     <div class="hero-portrait-frame">
-      <img class="hero-portrait" src="hero-portrait.webp" alt="Illustrated portrait of Kajal Jain" />
+      <!-- Intro clip goes here. For a GIF, swap the src below.
+           For video, replace the whole tag with:
+           <video class="hero-portrait" src="intro.mp4" poster="hero-portrait.webp"
+                  autoplay muted loop playsinline></video>
+           The play button then unmutes and restarts it. -->
+      <img class="hero-portrait" src="hero-portrait.webp" alt="Kajal Jain" />
     </div>
+    <button class="hero-play" id="hero-play" type="button" aria-label="Play introduction with sound">
+      <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.54.84l10.29-6.86a1 1 0 0 0 0-1.68L9.54 4.3A1 1 0 0 0 8 5.14Z"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg>
+    </button>
     <span class="hero-pill hero-pill--1"><span class="hero-pill-dot"></span>Kajal Jain</span>
-    <span class="hero-pill hero-pill--3 hero-pill--icon" aria-label="Design">
-      <svg class="pill-icon" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path opacity="0.25" d="M216,48V80a8,8,0,0,1-8,8H176a8,8,0,0,1-8-8V48a8,8,0,0,1,8-8h32A8,8,0,0,1,216,48ZM80,40H48a8,8,0,0,0-8,8V80a8,8,0,0,0,8,8H80a8,8,0,0,0,8-8V48A8,8,0,0,0,80,40ZM208,168H176a8,8,0,0,0-8,8v32a8,8,0,0,0,8,8h32a8,8,0,0,0,8-8V176A8,8,0,0,0,208,168ZM80,168H48a8,8,0,0,0-8,8v32a8,8,0,0,0,8,8H80a8,8,0,0,0,8-8V176A8,8,0,0,0,80,168Z"></path><path d="M208,96a16,16,0,0,0,16-16V48a16,16,0,0,0-16-16H176a16,16,0,0,0-16,16v8H96V48A16,16,0,0,0,80,32H48A16,16,0,0,0,32,48V80A16,16,0,0,0,48,96h8v64H48a16,16,0,0,0-16,16v32a16,16,0,0,0,16,16H80a16,16,0,0,0,16-16v-8h64v8a16,16,0,0,0,16,16h32a16,16,0,0,0,16-16V176a16,16,0,0,0-16-16h-8V96ZM176,48h32V80H176ZM48,48H80V63.9a.51.51,0,0,0,0,.2V80H48ZM80,208H48V176H80v15.9a.51.51,0,0,0,0,.2V208Zm128,0H176V176h32Zm-24-48h-8a16,16,0,0,0-16,16v8H96v-8a16,16,0,0,0-16-16H72V96h8A16,16,0,0,0,96,80V72h64v8a16,16,0,0,0,16,16h8Z"></path></svg>
-    </span>
     <span class="hero-pill hero-pill--2"><span class="hero-pill-dot"></span>7+ years of experience</span>
   </div>
   <h1 class="hero-headline">
@@ -1262,17 +1302,69 @@ footer {
 
 <script>
 (function () {
-  var section = document.querySelector('.showcase');
-  if (!section || !('IntersectionObserver' in window)) return;
+  var grid = document.querySelector('.showcase-grid');
+  if (!grid) return;
   var root = document.documentElement;
-  // Fires once the section covers the middle band of the viewport,
-  // so the shift lands as you settle into it rather than at its edge.
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      root.classList.toggle('is-dark', e.isIntersecting);
-    });
-  }, { rootMargin: '-38% 0px -38% 0px', threshold: 0 });
-  io.observe(section);
+  var ticking = false;
+
+  // Dark only while the grid spans the viewport top to bottom.
+  // Edge-based triggers fire while the logo strip above is still
+  // in frame; requiring coverage keeps the shift inside this section.
+  function update() {
+    ticking = false;
+    if (window.innerWidth < 760) { root.classList.remove('is-dark'); return; }
+    var r = grid.getBoundingClientRect();
+    var vh = window.innerHeight;
+    // Ratio of the grid that is on screen, measured against whichever
+    // is smaller: the grid or the viewport. A fixed pixel threshold
+    // breaks on tall screens where the grid is capped shorter than
+    // the viewport and could never satisfy it.
+    var visible = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+    var ratio = visible / Math.min(vh, r.height);
+    // The second clause keeps the logo strip above from being in frame.
+    var covers = ratio >= 0.82 && r.top <= vh * 0.18;
+    root.classList.toggle('is-dark', covers);
+  }
+  function onScroll() {
+    if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();
+</script>
+
+<script>
+(function () {
+  var btn = document.getElementById('hero-play');
+  if (!btn) return;
+  var media = document.querySelector('.hero-portrait');
+
+  // No video in the slot yet: keep the control out of the tab order
+  // and hide it, so there is never a button that does nothing.
+  if (!media || media.tagName !== 'VIDEO') {
+    btn.hidden = true;
+    return;
+  }
+
+  // The clip loops muted by default, like a GIF. The button is the
+  // way to actually hear the introduction, so it restarts with sound.
+  function setPlaying(on) {
+    btn.classList.toggle('is-playing', on);
+    btn.setAttribute('aria-label', on ? 'Mute introduction' : 'Play introduction with sound');
+  }
+  btn.addEventListener('click', function () {
+    if (media.muted) {
+      media.muted = false;
+      media.currentTime = 0;
+      media.play();
+      setPlaying(true);
+    } else {
+      media.muted = true;
+      setPlaying(false);
+    }
+  });
+  media.addEventListener('ended', function () { setPlaying(false); });
 })();
 </script>
 
