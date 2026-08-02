@@ -403,9 +403,15 @@ nav.is-stuck .nav-links a { font-size: 14px; }
 /* Loco card: warm sand picked up from the app screenshot's
    tan and amber tones, so the thumbnail sits in the card
    rather than on it. */
-/* Cards alternate white and grey against the #F2F1EF page,
-   so the stack reads as distinct layers as it collects. */
+/* Cards alternate against the #F2F1EF page so the stack reads
+   as distinct layers as it collects. One accent card only:
+   more than one and the emphasis cancels out. */
 .case-card--alt { background: #E4E3E0; }
+.case-card--accent { background: #EBFF3D; }
+.case-card--accent .case-tag {
+  background: rgba(20, 20, 20, 0.08);
+  color: #141414;
+}
 .case-card:nth-of-type(1) { top: 104px; }
 .case-card:nth-of-type(2) { top: 122px; }
 .case-card:nth-of-type(3) { top: 140px; }
@@ -991,11 +997,11 @@ footer {
     <img class="case-thumb case-thumb--flat" src="WMS.webp" alt="Warehouse Management System dashboard" />
   </div>
 
-  <div class="case-card case-card--alt">
+  <div class="case-card case-card--accent">
     <div class="case-copy">
-      <p class="case-eyebrow">IRL <span class="case-tag">0→1</span></p>
-      <h3 class="case-title">Vertical mobile streaming</h3>
-      <p class="case-desc">A mobile-first, vertical watch experience for live gaming and creator streams, designed for one-handed use and fast switching between shows.</p>
+      <p class="case-eyebrow">Loco <span class="case-tag">0→1</span><span class="case-tag">New audience</span></p>
+      <h3 class="case-title">Taking a gaming platform beyond gaming to reach Gen Z</h3>
+      <p class="case-desc">Loco's creators could only stream games from a desktop. Vertical mobile IRL streaming opens the platform to lifestyle content and a younger audience, without fragmenting discovery for the gaming streams already there.</p>
       <a class="case-cta" href="irl-case-study.html">Read more
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
